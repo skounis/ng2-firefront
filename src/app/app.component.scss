@@ -1,0 +1,27 @@
+@import "theme";
+
+@import "~ag-grid/dist/styles/ag-grid.css";
+@import "~ag-grid/dist/styles/theme-material.css";
+
+@import "~@progress/kendo-theme-default/dist/all.css";
+
+// NOTE: Theming is currently experimental and not yet publically released!
+body {
+	margin: 0;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+}
+
+.wfw-warn {
+	color: mat-color($warn);
+	font-size: small;
+}
+
+.wfw-accent {
+	color: mat-color($accent);
+	font-size: small;
+}

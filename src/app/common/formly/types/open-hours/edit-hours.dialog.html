@@ -1,0 +1,24 @@
+<h1 md-dialog-title>{{to.label || 'Edit hours'}}</h1>
+<form [formGroup]="form" md-dialog-content>
+	<div class="form-group">
+		<label for="day">Day</label>
+		<md-select id="day" formControlName="day" class="form-control" [multiple]="false">
+			<md-option *ngFor="let day of weekdays; let i = index" [value]="(i + 1)">{{day}}</md-option>
+		</md-select>
+	</div>
+
+	<div class="form-group">
+		<label for="openAt">Open at</label>
+		<ngb-timepicker id="openAt" formControlName="openAt"></ngb-timepicker>
+	</div>
+
+	<div class="form-group">
+		<label for="closeAt">Close at</label>
+		<ngb-timepicker id="closeAt" formControlName="closeAt"></ngb-timepicker>
+	</div>
+</form>
+
+<div md-dialog-actions>
+	<button md-button (click)="cancel()">CANCEL</button>
+	<button md-raised-button (click)="ok(form.value)" color="primary" [disabled]="!form.valid">OK</button>
+</div>

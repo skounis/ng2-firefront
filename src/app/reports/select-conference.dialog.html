@@ -1,0 +1,13 @@
+<h1 md-dialog-title>Select conference</h1>
+<div md-dialog-content>
+	<md-nav-list>
+		<md-list-item *ngFor="let conference of conferences$ | async" (click)="select(conference)">
+			<h4 md-line>{{conference.name}}</h4>
+			<p md-line> {{conference.website}} </p>
+		</md-list-item>
+	</md-nav-list>
+</div>
+
+<div md-dialog-actions>
+	<button md-button (click)="cancel()">CANCEL</button>
+</div>

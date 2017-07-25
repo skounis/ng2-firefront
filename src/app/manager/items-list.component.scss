@@ -1,0 +1,26 @@
+@import "../vars";
+
+:host {
+	display: block;
+}
+
+.cards-container {
+	display: flex;
+	flex-wrap: wrap;
+
+	md-card {
+		height: 200px;
+		width: 200px;
+	}
+
+	md-card-actions {
+		bottom: 25px;
+		position: absolute;
+	}
+}
+
+.search {
+	font-size: 14px;
+	margin-left: 20px;
+	margin-right: 20px;
+}

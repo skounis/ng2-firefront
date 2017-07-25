@@ -1,0 +1,55 @@
+<md-sidenav-container>
+
+	<md-sidenav #sidenav [mode]="mode" [opened]="opened" class="app-sidenav">
+
+		<md-nav-list>
+			<h3 md-subheader>Menu</h3>
+
+			<a md-list-item [routerLink]=" ['./manager/businesses']" routerLinkActive="active">
+				<md-icon md-list-icon>business</md-icon>
+				<span md-line>Businesses</span>
+			</a>
+			<a md-list-item [routerLink]=" ['./manager/products']" routerLinkActive="active">
+				<md-icon md-list-icon>shopping_cart</md-icon>
+				<span md-line>Products</span>
+			</a>
+			<a md-list-item [routerLink]=" ['./manager/news']" routerLinkActive="active">
+				<md-icon md-list-icon>message</md-icon>
+				<span md-line>News</span>
+			</a>
+
+			<a md-list-item [routerLink]=" ['./manager/colors']" routerLinkActive="active">
+				<md-icon md-list-icon>message</md-icon>
+				<span md-line>Colors</span>
+			</a>
+
+
+			<a md-list-item [routerLink]=" ['./reports']" routerLinkActive="active">
+				<md-icon md-list-icon>data_usage</md-icon>
+				<span md-line>Reports</span>
+			</a>
+
+			<a md-list-item [routerLink]=" ['./about']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+				<md-icon md-list-icon>info</md-icon>
+				<span md-line>About</span>
+			</a>
+
+			<a md-list-item [routerLink]=" ['./detail'] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+				<md-icon md-list-icon>info</md-icon>
+				<span md-line>Async route</span>
+			</a>
+		</md-nav-list>
+
+	</md-sidenav>
+
+	<top-bar [sidenav]="sidenav"></top-bar>
+
+	<div class="app-content">
+		<router-outlet></router-outlet>
+	</div>
+
+</md-sidenav-container>
+
+<!--<span class="app-action">-->
+<!--<button md-fab><md-icon>add circle</md-icon></button>-->
+<!--</span>-->

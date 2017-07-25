@@ -1,0 +1,136 @@
+<md-toolbar>
+	<span>Reports and reminders</span>
+	<span class="spacer"></span>
+
+	<button md-raised-button color="primary" (click)="selectConference()">Select conference</button>
+</md-toolbar>
+
+<!-- deadline -->
+<div id="ddline" class="" *ngIf="conference?.submissionEndDate">
+	<h4> Deadline for ePoster submissions</h4>
+	<br>
+	<div class="date">
+		<span class="binds"></span>
+		<span class="month">{{monthNames[conference.submissionEndDate.month - 1]}}</span>
+		<h1 class="day">{{conference.submissionEndDate.day}}</h1>
+	</div>
+	<br>
+
+	<p>
+		<span>{{daysBeforeDeadline}}</span> more days for authors to submit an ePoster
+	</p>
+</div>
+
+<!-- /deadline -->
+
+
+<!-- <md-grid-list cols="3" rowHeight="100px">
+  <md-grid-tile
+      *ngFor="let tile of tiles"
+      [colspan]="tile.cols"
+      [rowspan]="tile.rows"
+      [style.background]="tile.color">
+    {{tile.text}}
+  </md-grid-tile>
+</md-grid-list> -->
+
+<br>
+
+<md-grid-list cols="3" rowHeight="400px">
+
+	<md-grid-tile
+		[colspan]="1"
+		[rowspan]="1"
+		[style.background]="ff0000">
+		<div fxLayout="column">
+
+			<div class="chart">
+				<canvas baseChart
+					[data]="[450, 350]"
+					[labels]="['Total', 'Submitted']"
+					chartType="doughnut"></canvas>
+			</div>
+
+			<h3><a href="#">350</a> of <a href="#">450</a></h3>
+			<p>ePosters submitted <strong>in total</strong></p>
+			<small>That's 78% of <a href="#">all expected ePosters</a>.</small>
+			<br>
+			<div>
+				<button md-raised-button color="primary"> View Submitted</button>
+				<button md-raised-button color="primary"> View non-Submitted</button>
+			</div>
+		</div>
+
+	</md-grid-tile>
+
+	<md-grid-tile
+		[colspan]="1"
+		[rowspan]="1"
+		[style.background]="ff0000">
+		<div fxLayout="column">
+			<div class="chart">
+				<canvas baseChart
+					[data]="[100, 450]"
+					[labels]="['This week', 'Submitted']"
+					chartType="doughnut"></canvas>
+			</div>
+
+			<h3><a href="#">100</a> of <a href="#">450</a></h3>
+			<p>ePosters submitted <strong>this week</strong></p>
+			<small>That's 29% of <a href="#">all submitted ePosters</a>.</small>
+			<br>
+			<button md-raised-button color="primary"> View Submitted this week</button>
+		</div>
+	</md-grid-tile>
+
+	<md-grid-tile
+		[colspan]="1"
+		[rowspan]="1"
+		[style.background]="ff0000">
+		<div fxLayout="column">
+			<div class="chart">
+				<canvas baseChart
+					[data]="[28, 450]"
+					[labels]="['Today', 'Submitted']"
+					chartType="doughnut"></canvas>
+			</div>
+
+			<h3><a href="#"> 28 </a> of <a href="#">450</a></h3>
+			<p>ePosters submitted <strong>today</strong></p>
+			<small>That's 8% of <a href="#">all submitted ePosters</a>.</small>
+			<br>
+			<button md-raised-button color="primary"> View Submitted today</button>
+		</div>
+	</md-grid-tile>
+
+</md-grid-list>
+
+<br>
+
+<md-grid-list cols="2" rowHeight="200px">
+
+	<md-grid-tile
+		[colspan]="1"
+		[rowspan]="1"
+		[style.background]="ff0000">
+		<div fxLayout="column">
+			<h3>Last Reminder </h3>
+			<small>A reminder was last sent out on <strong>September 11, 2015, 13:00</strong></small>
+			<br>
+			<button md-raised-button color="primary"> View last reminder sent</button>
+		</div>
+	</md-grid-tile>
+
+	<md-grid-tile
+		[colspan]="1"
+		[rowspan]="1"
+		[style.background]="ff0000">
+		<div fxLayout="column">
+			<h3>Next Reminder </h3>
+			<small>The next reminder is scheduled for on <strong>September 13, 2015, 13:00</strong></small>
+			<br>
+			<button md-raised-button color="primary"> View next reminder scheduled</button>
+		</div>
+	</md-grid-tile>
+
+</md-grid-list>

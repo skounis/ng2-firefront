@@ -1,0 +1,11 @@
+<h1 md-dialog-title>New item</h1>
+<div md-dialog-content>
+	<md-input-container>
+		<input mdInput placeholder="Name" [(ngModel)]="itemName">
+	</md-input-container>
+</div>
+
+<div md-dialog-actions>
+	<button md-button (click)="cancel()">CANCEL</button>
+	<button md-raised-button (click)="create()" [disabled]="!itemName" color="primary">CREATE</button>
+</div>
