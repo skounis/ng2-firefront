@@ -1,0 +1,43 @@
+<div class="sg-login-screen">
+
+	<div class="app-branding">
+		<h1>{{appName}}</h1>
+		<h2>{{appSubtitle}}</h2>
+		<p>{{appSlogan}}</p>
+	</div>
+
+	<div class="sg-form-wrapper" fxLayout="row" fxLayoutAlign="center center">
+		<md-card>
+
+			<md-card-title>Sign up</md-card-title>
+
+			<div fxLayout="column">
+
+				<form [formGroup]="signupForm" #f="ngForm" (ngSubmit)="signUp()" fxLayout="column" fxFlexFill fxLayoutGap="10px">
+
+					<md-input-container>
+						<input mdInput formControlName="email" type="email" placeholder="Email">
+					</md-input-container>
+
+					<md-input-container>
+						<input mdInput formControlName="password" type="password" placeholder="Password">
+					</md-input-container>
+
+					<button md-raised-button color="primary" type="submit" aria-label="signup">Sign up</button>
+				</form>
+
+				<div [hidden]="error == ''">
+					<p class="wfw-warn">{{ error }}</p>
+				</div>
+
+				<md-divider></md-divider>
+
+				<div fxLayout="column" fxLayoutAlign="center" nxLayoutGap="10px">
+					<a md-button [routerLink]="['/sign-in']">Already have an account?</a>
+				</div>
+			</div>
+		</md-card>
+
+	</div>
+
+</div>

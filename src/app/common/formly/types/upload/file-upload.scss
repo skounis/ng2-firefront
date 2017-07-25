@@ -1,0 +1,26 @@
+.not-active {
+	pointer-events: none;
+	cursor: default;
+	color: lightgray;
+}
+
+.preview-link {
+	display: block;
+	margin-top: 5px;
+}
+
+.image-preview {
+	margin: 10px;
+	img {
+		max-width: 200px;
+		max-height: 200px;
+	}
+}
+
+md-spinner {
+	display: inline-block;
+	height: 14px;
+	width: 14px;
+	overflow: hidden;
+	margin-right: 5px;
+}

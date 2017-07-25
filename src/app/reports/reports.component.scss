@@ -1,0 +1,108 @@
+@import "../vars";
+
+:host {
+	display: block;
+}
+
+.chart {
+	display: block;
+	height: 200px;
+	width: 200px;
+	margin-bottom: 10px;
+}
+
+// date styling in CSS
+
+#ddline {
+	/*margin: auto;*/
+	margin-top: 20px;
+	margin-bottom: 20px;
+	text-align: center;
+
+	.datemessage {
+		font-size: 2em;
+		margin-bottom: 10px;
+	}
+
+	#statusreport {
+		clear: both;
+		padding-top: 20px;
+	}
+
+	.date {
+		display: block;
+		width: 100px;
+		height: 110px;
+		margin: 0px auto;
+		text-align: center;
+		font-family: 'Helvetica', sans-serif;
+		position: relative;
+	}
+
+	.date .binds {
+		position: absolute;
+		height: 15px;
+		width: 60px;
+		background: transparent;
+		border-width: 0 5px;
+		top: -6px;
+		left: 0;
+		right: 0;
+		margin: auto;
+	}
+
+	.date .month {
+		background: #555;
+		display: block;
+		padding: 8px 0;
+		color: #fff;
+		font-size: 12px;
+		font-weight: bold;
+		border-bottom: 2px solid #333;
+		box-shadow: inset 0 -1px 0 0 #666;
+	}
+
+	.date .day {
+		display: block;
+		margin: 0;
+		padding: 10px 0;
+		font-size: 48px;
+		box-shadow: 0 0 3px #ccc;
+		position: relative;
+		color: #000;
+		border: 1px solid #ccc;
+	}
+
+	.date .day::after {
+		content: '';
+		display: block;
+		height: 100%;
+		width: 96%;
+		position: absolute;
+		top: 3px;
+		left: 2%;
+		z-index: -1;
+		box-shadow: 0 0 3px #ccc;
+	}
+
+	.date .day::before {
+		content: '';
+		display: block;
+		height: 100%;
+		width: 90%;
+		position: absolute;
+		top: 6px;
+		left: 5%;
+	}
+
+	.dashboard-divs {
+		padding: 20px 10px;
+	}
+
+}
+
+md-grid-tile {
+	&.mat-grid-tile {
+		text-align: center;
+	}
+}
