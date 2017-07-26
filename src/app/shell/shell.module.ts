@@ -11,6 +11,8 @@ import { ReportsComponent } from '../reports/reports.component';
 import { ReportsModule } from '../reports/reports.module';
 import { AboutModule } from '../about/about.module';
 import { managerRoutes } from '../manager/manager.module';
+import { HomeComponent } from '../home/home.component';
+import { HomeModule } from '../home/home.module';
 
 const routes: Routes = [
 	{
@@ -19,6 +21,7 @@ const routes: Routes = [
 		canActivate: [AuthGuard],
 		children: [
 			...managerRoutes,
+			{ path: '', component: HomeComponent },
 			{ path: 'reports', component: ReportsComponent },
 			{ path: 'about', component: AboutComponent },
 			{ path: 'detail', loadChildren: '../+detail#DetailModule' }
@@ -37,7 +40,8 @@ const routes: Routes = [
 		RouterModule.forChild(routes),
 		MaterialModule,
 		ReportsModule,
-		AboutModule
+		AboutModule,
+		HomeModule
 	],
 	providers: []
 })
