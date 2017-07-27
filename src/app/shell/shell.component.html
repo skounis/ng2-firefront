@@ -5,6 +5,11 @@
 		<md-nav-list>
 			<h3 md-subheader>Menu</h3>
 
+			<a md-list-item [routerLink]=" ['./'] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+				<md-icon md-list-icon>home</md-icon>
+				<span md-line>Home</span>
+			</a>
+
 			<a md-list-item [routerLink]=" ['./manager/businesses']" routerLinkActive="active">
 				<md-icon md-list-icon>business</md-icon>
 				<span md-line>Businesses</span>
