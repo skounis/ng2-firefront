@@ -31,8 +31,15 @@ import { FormlyFieldTimePicker } from './types/time-picker';
 import { FormlyFieldFileUpload } from './types/upload/file-upload';
 import { FormlyPanelWrapper } from './wrappers/panel';
 import { FormlyWrapperWarning, FormlyWrapperWarningMessage } from './wrappers/warning';
+import { FormlyFieldNumericInput } from './types/numeric-input';
+import { TextMaskModule } from 'angular2-text-mask';
 
 const types: [TypeOption] = [
+	{
+		name: 'numeric-input',
+		component: FormlyFieldNumericInput,
+		wrappers: ['fieldset', 'label']
+	},
 	{
 		name: 'date-time-picker',
 		component: FormlyFieldDateTimePicker,
@@ -125,7 +132,8 @@ export const ngFormlyConfig: ConfigOption = {
 		AgmCoreModule,
 		SharedModule,
 		CalendarModule,
-		MdProgressSpinnerModule
+		MdProgressSpinnerModule,
+		TextMaskModule
 	],
 	exports: [],
 	declarations: [
@@ -147,7 +155,8 @@ export const ngFormlyConfig: ConfigOption = {
 		EditHoursDialog,
 		FormlyPanelWrapper,
 		FormlyFieldReference,
-		FormlyFieldMultiCheckbox
+		FormlyFieldMultiCheckbox,
+		FormlyFieldNumericInput
 	],
 	entryComponents: [CKEditorDialog, EditCoordsDialog, EditHoursDialog],
 	providers: []
