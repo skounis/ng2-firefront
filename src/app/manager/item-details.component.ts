@@ -115,8 +115,28 @@ export class ItemDetailsComponent implements AfterViewInit {
 	private prepareItem() {
 		let item = JSON.parse(JSON.stringify(this.item));
 		this.fields.forEach(x => {
-			if (item[x.key] && x.type === 'date-time-picker' && item[x.key].getTime) {
-				item[x.key] = item[x.key].getTime();
+			switch (x.type) {
+				case 'date-time-picker':
+					if (item[x.key]) {
+						if (item[x.key].getTime) {
+							item[x.key] = item[x.key].getTime();
+						} else if (typeof item[x.key] === 'string') {
+							item[x.key] = new Date(item[x.key]).getTime();
+						}
+					}
+					break;
+				case 'numeric-input':
+					if (x.templateOptions.mask.allowDecimal) {
+						item[x.key] = parseFloat(item[x.key]);
+					} else {
+						item[x.key] = parseInt(item[x.key], 10);
+					}
+					if (isNaN(item[x.key]) || item[x.key] === '') {
+						item[x.key] = null;
+					}
+					break;
+				default:
+					break;
 			}
 
 			if (item[x.key] === undefined) {
