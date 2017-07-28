@@ -39,6 +39,42 @@ export const itemsFormConfig = () => ({
 			}
 		},
 		{
+			type: 'input',
+			key: 'price',
+			templateOptions: {
+				label: 'Price',
+				type: 'number'
+			}
+		},
+		{
+			type: 'numeric-input',
+			key: 'priceMasked',
+			templateOptions: {
+				label: 'Price (int)',
+				mask: {
+					allowDecimal: false
+				}
+			}
+		},
+		{
+			type: 'numeric-input',
+			key: 'priceMaskedDecimal',
+			templateOptions: {
+				label: 'Price (decimal)',
+				mask: {
+					allowDecimal: true,
+					decimalLimit: 2
+				}
+			}
+		},
+		{
+			type: 'open-hours',
+			key: 'openhours',
+			templateOptions: {
+				label: 'Open hours'
+			}
+		},
+		{
 			type: 'file-upload',
 			key: 'banners',
 			templateOptions: {
@@ -59,21 +95,6 @@ export const itemsFormConfig = () => ({
 				buttonLabel: 'Upload',
 				maxFiles: 3
 
-			}
-		},
-		{
-			type: 'input',
-			key: 'price',
-			templateOptions: {
-				label: 'Price',
-				type: 'number'
-			}
-		},
-		{
-			type: 'open-hours',
-			key: 'openhours',
-			templateOptions: {
-				label: 'Open hours'
 			}
 		},
 		{
