@@ -68,6 +68,58 @@ export const itemsFormConfig = () => ({
 			}
 		},
 		{
+			type: 'repeater',
+			wrappers: ['panel'],
+			key: 'extraOptions',
+			templateOptions: {
+				title: 'Extra options'
+			},
+			fieldArray: {
+				className: 'row',
+				fieldGroup: [
+					{
+						className: 'col-12',
+						type: 'input',
+						key: 'name',
+						templateOptions: {
+							label: 'Name'
+						}
+					},
+					{
+						className: 'col-12',
+						type: 'numeric-input',
+						key: 'value',
+						templateOptions: {
+							label: 'Price',
+							description: 'Please enter the price. Decimals are allowed.',
+							mask: {
+								allowDecimal: true,
+								decimalLimit: 2
+							}
+						}
+					},
+					{
+						className: 'col-12',
+						type: 'check',
+						key: 'selected',
+						defaultValue: false,
+						templateOptions: {
+							label: 'This option is pre-selected'
+						}
+					},
+					{
+						className: 'col-12',
+						key: 'deliveryDate',
+						type: 'date-time-picker',
+						templateOptions: {
+							label: 'Delivery date',
+							showTime: true
+						}
+					}
+				]
+			}
+		},
+		{
 			type: 'open-hours',
 			key: 'openhours',
 			templateOptions: {
