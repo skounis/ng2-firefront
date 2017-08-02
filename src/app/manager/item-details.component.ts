@@ -8,6 +8,7 @@ import { DataService } from '../common/services/data.service';
 import { uuid } from '../common/uuid';
 import { itemsFormConfig } from './form.config';
 import { FormlyFormEnricher } from './formly-form-enricher';
+import { ModelProcessor } from './model-processor';
 
 @Component({
 	selector: 'item-details',
@@ -45,7 +46,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 			this.data.loadItem(this.itemType, this.itemId)
 				.subscribe(item => {
 					if (!this.item) {
-						this.item = this.preprocessItem(item);
+						this.item = ModelProcessor.convertForUI(item, this.fields);
 					}
 				});
 		} else {
@@ -58,7 +59,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 	}
 
 	save() {
-		let item = this.prepareItem();
+		let item = this.convertForDB(this.item);
 		this.data.saveItem(this.itemType, item)
 			.then(
 				() => {
@@ -84,7 +85,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 		} else {
 			this.data.loadItem(this.itemType, this.itemId)
 				.subscribe(item => {
-					this.item = this.preprocessItem(item);
+					this.item = ModelProcessor.convertForUI(item, this.fields);
 					this.form.reset(this.item);
 
 					this.snackBar.open('The changes has been canceled', 'Ok', {
@@ -101,64 +102,16 @@ export class ItemDetailsComponent implements AfterViewInit {
 		this.fields = fields;
 	}
 
-	private preprocessItem(item: any) {
-		item = JSON.parse(JSON.stringify(item));
-
-		this.fields.forEach(x => {
-			if (x.type === 'date-time-picker' && item[x.key]) {
-				item[x.key] = new Date(item[x.key]);
-			}
-		});
-		return item;
-	}
-
-	private prepareItem() {
-		let item = JSON.parse(JSON.stringify(this.item));
-		this.fields.forEach(x => {
-			switch (x.type) {
-				case 'date-time-picker':
-					if (item[x.key]) {
-						if (item[x.key].getTime) {
-							item[x.key] = item[x.key].getTime();
-						} else if (typeof item[x.key] === 'string') {
-							item[x.key] = new Date(item[x.key]).getTime();
-						}
-					}
-					break;
-				case 'numeric-input':
-					if (x.templateOptions.mask.allowDecimal) {
-						item[x.key] = parseFloat(item[x.key]);
-					} else {
-						item[x.key] = parseInt(item[x.key], 10);
-					}
-					if (isNaN(item[x.key]) || item[x.key] === '') {
-						item[x.key] = null;
-					}
-					break;
-				default:
-					break;
-			}
-
-			if (item[x.key] === undefined) {
-				item[x.key] = null;
-			}
-
-			if (x.fieldGroup) {
-				x.fieldGroup.forEach(field => {
-					if (item[x.key][field.key] === undefined) {
-						item[x.key][field.key] = null;
-					}
-				});
-			}
-		});
+	private convertForDB(model: any) {
+		model = ModelProcessor.convertForDB(model, this.fields);
 
 		if (this.parentId) {
-			item.parentId = this.parentId;
+			model.parentId = this.parentId;
 		}
-		if (!item.$key) {
-			item.$key = this.itemId || uuid();
+		if (!model.$key) {
+			model.$key = this.itemId || uuid();
 		}
 
-		return item;
+		return model;
 	}
 }

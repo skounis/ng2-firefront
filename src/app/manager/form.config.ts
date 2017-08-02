@@ -106,6 +106,15 @@ export const itemsFormConfig = () => ({
 						templateOptions: {
 							label: 'This option is pre-selected'
 						}
+					},
+					{
+						className: 'col-12',
+						key: 'deliveryDate',
+						type: 'date-time-picker',
+						templateOptions: {
+							label: 'Delivery date',
+							showTime: true
+						}
 					}
 				]
 			}
