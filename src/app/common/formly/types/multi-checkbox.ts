@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
-import { FieldType, FormlyFieldConfig } from 'ng-formly';
+import { FieldType, FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({
 	selector: 'formly-field-multi-checkbox',

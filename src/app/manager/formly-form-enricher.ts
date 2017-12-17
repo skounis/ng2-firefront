@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireDatabase } from 'angularfire2';
-import { FormlyFieldConfig } from 'ng-formly';
+import { FormlyFieldConfig } from '@ngx-formly/core';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { DataService } from '../common/services/data.service';
 import { FireStorage } from '../common/services/fire-storage';
 import { S3Storage } from '../common/services/s3-storage';
@@ -59,7 +59,8 @@ export class FormlyFormEnricher {
 			throw new Error(`'templateOption.collection' should be specified for 'multi-select' field. KEY = '${field.key}'`);
 		}
 		return {
-			dataSource: this.db.list(field.templateOptions.collection)
+			dataSource: this.db.list(field.templateOptions.collection).snapshotChanges()
+				.map(actions => actions.map(action => ({ $key: action.key, ...action.payload.val() })))
 		};
 	}
 

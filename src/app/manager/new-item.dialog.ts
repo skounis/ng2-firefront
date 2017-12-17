@@ -1,4 +1,4 @@
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 
 import { Component } from '@angular/core';
 @Component({
@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 export class NewItemDialog {
 	itemName: string = '';
 
-	constructor(private dialogRef: MdDialogRef<NewItemDialog>) {}
+	constructor(private dialogRef: MatDialogRef<NewItemDialog>) {}
 
 	create() {
 		this.dialogRef.close(this.itemName);

@@ -1,5 +1,5 @@
-<h1 md-dialog-title>{{to.label || 'Edit coordinates'}}</h1>
-<form [formGroup]="form" md-dialog-content>
+<h1 mat-dialog-title>{{to.label || 'Edit coordinates'}}</h1>
+<form [formGroup]="form" mat-dialog-content>
 
 	<div class="map" *ngIf="longitude && latitude">
 		<agm-map [latitude]="latitude" [longitude]="longitude" (mapClick)="mapClick($event)">
@@ -26,7 +26,7 @@
 	</div>
 </form>
 
-<div md-dialog-actions>
-	<button md-button (click)="cancel()">CANCEL</button>
-	<button md-raised-button (click)="ok(form.value)" color="primary" [disabled]="!form.valid">OK</button>
+<div mat-dialog-actions>
+	<button mat-button (click)="cancel()">CANCEL</button>
+	<button mat-raised-button (click)="ok(form.value)" color="primary" [disabled]="!form.valid">OK</button>
 </div>

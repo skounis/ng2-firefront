@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { FieldType } from 'ng-formly';
+import { FieldType } from '@ngx-formly/core';
 import { Observable } from 'rxjs/Observable';
-import { EditCoordsDialog } from './edit-coords.dialog';
 
 @Component({
 	selector: 'formly-field-reference',

@@ -1,86 +1,88 @@
 import { Injectable } from '@angular/core';
-import { AuthProviders, AngularFire, FirebaseAuthState, AuthMethods } from 'angularfire2';
-import { EmailPasswordCredentials } from 'angularfire2/auth';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
 	roles: string[] = [];
 
-	private authState: FirebaseAuthState = null;
+	private user: firebase.User = null;
 
-	constructor(public fire: AngularFire) {
-		fire.auth.subscribe((state: FirebaseAuthState) => {
-			this.authState = state;
+	constructor(public afAuth: AngularFireAuth, private afDb: AngularFireDatabase) {
+		afAuth.authState.subscribe((user: firebase.User) => {
+			this.user = user;
 		});
 	}
 
 	auth(): Observable<boolean> {
-		return this.fire.auth
+		return this.afAuth.authState
 			.take(1)
 			.flatMap(auth => {
 				if (!auth) {
 					return Observable.of(false);
 				}
 
-				return this.fire.database.list('users/' + auth.uid)
-					.do(roles => this.roles = roles.map(role => role.$value))
+				return this.afDb.list<any>('users/' + auth.uid).valueChanges()
+					.do(roles => {
+						this.roles = roles;
+					})
 					.map(() => true);
 			});
 	}
 
 	getName() {
-		return this.authState.auth.displayName;
+		return this.user.displayName;
 	}
 
 	getEmail() {
-		return this.authState.auth.email;
+		return this.user.email;
 	}
 
 	get authenticated(): boolean {
-		return this.authState !== null;
+		return this.user !== null;
 	}
 
 	get id(): string {
-		return this.authenticated ? this.authState.uid : '';
+		return this.authenticated ? this.user.uid : '';
 	}
 
-	resetPassword(email): firebase.Promise<any> {
-		return firebase.auth().sendPasswordResetEmail(email);
+	resetPassword(email): Promise<any> {
+		return this.afAuth.auth.sendPasswordResetEmail(email);
 	}
 
-	signInWithEmail(credentials: EmailPasswordCredentials) {
+	signInWithEmail(email, password): Promise<any> {
 		console.log('Sign in with email');
-		let config = {
-			provider: AuthProviders.Password,
-			method: AuthMethods.Password,
-		};
-		return this.fire.auth.login(credentials, config);
+		return this.afAuth.auth.signInWithEmailAndPassword(email, password);
 	}
 
-	signUp(credentials: EmailPasswordCredentials) {
-		return this.fire.auth.createUser(credentials);
+	signUp(email, password): Promise<any> {
+		return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
 	}
 
-	signIn(provider: number): firebase.Promise<FirebaseAuthState> {
-		return this.fire.auth.login({ provider })
+	signIn(provider: firebase.auth.AuthProvider): Promise<firebase.auth.AuthCredential> {
+		return this.afAuth.auth.signInWithRedirect(provider)
 			.catch(error => console.log('ERROR @ AuthService#signIn() :', error));
 	}
 
-	signInWithGithub(): firebase.Promise<FirebaseAuthState> {
-		return this.signIn(AuthProviders.Github);
+	signInWithGithub(): Promise<firebase.auth.AuthCredential> {
+		return this.signIn(new firebase.auth.GithubAuthProvider());
 	}
 
-	signInWithGoogle(): firebase.Promise<FirebaseAuthState> {
-		return this.signIn(AuthProviders.Google);
+	signInWithGoogle(): Promise<firebase.auth.AuthCredential> {
+		return this.signIn(new firebase.auth.GoogleAuthProvider());
 	}
 
-	signInWithTwitter(): firebase.Promise<FirebaseAuthState> {
-		return this.signIn(AuthProviders.Twitter);
+	signInWithTwitter(): Promise<firebase.auth.AuthCredential> {
+		return this.signIn(new firebase.auth.TwitterAuthProvider());
 	}
 
-	signOut(): Promise<void> {
-		return this.fire.auth.logout();
+	signOut(): Promise<any> {
+		return this.afAuth.auth.signOut();
+	}
+
+	isAdmin(): boolean {
+		return this.roles.indexOf('admin') >= 0;
 	}
 }

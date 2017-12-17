@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MdDialog } from '@angular/material';
-import { FieldType } from 'ng-formly';
+import { MatDialog } from '@angular/material';
+import { FieldType } from '@ngx-formly/core';
 import { days } from './weekdays';
 import { EditHoursDialog } from './edit-hours.dialog';
 
@@ -49,7 +49,7 @@ export class FormlyFieldOpenHours extends FieldType {
 		return this.model[this.key] ? this.model[this.key].zone : 0;
 	}
 
-	constructor(private dialog: MdDialog) {
+	constructor(private dialog: MatDialog) {
 		super();
 	}
 

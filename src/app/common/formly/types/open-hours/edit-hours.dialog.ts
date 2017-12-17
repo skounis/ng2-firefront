@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
-import { FormlyTemplateOptions } from 'ng-formly/lib/src/core/components/formly.field.config';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { FormlyTemplateOptions } from '@ngx-formly/core/src/components/formly.field.config';
 import { days } from './weekdays';
 
 @Component({
@@ -17,8 +17,8 @@ export class EditHoursDialog {
 	form: FormGroup;
 
 	constructor(
-		private dialogRef: MdDialogRef<EditHoursDialog>,
-		@Inject(MD_DIALOG_DATA) private data: any,
+		private dialogRef: MatDialogRef<EditHoursDialog>,
+		@Inject(MAT_DIALOG_DATA) private data: any,
 		fb: FormBuilder
 	) {
 		this.to = data.to;
