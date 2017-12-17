@@ -1,14 +1,14 @@
 <form role="form" novalidate [formGroup]="form" (ngSubmit)="save()">
-	<md-toolbar>
-		<button type="button" md-icon-button  *ngIf="parentType" (click)="back()">
-			<md-icon class="md-24">arrow_back</md-icon>
+	<mat-toolbar>
+		<button type="button" mat-icon-button  *ngIf="parentType" (click)="back()">
+			<mat-icon class="mat-24">arrow_back</mat-icon>
 		</button>
 		<span>{{item?.title}}</span>
 		<span class="spacer"></span>
 
-		<button type="submit" md-raised-button color="primary" [disabled]="!form.valid || !form.dirty">Save</button>
-		<button type="button" md-button [disabled]="!form.dirty && itemId" (click)="cancel()">Cancel</button>
-	</md-toolbar>
+		<button type="submit" mat-raised-button color="primary" [disabled]="!form.valid || !form.dirty">Save</button>
+		<button type="button" mat-button [disabled]="!form.dirty && itemId" (click)="cancel()">Cancel</button>
+	</mat-toolbar>
 
 	<formly-form *ngIf="item" [model]="item" [fields]="fields" [form]="form"></formly-form>
 </form>

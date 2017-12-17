@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import '../../../node_modules/chart.js/src/chart.js';
-import { AppState } from '../app.service';
 import { SelectConferenceDialog } from './select-conference.dialog';
-import { Title } from './title';
 
 @Component({
 	selector: 'reports',
@@ -62,7 +60,7 @@ export class ReportsComponent {
 		return Math.floor((deadline.getTime() - now.getTime()) / 1000 / 60 / 60 / 24);
 	}
 
-	constructor(private dialog: MdDialog) {
+	constructor(private dialog: MatDialog) {
 	}
 
 	selectConference() {

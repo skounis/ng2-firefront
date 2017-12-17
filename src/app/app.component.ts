@@ -18,5 +18,4 @@ import { Component, ViewEncapsulation } from '@angular/core';
 	encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-	public name = 'Angular 2 Webpack Starter';
 }

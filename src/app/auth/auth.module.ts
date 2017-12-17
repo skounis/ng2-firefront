@@ -1,17 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+import { SharedModule } from '../common/shared.module';
+import { ForgotPasswordComponent } from './components/forgot-password.component';
 import { SignInComponent } from './components/sign-in.component';
-import { Sign } from './components/sign-up.component.component';
+import { SignUpComponent } from './components/sign-up.component';
 import { AuthGuard } from './guards/auth.guard';
 import { UnauthGuard } from './guards/unauth.guard';
 import { AuthService } from './services/auth.service';
-import { MaterialModule } from '@angular/material';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { SignUpComponent } from './components/sign-up.component';
-import { ForgotPasswordComponent } from './components/forgot-password.component';
-
 
 const routes: Routes = [
 	{ path: 'sign-in', component: SignInComponent, canActivate: [UnauthGuard] },
@@ -19,7 +17,6 @@ const routes: Routes = [
 	{ path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [UnauthGuard] }
 
 ];
-
 
 @NgModule({
 	declarations: [
@@ -30,7 +27,7 @@ const routes: Routes = [
 	imports: [
 		CommonModule,
 		RouterModule.forChild(routes),
-		MaterialModule,
+		SharedModule,
 		FlexLayoutModule,
 		FormsModule,
 		ReactiveFormsModule
@@ -44,7 +41,6 @@ const routes: Routes = [
 
 export class AuthModule {
 }
-
 
 export { AuthGuard };
 export { AuthService };

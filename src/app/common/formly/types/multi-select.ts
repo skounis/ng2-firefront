@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { FieldType } from 'ng-formly';
+import { FieldType } from '@ngx-formly/core';
 
 @Component({
 	selector: 'formly-field-multi-select',
 	template: `
-		<md-select [formControl]="formControl" class="form-control" [formlyAttributes]="field" [multiple]="to.multiple">
-			<md-option *ngFor="let item of to.dataSource | async" [value]="item[valueProp]">{{item[labelProp]}}</md-option>
-		</md-select>
+		<mat-select [formControl]="formControl" class="form-control" [formlyAttributes]="field" [multiple]="to.multiple">
+			<mat-option *ngFor="let item of to.dataSource | async" [value]="item[valueProp]">{{item[labelProp]}}</mat-option>
+		</mat-select>
 	`
 })
 export class FormlyFieldMultiSelect extends FieldType {

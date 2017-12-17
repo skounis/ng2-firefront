@@ -5,9 +5,8 @@
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title><%= htmlWebpackPlugin.options.title %></title>
+		<title>FireFront</title>
 
-		<meta name="description" content="<%= htmlWebpackPlugin.options.title %>">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
@@ -20,15 +19,6 @@
 		<script src="https://cdn.jsdelivr.net/tether/1.4.0/tether.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
-		<% if (webpackConfig.htmlElements.headTags) { %>
-		<!-- Configured Head Tags  -->
-		<%= webpackConfig.htmlElements.headTags %>
-		<% } %>
-
-		<!-- base url -->
-		<base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
-
-
 	</head>
 
 	<body>
@@ -36,12 +26,6 @@
 		<app>
 			Loading...
 		</app>
-
-		<% if (htmlWebpackPlugin.options.metadata.isDevServer && htmlWebpackPlugin.options.metadata.HMR !== true) { %>
-		<!-- Webpack Dev Server reload -->
-		<script src="/webpack-dev-server.js"></script>
-		<% } %>
-
 
 	</body>
 </html>
