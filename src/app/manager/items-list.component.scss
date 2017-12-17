@@ -8,12 +8,12 @@
 	display: flex;
 	flex-wrap: wrap;
 
-	md-card {
+	mat-card {
 		height: 200px;
 		width: 200px;
 	}
 
-	md-card-actions {
+	mat-card-actions {
 		bottom: 25px;
 		position: absolute;
 	}

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../common/services/data.service';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ConfirmDialog } from '../common/dialogs/confirm.dialog';
 import { NewItemDialog } from './new-item.dialog';
@@ -18,7 +18,7 @@ export class ItemsListComponent implements OnInit {
 
 	constructor(
 		private data: DataService,
-		private dialog: MdDialog,
+		private dialog: MatDialog,
 		private router: Router,
 		private activatedRoute: ActivatedRoute
 	) {

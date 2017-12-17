@@ -1,4 +1,4 @@
-import { FormlyFieldConfig } from 'ng-formly';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 
 export class ModelProcessor {
 	static convertForUI(model: any, fields: FormlyFieldConfig[]): any {

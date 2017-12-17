@@ -1,51 +1,46 @@
-<md-sidenav-container>
+<mat-sidenav-container>
 
-	<md-sidenav #sidenav [mode]="mode" [opened]="opened" class="app-sidenav">
+	<mat-sidenav #sidenav [mode]="mode" [opened]="opened" class="app-sidenav">
 
-		<md-nav-list>
-			<h3 md-subheader>Menu</h3>
+		<mat-nav-list>
+			<h3 mat-subheader>Menu</h3>
 
-			<a md-list-item [routerLink]=" ['./'] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-				<md-icon md-list-icon>home</md-icon>
-				<span md-line>Home</span>
+			<a mat-list-item [routerLink]=" ['./'] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+				<mat-icon mat-list-icon>home</mat-icon>
+				<span mat-line>Home</span>
 			</a>
 
-			<a md-list-item [routerLink]=" ['./manager/businesses']" routerLinkActive="active">
-				<md-icon md-list-icon>business</md-icon>
-				<span md-line>Businesses</span>
+			<a mat-list-item [routerLink]=" ['./manager/businesses']" routerLinkActive="active">
+				<mat-icon mat-list-icon>business</mat-icon>
+				<span mat-line>Businesses</span>
 			</a>
-			<a md-list-item [routerLink]=" ['./manager/products']" routerLinkActive="active">
-				<md-icon md-list-icon>shopping_cart</md-icon>
-				<span md-line>Products</span>
+			<a mat-list-item [routerLink]=" ['./manager/products']" routerLinkActive="active">
+				<mat-icon mat-list-icon>shopping_cart</mat-icon>
+				<span mat-line>Products</span>
 			</a>
-			<a md-list-item [routerLink]=" ['./manager/news']" routerLinkActive="active">
-				<md-icon md-list-icon>message</md-icon>
-				<span md-line>News</span>
-			</a>
-
-			<a md-list-item [routerLink]=" ['./manager/colors']" routerLinkActive="active">
-				<md-icon md-list-icon>message</md-icon>
-				<span md-line>Colors</span>
+			<a mat-list-item [routerLink]=" ['./manager/news']" routerLinkActive="active">
+				<mat-icon mat-list-icon>message</mat-icon>
+				<span mat-line>News</span>
 			</a>
 
-
-			<a md-list-item [routerLink]=" ['./reports']" routerLinkActive="active">
-				<md-icon md-list-icon>data_usage</md-icon>
-				<span md-line>Reports</span>
+			<a mat-list-item [routerLink]=" ['./manager/colors']" routerLinkActive="active">
+				<mat-icon mat-list-icon>message</mat-icon>
+				<span mat-line>Colors</span>
 			</a>
 
-			<a md-list-item [routerLink]=" ['./about']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-				<md-icon md-list-icon>info</md-icon>
-				<span md-line>About</span>
+
+			<a mat-list-item [routerLink]=" ['./reports']" routerLinkActive="active">
+				<mat-icon mat-list-icon>data_usage</mat-icon>
+				<span mat-line>Reports</span>
 			</a>
 
-			<a md-list-item [routerLink]=" ['./detail'] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-				<md-icon md-list-icon>info</md-icon>
-				<span md-line>Async route</span>
+			<a mat-list-item [routerLink]=" ['./about']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+				<mat-icon mat-list-icon>info</mat-icon>
+				<span mat-line>About</span>
 			</a>
-		</md-nav-list>
+		</mat-nav-list>
 
-	</md-sidenav>
+	</mat-sidenav>
 
 	<top-bar [sidenav]="sidenav"></top-bar>
 
@@ -53,8 +48,8 @@
 		<router-outlet></router-outlet>
 	</div>
 
-</md-sidenav-container>
+</mat-sidenav-container>
 
 <!--<span class="app-action">-->
-<!--<button md-fab><md-icon>add circle</md-icon></button>-->
+<!--<button mat-fab><mat-icon>add circle</mat-icon></button>-->
 <!--</span>-->

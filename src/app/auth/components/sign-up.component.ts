@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 import { AuthService } from '../services/auth.service';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { config } from '../../config';
-
 
 @Component({
 	templateUrl: 'sign-up.component.html',
@@ -29,18 +28,14 @@ export class SignUpComponent {
 
 		this.error = '';
 
-		this.appName = config.app.name;
-		this.appSubtitle = config.app.subtitle;
-		this.appSlogan = config.app.slogan;
+		this.appName = environment.app.name;
+		this.appSubtitle = environment.app.subtitle;
+		this.appSlogan = environment.app.slogan;
 	}
 
 	signUp() {
 		let data = this.signupForm.value;
-		let credentials = {
-			email: data.email,
-			password: data.password
-		};
-		this.auth.signUp(credentials).then(
+		this.auth.signUp(data.email, data.password).then(
 			() => this.postSignUp(),
 			error => this.error = error.message
 		);

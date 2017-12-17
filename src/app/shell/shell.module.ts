@@ -2,17 +2,17 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../auth/guards/auth.guard';
-import { ShellComponent } from './shell.component';
-import { MaterialModule } from '@angular/material';
-import { TopBarComponent } from './top-bar/top-bar.component';
 import { AboutComponent } from '../about/about.component';
-import { ReportsComponent } from '../reports/reports.component';
-import { ReportsModule } from '../reports/reports.module';
 import { AboutModule } from '../about/about.module';
-import { managerRoutes } from '../manager/manager.module';
+import { AuthGuard } from '../auth/guards/auth.guard';
+import { SharedModule } from '../common/shared.module';
 import { HomeComponent } from '../home/home.component';
 import { HomeModule } from '../home/home.module';
+import { managerRoutes } from '../manager/manager.module';
+import { ReportsComponent } from '../reports/reports.component';
+import { ReportsModule } from '../reports/reports.module';
+import { ShellComponent } from './shell.component';
+import { TopBarComponent } from './top-bar/top-bar.component';
 
 const routes: Routes = [
 	{
@@ -21,10 +21,9 @@ const routes: Routes = [
 		canActivate: [AuthGuard],
 		children: [
 			...managerRoutes,
-			{ path: '', component: HomeComponent },
-			{ path: 'reports', component: ReportsComponent },
-			{ path: 'about', component: AboutComponent },
-			{ path: 'detail', loadChildren: '../+detail#DetailModule' }
+			{ path: '', component: HomeComponent, pathMatch: 'full' },
+			{ path: 'reports', component: ReportsComponent, pathMatch: 'full' },
+			{ path: 'about', component: AboutComponent, pathMatch: 'full' }
 		]
 	}
 ];
@@ -38,7 +37,7 @@ const routes: Routes = [
 		CommonModule,
 		FormsModule,
 		RouterModule.forChild(routes),
-		MaterialModule,
+		SharedModule,
 		ReportsModule,
 		AboutModule,
 		HomeModule

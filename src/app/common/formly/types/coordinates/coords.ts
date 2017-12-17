@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MdDialog } from '@angular/material';
-import { FieldType } from 'ng-formly';
+import { MatDialog } from '@angular/material';
+import { FieldType } from '@ngx-formly/core';
 import { EditCoordsDialog } from './edit-coords.dialog';
 
 @Component({
@@ -37,7 +37,7 @@ export class FormlyFieldCoords extends FieldType {
 		return !items || !this.to.maxRecords || items.length < this.to.maxRecords;
 	}
 
-	constructor(private dialog: MdDialog) {
+	constructor(private dialog: MatDialog) {
 		super();
 	}
 

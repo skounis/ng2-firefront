@@ -1,5 +1,5 @@
 import { ViewContainerRef, ViewChild, Component } from '@angular/core';
-import { FieldWrapper } from 'ng-formly';
+import { FieldWrapper } from '@ngx-formly/core';
 
 @Component({
 	selector: 'formly-wrapper-warning',

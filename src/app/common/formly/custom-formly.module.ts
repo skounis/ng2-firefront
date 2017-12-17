@@ -2,16 +2,14 @@ import { AgmCoreModule } from '@agm/core';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MdProgressSpinnerModule, MdSelectModule } from '@angular/material';
+import { MatProgressSpinnerModule, MatSelectModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormlyModule } from 'ng-formly';
-import { ManipulatorsOption, TypeOption, WrapperOption } from 'ng-formly/lib/src/core/services/formly.config';
+import { ConfigOption, FormlyModule } from '@ngx-formly/core';
+import { ManipulatorOption, TypeOption, WrapperOption } from '@ngx-formly/core/src/services/formly.config';
+import { TextMaskModule } from 'angular2-text-mask';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { CalendarModule } from 'primeng/components/calendar/calendar';
-import { ConfigOption } from '../../../../node_modules/ng-formly/lib/src/core/services/formly.config';
-import { ComponentsModule } from '../components/components.module';
 import { SharedModule } from '../shared.module';
-import { Component } from './.component';
 import { TemplateWarningWrapper } from './run/warning';
 import { FormlyFieldCheck } from './types/check';
 import { FormlyFieldCoords } from './types/coordinates/coords';
@@ -21,6 +19,7 @@ import { FormlyFieldDateTimePicker } from './types/date-time-picker';
 import { FormlyFieldHtml } from './types/html';
 import { FormlyFieldMultiCheckbox } from './types/multi-checkbox';
 import { FormlyFieldMultiSelect } from './types/multi-select';
+import { FormlyFieldNumericInput } from './types/numeric-input';
 import { EditHoursDialog } from './types/open-hours/edit-hours.dialog';
 import { FormlyFieldOpenHours } from './types/open-hours/open-hours';
 import { FormlyFieldReference } from './types/reference/reference';
@@ -31,8 +30,6 @@ import { FormlyFieldTimePicker } from './types/time-picker';
 import { FormlyFieldFileUpload } from './types/upload/file-upload';
 import { FormlyPanelWrapper } from './wrappers/panel';
 import { FormlyWrapperWarning, FormlyWrapperWarningMessage } from './wrappers/warning';
-import { FormlyFieldNumericInput } from './types/numeric-input';
-import { TextMaskModule } from 'angular2-text-mask';
 
 const types: [TypeOption] = [
 	{
@@ -104,7 +101,7 @@ const types: [TypeOption] = [
 	}
 ];
 
-const manipulators: [ManipulatorsOption] = [
+const manipulators: [ManipulatorOption] = [
 	{ class: TemplateWarningWrapper, method: 'run' }
 ];
 
@@ -128,11 +125,11 @@ export const ngFormlyConfig: ConfigOption = {
 		CommonModule,
 		NgbModule,
 		CKEditorModule,
-		MdSelectModule,
+		MatSelectModule,
 		AgmCoreModule,
 		SharedModule,
 		CalendarModule,
-		MdProgressSpinnerModule,
+		MatProgressSpinnerModule,
 		TextMaskModule
 	],
 	exports: [],

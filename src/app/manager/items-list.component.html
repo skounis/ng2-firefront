@@ -1,19 +1,19 @@
-<md-toolbar>
+<mat-toolbar>
 	<span>{{itemsType | uppercase}}</span>
 	<span class="spacer"></span>
 	<input class="search form-control" placeholder="Search..." (keyup)="search(input.value)" #input>
 	<span class="spacer"></span>
-	<button md-raised-button color="primary" (click)="createItem()">New item</button>
-</md-toolbar>
+	<button mat-raised-button color="primary" (click)="createItem()">New item</button>
+</mat-toolbar>
 
 <div class="cards-container">
-	<md-card (click)="editItem(item)" *ngFor="let item of visibleItems">
-		<md-card-header>
-			<md-card-title>{{item.title}}</md-card-title>
-		</md-card-header>
+	<mat-card (click)="editItem(item)" *ngFor="let item of visibleItems">
+		<mat-card-header>
+			<mat-card-title>{{item.title}}</mat-card-title>
+		</mat-card-header>
 
-		<md-card-actions>
-			<button md-icon-button (click)="deleteItem(item); $event.stopPropagation();"><md-icon>delete</md-icon></button>
-		</md-card-actions>
-	</md-card>
+		<mat-card-actions>
+			<button mat-icon-button (click)="deleteItem(item); $event.stopPropagation();"><mat-icon>delete</mat-icon></button>
+		</mat-card-actions>
+	</mat-card>
 </div>

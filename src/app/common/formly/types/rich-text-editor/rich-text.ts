@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MdDialog } from '@angular/material';
-import { FieldType } from 'ng-formly';
+import { MatDialog } from '@angular/material';
+import { FieldType } from '@ngx-formly/core';
 import { CKEditorDialog } from './ckeditor.dialog';
 
 @Component({
@@ -12,7 +12,7 @@ import { CKEditorDialog } from './ckeditor.dialog';
 	`
 })
 export class FormlyFieldRichText extends FieldType {
-	constructor(private dialog: MdDialog) {
+	constructor(private dialog: MatDialog) {
 		super();
 	}
 
