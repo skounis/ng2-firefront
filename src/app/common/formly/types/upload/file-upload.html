@@ -6,11 +6,11 @@
 		<input class="form-control" [value]="picture.url" placeholder="{{to.placeholder}}" disabled>
 
 		<span class="input-group-btn">
-		<button class="btn btn-secondary" type="button" (click)="remove(picture)" [disabled]="!picture.url"><md-icon>delete</md-icon></button>
+		<button class="btn btn-secondary" type="button" (click)="remove(picture)" [disabled]="!picture.url"><mat-icon>delete</mat-icon></button>
 	</span>
 		<span class="input-group-btn">
 		<button class="btn btn-secondary" type="button" (click)="upload(i)">
-				<md-spinner [hidden]="!picture.inProgress"></md-spinner>
+				<mat-spinner [hidden]="!picture.inProgress"></mat-spinner>
 				<span>{{to.buttonLabel}}</span>
 		</button>
 	</span>

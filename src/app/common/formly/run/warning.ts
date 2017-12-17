@@ -1,4 +1,4 @@
-import { FormlyConfig, FormlyFieldConfig } from 'ng-formly';
+import { FormlyConfig, FormlyFieldConfig } from '@ngx-formly/core';
 
 export class TemplateWarningWrapper {
 	run(fc: FormlyConfig) {

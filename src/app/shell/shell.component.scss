@@ -1,10 +1,10 @@
 @import '../vars';
 
-md-sidenav-container {
+mat-sidenav-container {
 	height: 100%;
 }
 
-.app-content md-card {
+.app-content mat-card {
 	margin: 20px;
 }
 
@@ -30,8 +30,8 @@ md-sidenav-container {
 	right: 20px;
 }
 
-md-sidenav {
-	[md-list-icon] {
+mat-sidenav {
+	[mat-list-icon] {
 		padding: 0 !important;
 	}
 }

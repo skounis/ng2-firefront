@@ -1,9 +1,9 @@
 import { Location } from '@angular/common';
 import { AfterViewInit, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { FormlyFieldConfig } from 'ng-formly';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 import { DataService } from '../common/services/data.service';
 import { uuid } from '../common/uuid';
 import { itemsFormConfig } from './form.config';
@@ -29,7 +29,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 		private fb: FormBuilder,
 		private data: DataService,
 		private route: ActivatedRoute,
-		private snackBar: MdSnackBar,
+		private snackBar: MatSnackBar,
 		private location: Location,
 		private enricher: FormlyFormEnricher
 	) {

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { MaterialModule } from '@angular/material';
+import { SharedModule } from '../common/shared.module';
 import { AboutComponent } from './about.component';
 
 @NgModule({
 	imports: [
-		MaterialModule
+		SharedModule
 	],
 	declarations: [AboutComponent]
 })

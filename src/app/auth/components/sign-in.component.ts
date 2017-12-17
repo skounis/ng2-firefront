@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 import { AuthService } from '../services/auth.service';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { config } from '../../config';
 
 @Component({
 	templateUrl: 'sign-in.component.html',
@@ -17,7 +17,6 @@ export class SignInComponent {
 	appSubtitle = '';
 	appSlogan = '';
 
-
 	constructor(private auth: AuthService, private router: Router, private formBuilder: FormBuilder) {
 	}
 
@@ -29,9 +28,9 @@ export class SignInComponent {
 
 		this.error = '';
 
-		this.appName = config.app.name;
-		this.appSubtitle = config.app.subtitle;
-		this.appSlogan = config.app.slogan;
+		this.appName = environment.app.name;
+		this.appSubtitle = environment.app.subtitle;
+		this.appSlogan = environment.app.slogan;
 	}
 
 	reset() {
@@ -41,11 +40,7 @@ export class SignInComponent {
 
 	signInWithEmail() {
 		let data = this.loginForm.value;
-		let credentials = {
-			email: data.email,
-			password: data.password
-		};
-		this.auth.signInWithEmail(credentials).then(
+		this.auth.signInWithEmail(data.email, data.password).then(
 			() => this.postSignIn(),
 			error => this.error = error.message
 		);

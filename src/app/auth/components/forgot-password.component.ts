@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 import { AuthService } from '../services/auth.service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { config } from '../../config';
 
 @Component({
 	templateUrl: 'forgot-password.component.html',
@@ -25,9 +25,9 @@ export class ForgotPasswordComponent {
 		this.error = '';
 
 
-		this.appName = config.app.name;
-		this.appSubtitle = config.app.subtitle;
-		this.appSlogan = config.app.slogan;
+		this.appName = environment.app.name;
+		this.appSubtitle = environment.app.subtitle;
+		this.appSlogan = environment.app.slogan;
 	}
 
 	reset() {

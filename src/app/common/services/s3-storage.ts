@@ -1,5 +1,5 @@
+import { environment } from '../../../environments/environment';
 import { IStorage } from './storage.interface';
-import { config } from '../../config';
 import * as AWS from 'aws-sdk';
 import { Subject } from 'rxjs';
 
@@ -8,8 +8,8 @@ export class S3Storage implements IStorage {
 
 	constructor() {
 		AWS.config.update({
-			accessKeyId: config.s3.accessKeyId,
-			secretAccessKey: config.s3.secretAccessKey
+			accessKeyId: environment.s3.accessKeyId,
+			secretAccessKey: environment.s3.secretAccessKey
 		});
 		this.s3 = new AWS.S3();
 	}
@@ -22,7 +22,7 @@ export class S3Storage implements IStorage {
 			ContentType: 'image/jpeg',
 			Body: file,
 			ACL: 'public-read',
-			Bucket: config.s3.bucket
+			Bucket: environment.s3.bucket
 		};
 
 		let subject = new Subject();
@@ -58,7 +58,7 @@ export class S3Storage implements IStorage {
 	remove(path): Promise<void> {
 		let params: AWS.S3.Types.DeleteObjectRequest = {
 			Key: this.getFilename(path),
-			Bucket: config.s3.bucket
+			Bucket: environment.s3.bucket
 		};
 
 		return new Promise<void>((resolve, reject) => {
@@ -74,7 +74,7 @@ export class S3Storage implements IStorage {
 	}
 
 	private getFullUrl(filename) {
-		return 'https://s3.amazonaws.com/' + config.s3.bucket + '/' + filename;
+		return 'https://s3.amazonaws.com/' + environment.s3.bucket + '/' + filename;
 	}
 
 	private generateFilename(name: string) {

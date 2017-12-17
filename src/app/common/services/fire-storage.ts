@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
-import { Subject } from 'rxjs';
-import { FileItem } from '../directives/file-item';
+import { Subject } from 'rxjs/Subject';
 import { uuid } from '../uuid';
 import { IStorage } from './storage.interface';
 
 @Injectable()
 export class FireStorage implements IStorage {
-	private FILES_FOLDER: string = 'files';
+	private FILES_FOLDER = 'files';
 
 	upload(file: File): Subject<any> {
 		let storageRef = firebase.storage().ref();
@@ -18,7 +17,7 @@ export class FireStorage implements IStorage {
 		let subject = new Subject();
 
 		uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-			(snapshot) => {
+			(snapshot: any) => {
 				let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 				subject.next({
 					eventType: 'PROGRESS_CHANGED',

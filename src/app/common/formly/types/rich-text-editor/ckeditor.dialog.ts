@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
-import { FormlyTemplateOptions } from 'ng-formly/lib/src/core/components/formly.field.config';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { FormlyTemplateOptions } from '@ngx-formly/core/src/components/formly.field.config';
 
 @Component({
 	selector: 'ckeditor-dialog',
@@ -11,7 +11,7 @@ export class CKEditorDialog {
 	text: string = '';
 	to: FormlyTemplateOptions;
 
-	constructor(private dialogRef: MdDialogRef<CKEditorDialog>, @Inject(MD_DIALOG_DATA) private data: any) {
+	constructor(private dialogRef: MatDialogRef<CKEditorDialog>, @Inject(MAT_DIALOG_DATA) private data: any) {
 		if (data) {
 			this.text = data.text;
 			this.to = data.to || {};

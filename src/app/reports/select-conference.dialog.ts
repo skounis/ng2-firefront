@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { MdDialogRef } from '@angular/material';
-import { FirebaseListObservable } from 'angularfire2';
+import { MatDialogRef } from '@angular/material';
 import { AuthService } from '../auth/services/auth.service';
 import { DataService } from '../common/services/data.service';
 
@@ -10,15 +9,12 @@ import { DataService } from '../common/services/data.service';
 	styleUrls: ['./select-conference.dialog.scss']
 })
 export class SelectConferenceDialog {
-	private conferences$: FirebaseListObservable<any[]>;
-
 	constructor(
-		private dialogRef: MdDialogRef<SelectConferenceDialog>,
+		private dialogRef: MatDialogRef<SelectConferenceDialog>,
 		private data: DataService,
 		private auth: AuthService
 	) {
 		let userId = this.auth.roles.indexOf('admin') < 0 ? this.auth.id : null;
-		this.conferences$ = this.data.loadConferences(userId);
 	}
 
 	select(conference) {

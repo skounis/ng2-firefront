@@ -3,14 +3,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MdSnackBarModule } from '@angular/material';
+import { MatSnackBarModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AgGridModule } from 'ag-grid-angular';
+import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
+import { FormlyModule } from '@ngx-formly/core';
 import { AngularFireModule } from 'angularfire2';
-import { FormlyBootstrapModule, FormlyModule } from 'ng-formly';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { environment } from '../environments/environment';
 // App is our top level component
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
@@ -21,13 +24,11 @@ import { CustomFormlyModule, ngFormlyConfig } from './common/formly/custom-forml
 import { DataService } from './common/services/data.service';
 import { FireStorage } from './common/services/fire-storage';
 import { SharedModule } from './common/shared.module';
-import { config } from './config';
 import 'hammerjs';
 
 /*
  * Platform and Environment providers/directives/pipes
  */
-import { ENV_PROVIDERS } from './environment';
 import { ManagerModule } from './manager/manager.module';
 import { ShellModule } from './shell/shell.module';
 import { AgmCoreModule } from '@agm/core';
@@ -54,7 +55,7 @@ const APP_PROVIDERS = [
 		HttpModule,
 		BrowserAnimationsModule,
 		RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
-		MdSnackBarModule,
+		MatSnackBarModule,
 
 		NgbModule.forRoot(),
 		FormlyModule.forRoot(ngFormlyConfig),
@@ -67,16 +68,15 @@ const APP_PROVIDERS = [
 		FlexLayoutModule,
 		CKEditorModule,
 
-		AngularFireModule.initializeApp(config.fire.auth, config.fire.authConfig),
+		AngularFireModule.initializeApp(environment.fire.auth),
+		AngularFireDatabaseModule,
+		AngularFireAuthModule,
 		SharedModule,
 		AuthModule,
 		ShellModule,
-		ManagerModule,
-
-		AgGridModule.withComponents([])
+		ManagerModule
 	],
 	providers: [ // expose our Services and Providers into Angular's dependency injection
-		ENV_PROVIDERS,
 		APP_PROVIDERS
 	]
 })
