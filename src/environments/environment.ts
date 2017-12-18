@@ -6,9 +6,9 @@
 export const environment = {
 	production: false,
 	app: {
-		name: 'ePostersLive',
-		subtitle: 'Manager Portal',
-		slogan: 'Your one-stop-shop for managing your electronic Poster Program'
+		name: 'Firefront',
+		subtitle: 'Firebase Admin',
+		slogan: 'Your Firebase Admin Panel'
 	},
 	fire: {
 		auth: {
