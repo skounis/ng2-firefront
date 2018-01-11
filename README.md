@@ -1,10 +1,10 @@
 # Firefront
-A codefree Firebase front end. 
+A codefree Firebase front end.
 
 ## The purpose
-Create rich user experiences for managing data stored in Firebaset by just declaring their structure. 
+Create rich user experiences for managing data stored in Firebase by just declaring their structure. 
 
-Forms, Validation and Serialization should work out of the box based on the instructions declared. 
+Forms, Validation and Serialization should work out of the box based on the instructions declared.
 
 ## Technologies
 - Angular
