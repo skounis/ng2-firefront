@@ -19,6 +19,9 @@ export const environment = {
 			messagingSenderId: ''
 		}
 	},
+	maps: {
+		apiKey: ''
+	},
 	s3: {
 		accessKeyId: '',
 		secretAccessKey: '',
