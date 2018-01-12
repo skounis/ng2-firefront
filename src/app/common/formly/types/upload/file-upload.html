@@ -10,11 +10,11 @@
 	</span>
 		<span class="input-group-btn">
 		<button class="btn btn-secondary" type="button" (click)="upload(i)">
-				<mat-spinner [hidden]="!picture.inProgress"></mat-spinner>
+				<mat-spinner [diameter]="20" [hidden]="!picture.inProgress"></mat-spinner>
 				<span>{{to.buttonLabel}}</span>
 		</button>
 	</span>
-		<input #fileInput type="file" style="display: none;" (change)="fileChange($event, picture)">
+		<input #fileInput type="file" style="display: none;" (change)="fileChange($event, picture)" [accept]="to['accept']">
 	</div>
 	<a class="preview-link" *ngIf="picture.url" href="{{picture.url}}" target="_blank">{{getActionLabel(picture.url)}}</a>
 </div>
