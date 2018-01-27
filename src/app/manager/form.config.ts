@@ -280,6 +280,14 @@ export const itemsFormConfig = () => ({
 			validators: {
 				validation: Validators.compose([Validators.required])
 			}
+		},
+		{
+			type: 'text',
+			key: 'justText',
+			templateOptions: {
+				label: 'Read only next',
+				description: 'This is just a read only text'
+			},
 		}
 	]
 });
