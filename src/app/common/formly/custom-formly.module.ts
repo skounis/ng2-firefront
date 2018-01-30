@@ -26,6 +26,7 @@ import { FormlyFieldReference } from './types/reference/reference';
 import { FormlyFieldRepeater } from './types/repeater';
 import { CKEditorDialog } from './types/rich-text-editor/ckeditor.dialog';
 import { FormlyFieldRichText } from './types/rich-text-editor/rich-text';
+import { FormlyFieldText } from './types/text';
 import { FormlyFieldTimePicker } from './types/time-picker';
 import { FormlyFieldFileUpload } from './types/upload/file-upload';
 import { FormlyPanelWrapper } from './wrappers/panel';
@@ -98,6 +99,11 @@ const types: [TypeOption] = [
 	{
 		name: 'repeater',
 		component: FormlyFieldRepeater
+	},
+	{
+		name: 'text',
+		component: FormlyFieldText,
+		wrappers: ['fieldset', 'label']
 	}
 ];
 
@@ -153,7 +159,8 @@ export const ngFormlyConfig: ConfigOption = {
 		FormlyPanelWrapper,
 		FormlyFieldReference,
 		FormlyFieldMultiCheckbox,
-		FormlyFieldNumericInput
+		FormlyFieldNumericInput,
+		FormlyFieldText
 	],
 	entryComponents: [CKEditorDialog, EditCoordsDialog, EditHoursDialog],
 	providers: []
