@@ -72,7 +72,8 @@ export const itemsFormConfig = () => ({
 			wrappers: ['panel'],
 			key: 'extraOptions',
 			templateOptions: {
-				title: 'Extra options'
+				title: 'Extra options',
+				expandable: true
 			},
 			fieldArray: {
 				className: 'row',
