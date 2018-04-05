@@ -10,5 +10,5 @@
 		<button type="button" mat-button [disabled]="!form.dirty && itemId" (click)="cancel()">Cancel</button>
 	</mat-toolbar>
 
-	<formly-form *ngIf="item" [model]="item" [fields]="fields" [form]="form"></formly-form>
+	<formly-form *ngIf="item" [model]="item" [fields]="fields" [form]="form" [options]="options"></formly-form>
 </form>
