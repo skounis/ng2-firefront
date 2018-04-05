@@ -25,7 +25,7 @@ import { ConfirmDialog } from './dialogs/confirm.dialog';
 import { OrderBy } from './pipes/order-by.pipe';
 
 @NgModule({
-	imports: [CommonModule, FormsModule, ReactiveFormsModule],
+	imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule],
 	exports: [
 		OrderBy,
 		MatProgressSpinnerModule,

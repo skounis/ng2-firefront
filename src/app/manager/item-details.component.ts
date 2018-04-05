@@ -1,9 +1,10 @@
 import { Location } from '@angular/common';
-import { AfterViewInit, Component, EventEmitter } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
+import { Observable } from 'rxjs/Observable';
 import { DataService } from '../common/services/data.service';
 import { uuid } from '../common/uuid';
 import { itemsFormConfig } from './form.config';
@@ -121,5 +122,10 @@ export class ItemDetailsComponent implements AfterViewInit {
 		}
 
 		return model;
+	}
+
+	@HostListener('window:beforeunload', ['$event'])
+	canDeactivate(): Observable<boolean> | boolean {
+		return !this.form.dirty;
 	}
 }
