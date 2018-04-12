@@ -17,6 +17,7 @@ import { EditCoordsDialog } from './types/coordinates/edit-coords.dialog';
 import { FormlyFieldDatePicker } from './types/date-picker';
 import { FormlyFieldDateTimePicker } from './types/date-time-picker';
 import { FormlyFieldHtml } from './types/html';
+import { FormlyMasterDetails } from './types/master-details/master-details';
 import { FormlyFieldMultiCheckbox } from './types/multi-checkbox';
 import { FormlyFieldMultiSelect } from './types/multi-select';
 import { FormlyFieldNumericInput } from './types/numeric-input';
@@ -104,6 +105,10 @@ const types: [TypeOption] = [
 		name: 'text',
 		component: FormlyFieldText,
 		wrappers: ['fieldset', 'label']
+	},
+	{
+		name: 'master-details',
+		component: FormlyMasterDetails
 	}
 ];
 
@@ -160,7 +165,8 @@ export const ngFormlyConfig: ConfigOption = {
 		FormlyFieldReference,
 		FormlyFieldMultiCheckbox,
 		FormlyFieldNumericInput,
-		FormlyFieldText
+		FormlyFieldText,
+		FormlyMasterDetails
 	],
 	entryComponents: [CKEditorDialog, EditCoordsDialog, EditHoursDialog],
 	providers: []
