@@ -1,9 +1,10 @@
 import { Location } from '@angular/common';
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { FormlyFieldConfig } from '@ngx-formly/core';
+import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
+import { Observable } from 'rxjs/Observable';
 import { DataService } from '../common/services/data.service';
 import { uuid } from '../common/uuid';
 import { itemsFormConfig } from './form.config';
@@ -24,6 +25,12 @@ export class ItemDetailsComponent implements AfterViewInit {
 	itemType: string;
 	parentId: string;
 	parentType: string;
+
+	options: FormlyFormOptions = {
+		formState: {
+			onFlush: new EventEmitter<void>()
+		}
+	};
 
 	constructor(
 		private fb: FormBuilder,
@@ -59,6 +66,8 @@ export class ItemDetailsComponent implements AfterViewInit {
 	}
 
 	save() {
+		this.options.formState.onFlush.emit();
+
 		let item = this.convertForDB(this.item);
 		this.data.saveItem(this.itemType, item)
 			.then(
@@ -113,5 +122,10 @@ export class ItemDetailsComponent implements AfterViewInit {
 		}
 
 		return model;
+	}
+
+	@HostListener('window:beforeunload', ['$event'])
+	canDeactivate(): Observable<boolean> | boolean {
+		return !this.form.dirty;
 	}
 }
