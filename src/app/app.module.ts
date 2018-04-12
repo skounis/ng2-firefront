@@ -63,7 +63,7 @@ const APP_PROVIDERS = [
 		CustomFormlyModule,
 
 		AgmCoreModule.forRoot({
-			apiKey: 'AIzaSyB3c6WmfOf9_Dd_Sh1gC2n7MjyGrUYPiSw'
+			apiKey: environment.maps.apiKey
 		}),
 		FlexLayoutModule,
 		CKEditorModule,
