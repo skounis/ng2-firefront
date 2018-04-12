@@ -17,6 +17,7 @@ import { EditCoordsDialog } from './types/coordinates/edit-coords.dialog';
 import { FormlyFieldDatePicker } from './types/date-picker';
 import { FormlyFieldDateTimePicker } from './types/date-time-picker';
 import { FormlyFieldHtml } from './types/html';
+import { FormlyMasterDetails } from './types/master-details/master-details';
 import { FormlyFieldMultiCheckbox } from './types/multi-checkbox';
 import { FormlyFieldMultiSelect } from './types/multi-select';
 import { FormlyFieldNumericInput } from './types/numeric-input';
@@ -26,6 +27,7 @@ import { FormlyFieldReference } from './types/reference/reference';
 import { FormlyFieldRepeater } from './types/repeater';
 import { CKEditorDialog } from './types/rich-text-editor/ckeditor.dialog';
 import { FormlyFieldRichText } from './types/rich-text-editor/rich-text';
+import { FormlyFieldText } from './types/text';
 import { FormlyFieldTimePicker } from './types/time-picker';
 import { FormlyFieldFileUpload } from './types/upload/file-upload';
 import { FormlyPanelWrapper } from './wrappers/panel';
@@ -98,6 +100,15 @@ const types: [TypeOption] = [
 	{
 		name: 'repeater',
 		component: FormlyFieldRepeater
+	},
+	{
+		name: 'text',
+		component: FormlyFieldText,
+		wrappers: ['fieldset', 'label']
+	},
+	{
+		name: 'master-details',
+		component: FormlyMasterDetails
 	}
 ];
 
@@ -153,7 +164,9 @@ export const ngFormlyConfig: ConfigOption = {
 		FormlyPanelWrapper,
 		FormlyFieldReference,
 		FormlyFieldMultiCheckbox,
-		FormlyFieldNumericInput
+		FormlyFieldNumericInput,
+		FormlyFieldText,
+		FormlyMasterDetails
 	],
 	entryComponents: [CKEditorDialog, EditCoordsDialog, EditHoursDialog],
 	providers: []

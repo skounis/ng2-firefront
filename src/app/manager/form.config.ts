@@ -72,7 +72,8 @@ export const itemsFormConfig = () => ({
 			wrappers: ['panel'],
 			key: 'extraOptions',
 			templateOptions: {
-				title: 'Extra options'
+				title: 'Extra options',
+				expandable: true
 			},
 			fieldArray: {
 				className: 'row',
@@ -279,6 +280,45 @@ export const itemsFormConfig = () => ({
 			},
 			validators: {
 				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			type: 'text',
+			key: 'justText',
+			templateOptions: {
+				label: 'Read only next',
+				description: 'This is just a read only text'
+			}
+		},
+
+		{
+			key: 'hue',
+			templateOptions: {
+				label: 'Hue',
+				titleColumnValueSetter: (item, index: number) => {
+					item.title = `Hue #${index}`;
+				}
+			},
+			type: 'master-details',
+			// wrappers: ['panel'],
+			fieldArray: {
+				fieldGroup: [
+					{
+						key: 'title',
+						templateOptions: {
+							label: 'Title',
+							showInGrid: true
+						},
+						type: 'input'
+					},
+					{
+						key: 'description',
+						templateOptions: {
+							label: 'Description'
+						},
+						type: 'input'
+					}
+				]
 			}
 		}
 	]

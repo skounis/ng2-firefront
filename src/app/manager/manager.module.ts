@@ -9,13 +9,14 @@ import { SharedModule } from '../common/shared.module';
 import { FormlyFormEnricher } from './formly-form-enricher';
 import { ItemDetailsComponent } from './item-details.component';
 import { ItemsListComponent } from './items-list.component';
+import { CanDeactivateManagerGuard } from './manager.can-deactivate';
 import { NewItemDialog } from './new-item.dialog';
 
 export const managerRoutes: Routes = [
 	{ path: 'manager/:itemsType', component: ItemsListComponent, pathMatch: 'full' },
-	{ path: 'manager/:itemsType/:id', component: ItemDetailsComponent, pathMatch: 'full' },
+	{ path: 'manager/:itemsType/:id', component: ItemDetailsComponent, pathMatch: 'full', canDeactivate: [CanDeactivateManagerGuard] },
 	{ path: 'manager/:parentType/:parentId/:itemsType', component: ItemDetailsComponent, pathMatch: 'full' },
-	{ path: 'manager/:parentType/:parentId/:itemsType/:id', component: ItemDetailsComponent, pathMatch: 'full' }
+	{ path: 'manager/:parentType/:parentId/:itemsType/:id', component: ItemDetailsComponent, pathMatch: 'full', canDeactivate: [CanDeactivateManagerGuard] }
 ];
 
 @NgModule({
@@ -35,7 +36,7 @@ export const managerRoutes: Routes = [
 		NewItemDialog
 	],
 	entryComponents: [NewItemDialog],
-	providers: [FormlyFormEnricher]
+	providers: [FormlyFormEnricher, CanDeactivateManagerGuard]
 })
 export class ManagerModule {
 }
