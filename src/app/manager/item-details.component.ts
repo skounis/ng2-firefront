@@ -7,9 +7,9 @@ import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { Observable } from 'rxjs/Observable';
 import { DataService } from '../common/services/data.service';
 import { uuid } from '../common/uuid';
-import { itemsFormConfig } from './form.config';
-import { FormlyFormEnricher } from './formly-form-enricher';
-import { ModelProcessor } from './model-processor';
+import { itemsFormConfig } from '../dynamic-form/form.config';
+import { FormlyFormEnricher } from '../dynamic-form/formly-form-enricher';
+import { ModelProcessor } from '../dynamic-form/model-processor';
 
 @Component({
 	selector: 'item-details',
@@ -20,17 +20,16 @@ export class ItemDetailsComponent implements AfterViewInit {
 	item: any;
 	fields: FormlyFieldConfig[];
 	form: FormGroup;
-
-	itemId: string;
-	itemType: string;
-	parentId: string;
-	parentType: string;
-
 	options: FormlyFormOptions = {
 		formState: {
 			onFlush: new EventEmitter<void>()
 		}
 	};
+
+	itemId: string;
+	itemType: string;
+	parentId: string;
+	parentType: string;
 
 	constructor(
 		private fb: FormBuilder,
