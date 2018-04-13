@@ -1,5 +1,5 @@
 import { FormControl, FormGroup } from '@angular/forms';
-import validator from 'validator';
+let validator = require('validator');
 
 export class ValidationService {
 	static getValidatorErrorMessage(code: string) {

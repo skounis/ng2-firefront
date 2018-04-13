@@ -30,6 +30,7 @@ import 'hammerjs';
  * Platform and Environment providers/directives/pipes
  */
 import { ManagerModule } from './manager/manager.module';
+import { PublicModule } from './public/public.module';
 import { ShellModule } from './shell/shell.module';
 import { AgmCoreModule } from '@agm/core';
 import { S3Storage } from './common/services/s3-storage';
@@ -74,7 +75,8 @@ const APP_PROVIDERS = [
 		SharedModule,
 		AuthModule,
 		ShellModule,
-		ManagerModule
+		ManagerModule,
+		PublicModule
 	],
 	providers: [ // expose our Services and Providers into Angular's dependency injection
 		APP_PROVIDERS
