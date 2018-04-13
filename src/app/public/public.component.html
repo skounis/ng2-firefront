@@ -1,0 +1,8 @@
+<dynamic-form [fields]="fields" [form]="form" [item]="item" [options]="options">
+	<mat-toolbar>
+		<span class="spacer"></span>
+
+		<button type="submit" mat-raised-button color="primary" [disabled]="!form.valid || !form.dirty" (click)="submit()">Submit</button>
+		<button type="button" mat-button [disabled]="!form.dirty && itemId" (click)="clear()">Clear</button>
+	</mat-toolbar>
+</dynamic-form>
