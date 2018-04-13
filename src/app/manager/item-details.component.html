@@ -1,14 +1,13 @@
-<form role="form" novalidate [formGroup]="form" (ngSubmit)="save()">
+<dynamic-form *ngIf="item" [fields]="fields" [form]="form" [item]="item" [options]="options">
 	<mat-toolbar>
-		<button type="button" mat-icon-button  *ngIf="parentType" (click)="back()">
+		<button type="button" mat-icon-button *ngIf="parentType" (click)="back()">
 			<mat-icon class="mat-24">arrow_back</mat-icon>
 		</button>
+
 		<span>{{item?.title}}</span>
 		<span class="spacer"></span>
 
-		<button type="submit" mat-raised-button color="primary" [disabled]="!form.valid || !form.dirty">Save</button>
+		<button type="submit" mat-raised-button color="primary" [disabled]="!form.valid || !form.dirty" (click)="save()">Save</button>
 		<button type="button" mat-button [disabled]="!form.dirty && itemId" (click)="cancel()">Cancel</button>
 	</mat-toolbar>
-
-	<formly-form *ngIf="item" [model]="item" [fields]="fields" [form]="form" [options]="options"></formly-form>
-</form>
+</dynamic-form>
