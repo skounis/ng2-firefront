@@ -1,3 +1,4 @@
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApplicationRef, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -21,6 +22,7 @@ import { ROUTES } from './app.routes';
 import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/services/auth.service';
 import { CustomFormlyModule, ngFormlyConfig } from './common/formly/custom-formly.module';
+import { HttpErrorsInterceptor } from './common/pipes/http-errors.interceptor';
 import { DataService } from './common/services/data.service';
 import { FireStorage } from './common/services/fire-storage';
 import { SharedModule } from './common/shared.module';
@@ -79,7 +81,8 @@ const APP_PROVIDERS = [
 		PublicModule
 	],
 	providers: [ // expose our Services and Providers into Angular's dependency injection
-		APP_PROVIDERS
+		APP_PROVIDERS,
+		{ provide: HTTP_INTERCEPTORS, useClass: HttpErrorsInterceptor, multi: true }
 	]
 })
 export class AppModule {
