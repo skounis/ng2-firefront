@@ -17,13 +17,13 @@
 
 				<form [formGroup]="loginForm" #f="ngForm" (ngSubmit)="signInWithEmail()" fxLayout="column" fxFlexFill fxLayoutGap="10px">
 
-					<mat-input-container>
+					<mat-form-field>
 						<input matInput formControlName="email" type="email" placeholder="Email">
-					</mat-input-container>
+					</mat-form-field>
 
-					<mat-input-container>
+					<mat-form-field>
 						<input matInput formControlName="password" type="password" placeholder="Password">
-					</mat-input-container>
+					</mat-form-field>
 
 					<button mat-raised-button color="primary" type="submit" aria-label="login">Sign In</button>
 				</form>

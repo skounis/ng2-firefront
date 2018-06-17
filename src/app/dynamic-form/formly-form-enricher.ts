@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormlyFieldConfig } from '@ngx-formly/core';
@@ -59,8 +60,8 @@ export class FormlyFormEnricher {
 			throw new Error(`'templateOption.collection' should be specified for 'multi-select' field. KEY = '${field.key}'`);
 		}
 		return {
-			dataSource: this.db.list(field.templateOptions.collection).snapshotChanges()
-				.map(actions => actions.map(action => ({ $key: action.key, ...action.payload.val() })))
+			dataSource: this.db.list(field.templateOptions.collection).snapshotChanges().pipe(
+				map(actions => actions.map(action => ({ $key: action.key, ...action.payload.val() }))))
 		};
 	}
 
@@ -72,12 +73,12 @@ export class FormlyFormEnricher {
 		switch (field.templateOptions.storage) {
 			case 'FIRE':
 				return {
-					change: (file: File) => this.storage.upload(file),
+					upload: (file: File) => this.storage.upload(file),
 					remove: (url: string) => this.storage.remove(url)
 				};
 			case 'S3':
 				return {
-					change: (file: File) => this.s3.upload(file),
+					upload: (file: File) => this.s3.upload(file),
 					remove: (url: string) => this.s3.remove(url)
 				};
 			default:

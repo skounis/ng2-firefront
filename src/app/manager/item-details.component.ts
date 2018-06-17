@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { DataService } from '../common/services/data.service';
 import { uuid } from '../common/uuid';
 import { itemsFormConfig } from '../dynamic-form/form.config';

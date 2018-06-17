@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot } from '@angular/router';
@@ -25,7 +26,8 @@ export class CanDeactivateManagerGuard implements CanDeactivate<ItemDetailsCompo
 			buttonCancel: 'Stay'
 		};
 		return this.dialog.open(ConfirmDialog, { data: data })
-			.afterClosed()
-			.map(x => x === 'OK');
+			.afterClosed().pipe(
+				map(x => x === 'OK')
+			);
 	}
 }
