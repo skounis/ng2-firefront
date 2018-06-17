@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { uuid } from '../uuid';
 import { IStorage } from './storage.interface';
 
@@ -28,15 +28,18 @@ export class FireStorage implements IStorage {
 				subject.error(error);
 			},
 			() => {
-				let url = uploadTask.snapshot.downloadURL;
-				subject.next({
-					eventType: 'UPLOADED',
-					data: {
-						url: url,
-						path: path
-					}
-				});
-				subject.complete();
+				uploadTask.snapshot.ref
+					.getDownloadURL()
+					.then((downloadUrl: string) => {
+						subject.next({
+							eventType: 'UPLOADED',
+							data: {
+								url: downloadUrl,
+								path: path
+							}
+						});
+						subject.complete();
+					});
 			}
 		);
 

@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule, MatSelectModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfigOption, FormlyModule } from '@ngx-formly/core';
-import { ManipulatorOption, TypeOption, WrapperOption } from '@ngx-formly/core/src/services/formly.config';
+import { ManipulatorOption, TypeOption, WrapperOption } from '@ngx-formly/core/lib/services/formly.config';
 import { TextMaskModule } from 'angular2-text-mask';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { CalendarModule } from 'primeng/components/calendar/calendar';
@@ -33,7 +33,7 @@ import { FormlyFieldFileUpload } from './types/upload/file-upload';
 import { FormlyPanelWrapper } from './wrappers/panel';
 import { FormlyWrapperWarning, FormlyWrapperWarningMessage } from './wrappers/warning';
 
-const types: [TypeOption] = [
+const types: TypeOption[] = [
 	{
 		name: 'numeric-input',
 		component: FormlyFieldNumericInput,
@@ -112,11 +112,11 @@ const types: [TypeOption] = [
 	}
 ];
 
-const manipulators: [ManipulatorOption] = [
+const manipulators: ManipulatorOption[] = [
 	{ class: TemplateWarningWrapper, method: 'run' }
 ];
 
-const wrappers: [WrapperOption] = [
+const wrappers: WrapperOption[] = [
 	{ name: 'warning-wrapper', component: FormlyWrapperWarning },
 	{ name: 'warning-message', component: FormlyWrapperWarningMessage },
 	{ name: 'panel', component: FormlyPanelWrapper }

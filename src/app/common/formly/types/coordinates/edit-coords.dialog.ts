@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { FormlyTemplateOptions } from '@ngx-formly/core/src/components/formly.field.config';
+import { FormlyTemplateOptions } from '@ngx-formly/core/lib/components/formly.field.config';
 
 @Component({
 	selector: 'edit-coords-dialog',

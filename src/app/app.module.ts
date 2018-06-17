@@ -3,7 +3,7 @@ import { ApplicationRef, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { PreloadAllModules, RouterModule } from '@angular/router';
@@ -55,7 +55,7 @@ const APP_PROVIDERS = [
 	imports: [ // import Angular's modules
 		BrowserModule,
 		FormsModule,
-		HttpModule,
+		HttpClientModule,
 		BrowserAnimationsModule,
 		RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
 		MatSnackBarModule,

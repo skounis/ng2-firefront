@@ -17,7 +17,9 @@ import { FieldType, FormlyFieldConfig } from '@ngx-formly/core';
 })
 export class FormlyFieldMultiCheckbox extends FieldType {
 	static createControl(model: any, field: FormlyFieldConfig): AbstractControl {
-		let controlGroupConfig = field.templateOptions.options.reduce((previous, option) => {
+		const fieldTemplateOptions = <any[]>field.templateOptions.options;
+
+		let controlGroupConfig = fieldTemplateOptions.reduce((previous, option) => {
 			previous[option.key] = new FormControl(model ? model[option.key] : undefined);
 			return previous;
 		}, {});
