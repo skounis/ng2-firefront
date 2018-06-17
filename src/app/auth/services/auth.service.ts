@@ -1,8 +1,9 @@
+import { of as observableOf,  Observable } from 'rxjs';
+import { map, tap, take, mergeMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
-import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
@@ -17,19 +18,19 @@ export class AuthService {
 	}
 
 	auth(): Observable<boolean> {
-		return this.afAuth.authState
-			.take(1)
-			.flatMap(auth => {
+		return this.afAuth.authState.pipe(
+			take(1),
+			mergeMap(auth => {
 				if (!auth) {
-					return Observable.of(false);
+					return observableOf(false);
 				}
 
-				return this.afDb.list<any>('users/' + auth.uid).valueChanges()
-					.do(roles => {
+				return this.afDb.list<any>('users/' + auth.uid).valueChanges().pipe(
+					tap(roles => {
 						this.roles = roles;
-					})
-					.map(() => true);
-			});
+					}),
+					map(() => true),);
+			}),);
 	}
 
 	getName() {

@@ -73,7 +73,7 @@ export class FormlyFieldFileUpload extends Field {
 
 	private uploadFile(file: File, picture) {
 		picture.inProgress = true;
-		this.to.change(file).subscribe(x => {
+		this.to['upload'](file).subscribe((x) => {
 			if (x.eventType === 'UPLOADED') {
 				picture.inProgress = false;
 				picture.url = x.data.url;

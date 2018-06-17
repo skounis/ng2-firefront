@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
-import { ISubscription } from 'rxjs/Subscription';
+import { SubscriptionLike as ISubscription } from 'rxjs';
 
 @Component({
 	selector: 'formly-field-prefix',

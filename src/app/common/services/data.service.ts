@@ -1,6 +1,7 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { uuid } from '../uuid';
 
 @Injectable()
@@ -9,8 +10,8 @@ export class DataService {
 	}
 
 	loadItems(type: string): Observable<any[]> {
-		return this.afDB.list(type).snapshotChanges()
-			.map(actions => actions.map(action => ({ $key: action.key, ...action.payload.val() })));
+		return this.afDB.list(type).snapshotChanges().pipe(
+			map(actions => actions.map(action => ({ $key: action.key, ...action.payload.val() }))));
 	}
 
 	loadItemsByParent(collection: string, parentId: string): Observable<any[]> {

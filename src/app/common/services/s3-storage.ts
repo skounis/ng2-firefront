@@ -1,7 +1,7 @@
 import { environment } from '../../../environments/environment';
 import { IStorage } from './storage.interface';
 import * as AWS from 'aws-sdk';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 
 export class S3Storage implements IStorage {
 	private s3: AWS.S3;
