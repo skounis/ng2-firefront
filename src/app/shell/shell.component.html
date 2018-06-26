@@ -1,9 +1,7 @@
+<top-bar [sidenav]="sidenav"></top-bar>
 <mat-sidenav-container>
-
 	<mat-sidenav #sidenav [mode]="mode" [opened]="opened" class="app-sidenav">
-
 		<mat-nav-list>
-			<h3 mat-subheader>Menu</h3>
 
 			<a mat-list-item [routerLink]=" ['./'] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
 				<mat-icon mat-list-icon>home</mat-icon>
@@ -42,12 +40,9 @@
 
 	</mat-sidenav>
 
-	<top-bar [sidenav]="sidenav"></top-bar>
-
 	<div class="app-content">
 		<router-outlet></router-outlet>
 	</div>
-
 </mat-sidenav-container>
 
 <!--<span class="app-action">-->

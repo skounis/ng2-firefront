@@ -20,3 +20,35 @@ body {
 	color: mat-color($accent);
 	font-size: small;
 }
+
+/*
+ * Make the inner part of the form scroll (only)
+ * Lock the height of all the parent elements
+ */
+mat-sidenav-content .app-content,
+mat-sidenav-content home,
+mat-sidenav-content .as-form{
+	position: relative;
+	height: 100%;
+}
+
+.as-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.as-form-header {
+	flex: 0 0 auto;
+}
+
+.as-form-header::before {
+	display: block;
+	content: '';
+	height: 64px;
+}
+
+.as-form-scroll {
+	flex: 1 1 auto;
+	overflow-y: auto;
+	position: relative;
+}
