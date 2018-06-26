@@ -5,10 +5,11 @@ mat-sidenav-container {
 }
 
 .app-content mat-card {
-	margin: 20px;
+	margin: 10px;
 }
 
 .app-sidenav {
+	margin-top: 64px;
 	min-width: 250px;
 	width: 250px;
 	.active {
@@ -20,6 +21,9 @@ mat-sidenav-container {
 		font-family: sans-serif;
 		font-weight: 600;
 		font-size: medium;
+	}
+	mat-nav-list {
+		padding-top: 0px;
 	}
 }
 
