@@ -36,6 +36,7 @@ import { PublicModule } from './public/public.module';
 import { ShellModule } from './shell/shell.module';
 import { AgmCoreModule } from '@agm/core';
 import { S3Storage } from './common/services/s3-storage';
+import { MenuService } from './common/services/menu.service';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -43,7 +44,8 @@ const APP_PROVIDERS = [
 	AuthService,
 	FireStorage,
 	S3Storage,
-	DataService
+	DataService,
+	MenuService
 ];
 
 /**

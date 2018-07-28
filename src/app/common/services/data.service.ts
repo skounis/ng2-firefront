@@ -9,9 +9,22 @@ export class DataService {
 	constructor(private afDB: AngularFireDatabase) {
 	}
 
+	getItemPath(type: string): string {
+		if (type === 'system-menus') {
+			return `system/menus`;
+		}
+
+		return type;
+	}
+
 	loadItems(type: string): Observable<any[]> {
-		return this.afDB.list(type).snapshotChanges().pipe(
-			map(actions => actions.map(action => ({ $key: action.key, ...action.payload.val() }))));
+		const itemPath = this.getItemPath(type);
+
+		return this.afDB.list(itemPath)
+			.snapshotChanges()
+			.pipe(
+				map(actions => actions.map(action => ({ $key: action.key, ...action.payload.val() })))
+			);
 	}
 
 	loadItemsByParent(collection: string, parentId: string): Observable<any[]> {
@@ -20,23 +33,31 @@ export class DataService {
 	}
 
 	createItem(itemType: string, item: any): Promise<void> {
+		const itemPath = this.getItemPath(itemType);
+
 		let key = uuid();
-		return this.afDB.object(`${itemType}/${key}`).set(item);
+		return this.afDB.object(`${itemPath}/${key}`).set(item);
 	}
 
 	deleteItem(itemType: string, item: any): Promise<void> {
+		const itemPath = this.getItemPath(itemType);
+
 		let key = item.$key;
-		return this.afDB.object(`${itemType}/${key}`).remove();
+		return this.afDB.object(`${itemPath}/${key}`).remove();
 	}
 
 	loadItem(itemType: string, itemId: string): Observable<any> {
-		return this.afDB.object(`${itemType}/${itemId}`).valueChanges();
+		const itemPath = this.getItemPath(itemType);
+
+		return this.afDB.object(`${itemPath}/${itemId}`).valueChanges();
 	}
 
 	saveItem(itemType: string, item: any): Promise<void> {
+		const itemPath = this.getItemPath(itemType);
+
 		let key = item.$key;
 		let update = this.patchEntity(item);
-		return this.afDB.object(`${itemType}/${key}`).update(update);
+		return this.afDB.object(`${itemPath}/${key}`).update(update);
 	}
 
 	private patchEntity(item: any): any {

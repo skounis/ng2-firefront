@@ -1,25 +1,29 @@
 <div class="as-form">
 	<div class="as-form-header">
 		<mat-toolbar>
-			<span>{{itemsType | uppercase}}</span>
-			<span class="spacer"></span>
-			<input class="search form-control" placeholder="Search..." (keyup)="search(input.value)" #input>
-			<span class="spacer"></span>
-			<button mat-raised-button color="primary" (click)="createItem()">New item</button>
+	<span>{{itemsTitle | uppercase}}</span>
+	<span class="spacer"></span>
+	<input class="search form-control" placeholder="Search..." (keyup)="search(input.value)" #input>
+	<span class="spacer"></span>
+	<button mat-raised-button color="primary" (click)="createItem()">New item</button>
 		</mat-toolbar>
 	</div>
 
 	<div class="as-form-scroll">
 		<div class="cards-container">
-			<mat-card (click)="editItem(item)" *ngFor="let item of visibleItems">
-				<mat-card-header>
-					<mat-card-title>{{item.title}}</mat-card-title>
-				</mat-card-header>
+	<mat-card (click)="editItem(item)" *ngFor="let item of visibleItems">
+		<mat-card-header>
+			<mat-card-title>{{item.title}}</mat-card-title>
+		</mat-card-header>
 
-				<mat-card-actions>
-					<button mat-icon-button (click)="deleteItem(item); $event.stopPropagation();"><mat-icon>delete</mat-icon></button>
-				</mat-card-actions>
-			</mat-card>
+		<mat-card-actions>
+			<button
+				mat-icon-button
+				*ngIf="canDelete(item)"
+				(click)="deleteItem($event, item);"
+			><mat-icon>delete</mat-icon></button>
+		</mat-card-actions>
+	</mat-card>
 		</div>
 	</div>
 </div>
