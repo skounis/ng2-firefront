@@ -321,5 +321,54 @@ export const itemsFormConfig = () => ({
 				]
 			}
 		}
+	],
+	'system-menus': [
+		{
+			type: 'input',
+			key: 'title',
+			templateOptions: {
+				label: 'Title',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			type: 'input',
+			key: 'icon',
+			templateOptions: {
+				label: 'Icon',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			type: 'input',
+			key: 'itemsType',
+			templateOptions: {
+				label: 'ItemsType',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			type: 'numeric-input',
+			key: 'order',
+			templateOptions: {
+				label: 'Order',
+				required: true,
+				mask: {
+					allowDecimal: false
+				}
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		}
 	]
 });

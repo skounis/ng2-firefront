@@ -1,47 +1,39 @@
 <div class="as-form">
-  <div class="as-form-header">
-    <mat-toolbar>
-      <span>Dashboard</span>
-    </mat-toolbar>
-  </div>
+	<div class="as-form-header">
+		<mat-toolbar>
+			<span>Dashboard</span>
+		</mat-toolbar>
+	</div>
 
-  <div class="as-form-scroll">
-    <div class="cards-container">
+	<div class="as-form-scroll">
+		<div class="cards-container">
 
-      <mat-card [routerLink]="['./manager/businesses']">
-        <mat-icon>business</mat-icon>
-        Businesses
-      </mat-card>
+			<ng-template ngFor let-menu [ngForOf]="menus">
+				<mat-card [routerLink]="['./manager/' + menu.itemsType]">
+					<mat-icon>{{menu.icon}}</mat-icon>
+					{{menu.title}}
+				</mat-card>
+			</ng-template>
 
-      <mat-card [routerLink]="['./manager/products']">
-        <mat-icon>shopping_cart</mat-icon>
-        Products
-      </mat-card>
+			<mat-card [routerLink]="['./reports']">
+				<mat-icon>data_usage</mat-icon>
+				Reports
+			</mat-card>
 
-      <mat-card [routerLink]="['./manager/news']">
-        <mat-icon>message</mat-icon>
-        News
-      </mat-card>
+			<mat-card [routerLink]="['./manager/system-menus']">
+				<mat-icon>list</mat-icon>
+				Menus
+			</mat-card>
 
-      <mat-card [routerLink]="['./manager/colors']">
-        <mat-icon>message</mat-icon>
-        Colors
-      </mat-card>
+			<mat-card [routerLink]="['./about']">
+				<mat-icon>info</mat-icon>
+				About
+			</mat-card>
 
-      <mat-card [routerLink]="['./reports']">
-        <mat-icon>data_usage</mat-icon>
-        Reports
-      </mat-card>
-
-      <mat-card [routerLink]="['./about']">
-        <mat-icon>info</mat-icon>
-        About
-      </mat-card>
-
-      <div class="app-content">
-        <!-- TODO?  -->
-        <!-- <router-outlet></router-outlet> -->
-      </div>
-    </div>
-  </div>
+			<div class="app-content">
+				<!-- TODO?  -->
+				<!-- <router-outlet></router-outlet> -->
+			</div>
+		</div>
+	</div>
 </div>

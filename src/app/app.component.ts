@@ -1,7 +1,9 @@
 /*
  * Angular 2 decorators and services
  */
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { DataService } from './common/services/data.service';
+import { MenuService } from './common/services/menu.service';
 
 /*
  * App Component
@@ -17,5 +19,18 @@ import { Component, ViewEncapsulation } from '@angular/core';
 	template: `<router-outlet></router-outlet>`,
 	encapsulation: ViewEncapsulation.None
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+	constructor(
+		private dataService: DataService,
+		private menuService: MenuService
+	) {
+	}
+
+	ngOnInit(): void {
+		this.dataService
+			.loadItems('system-menus')
+			.subscribe(menus => {
+				this.menuService.menus.next(menus);
+			});
+	}
 }
