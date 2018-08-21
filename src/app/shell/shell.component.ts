@@ -1,4 +1,7 @@
-import { Component, ViewEncapsulation, HostListener } from '@angular/core';
+import { Component, ViewEncapsulation, HostListener, OnInit } from '@angular/core';
+import { MenuItem } from '../common/models/menu-item';
+import { orderBy } from 'lodash';
+import { MenuService } from '../common/services/menu.service';
 
 @Component({
 	selector: 'shell',
@@ -6,11 +9,23 @@ import { Component, ViewEncapsulation, HostListener } from '@angular/core';
 	styleUrls: ['./shell.component.scss'],
 	encapsulation: ViewEncapsulation.None
 })
-export class ShellComponent {
+export class ShellComponent implements OnInit {
 	mode = 'side';
 	opened = true;
 
-	constructor() {
+	menus: MenuItem[];
+
+	constructor(
+		private menuService: MenuService
+	) {
+	}
+
+	ngOnInit(): void {
+		this.menuService.menus.subscribe(menus => {
+			menus = menus.filter(x => !x.itemsType.startsWith('system-'));
+
+			this.menus = orderBy(menus, ['order']);
+		})
 	}
 
 	@HostListener('window:resize', ['$event'])
