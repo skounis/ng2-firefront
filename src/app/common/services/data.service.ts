@@ -14,7 +14,7 @@ export class DataService {
 			return `system/menus`;
 		}
 
-		return type;
+		return `ft${type}`;
 	}
 
 	loadItems(type: string): Observable<any[]> {
