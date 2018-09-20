@@ -1,6 +1,47 @@
 import { Validators } from '@angular/forms';
 
 export const itemsFormConfig = () => ({
+	activityfeed: [
+		{
+			type: 'input',
+			key: 'title',
+			templateOptions: {
+				label: 'Title',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			key: 'body',
+			type: 'textarea',
+			templateOptions: {
+				rows: 5,
+				label: 'Body',
+				description: 'Please enter at least 150 characters',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			key: 'date',
+			type: 'date-time-picker',
+			templateOptions: {
+				label: 'Date',
+				showTime: false
+			}
+		},
+		{
+			type: 'text',
+			key: 'posted_by',
+			templateOptions: {
+				label: 'Author'
+			}
+		}
+	],
 	businesses: [
 		{
 			type: 'input',
@@ -22,6 +63,30 @@ export const itemsFormConfig = () => ({
 				parentCollection: 'businesses',
 				collection: 'news',
 				summaryField: 'title'
+			}
+		}
+	],
+	chatrooms: [
+		{
+			type: 'input',
+			key: 'title',
+			templateOptions: {
+				label: 'Title',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			type: 'input',
+			key: 'icon',
+			templateOptions: {
+				label: 'Icon',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
 			}
 		}
 	],
@@ -135,7 +200,6 @@ export const itemsFormConfig = () => ({
 				storage: 'FIRE',
 				disabled: true,
 				buttonLabel: 'Upload'
-
 			}
 		},
 		{
@@ -196,6 +260,203 @@ export const itemsFormConfig = () => ({
 				description: 'Please enter at least 150 characters'
 			}
 		}
+	],
+	catalogitems: [
+		{
+			type: 'input',
+			key: 'title',
+			templateOptions: {
+				label: 'Title',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			type: 'input',
+			key: 'url',
+			templateOptions: {
+				label: 'Url',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			key: 'body',
+			type: 'textarea',
+			templateOptions: {
+				rows: 5,
+				label: 'Body'
+			}
+		},
+		{
+			type: 'file-upload',
+			key: 'thumb',
+			templateOptions: {
+				label: 'Thumb',
+				storage: 'FIRE',
+				disabled: true,
+				buttonLabel: 'Upload',
+				description: 'Recommended: 300 px wide x 300 px high'
+			}
+		},
+		{
+			type: 'file-upload',
+			key: 'pictures',
+			templateOptions: {
+				label: 'Pictures',
+				storage: 'FIRE',
+				disabled: true,
+				buttonLabel: 'Upload',
+				description: 'Recommended: 300 px wide x 300 px high'
+			}
+		},
+		{
+			type: 'input',
+			key: 'pdf',
+			templateOptions: {
+				label: 'PDF'
+			}
+		}
+	],
+	menuitems: [
+		{
+			type: 'input',
+			key: 'title',
+			templateOptions: {
+				label: 'Title',
+				description: 'Provide the official product title',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			key: 'body',
+			type: 'textarea',
+			templateOptions: {
+				rows: 5,
+				label: 'Description'
+			}
+		},
+		{
+			type: 'input',
+			key: 'category',
+			templateOptions: {
+				label: 'Category',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			className: 'col-12',
+			type: 'check',
+			key: 'isFeatured',
+			defaultValue: false,
+			templateOptions: {
+				label: 'Featured'
+			}
+		},
+		{
+			type: 'file-upload',
+			key: 'pictures',
+			templateOptions: {
+				label: 'Avatar',
+				storage: 'FIRE',
+				disabled: true,
+				buttonLabel: 'Upload'
+			}
+		},
+		{
+			type: 'file-upload',
+			key: 'thumb',
+			templateOptions: {
+				label: 'Thumb',
+				storage: 'FIRE',
+				disabled: true,
+				buttonLabel: 'Upload'
+			}
+		},
+		{
+			type: 'repeater',
+			wrappers: ['panel'],
+			key: 'price',
+			templateOptions: {
+				title: 'Price',
+				expandable: true
+			},
+			fieldArray: {
+				className: 'row',
+				fieldGroup: [
+					{
+						className: 'col-12',
+						type: 'input',
+						key: 'currency',
+						templateOptions: {
+							label: 'Currency'
+						}
+					},
+					{
+						className: 'col-12',
+						type: 'input',
+						key: 'name',
+						templateOptions: {
+							label: 'Name'
+						}
+					},
+					{
+						className: 'col-12',
+						type: 'numeric-input',
+						key: 'value',
+						templateOptions: {
+							label: 'Price',
+							description: 'Please enter the price. Decimals are allowed.',
+							mask: {
+								allowDecimal: true,
+								decimalLimit: 2
+							}
+						}
+					}
+				]
+			}
+		},
+		{
+			type: 'repeater',
+			wrappers: ['panel'],
+			key: 'standardOptions',
+			templateOptions: {
+				title: 'Standard options',
+				expandable: true
+			},
+			fieldArray: {
+				className: 'row',
+				fieldGroup: [
+					{
+						className: 'col-12',
+						type: 'input',
+						key: 'name',
+						templateOptions: {
+							label: 'Name'
+						}
+					},
+					{
+						className: 'col-12',
+						type: 'check',
+						key: 'selected',
+						defaultValue: false,
+						templateOptions: {
+							label: 'This option is pre-selected'
+						}
+					}
+				]
+			}
+		},
 	],
 	news: [
 		{
@@ -266,6 +527,298 @@ export const itemsFormConfig = () => ({
 				disabled: true,
 				buttonLabel: 'Upload',
 				description: 'Recommended: 600 px wide x 600 px high'
+			}
+		}
+	],
+	photogalleries: [
+		{
+			type: 'input',
+			key: 'title',
+			templateOptions: {
+				label: 'Title',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			key: 'body',
+			type: 'textarea',
+			templateOptions: {
+				rows: 5,
+				label: 'Body',
+				description: 'Please enter at least 150 characters',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			type: 'file-upload',
+			key: 'picture',
+			templateOptions: {
+				label: 'Avatar',
+				storage: 'FIRE',
+				disabled: true,
+				buttonLabel: 'Upload'
+			}
+		}
+	],
+	properties: [
+		{
+			type: 'input',
+			key: 'title',
+			templateOptions: {
+				label: 'Title',
+				description: 'Provide the official product title',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			type: 'input',
+			key: 'category',
+			templateOptions: {
+				label: 'Category',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			type: 'input',
+			key: 'code',
+			templateOptions: {
+				label: 'Code',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			type: 'input',
+			key: 'buildIn',
+			templateOptions: {
+				label: 'BuildIn:',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			key: 'description',
+			type: 'textarea',
+			templateOptions: {
+				rows: 5,
+				label: 'Description',
+				description: 'Please enter at least 150 characters',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			type: 'numeric-input',
+			key: 'surface',
+			templateOptions: {
+				label: 'Surface',
+				required: true,
+				mask: {
+					allowDecimal: false
+				}
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			type: 'input',
+			key: 'address',
+			templateOptions: {
+				label: 'Address',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			type: 'input',
+			key: 'intention',
+			templateOptions: {
+				label: 'Intention',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			type: 'file-upload',
+			key: 'pictures',
+			templateOptions: {
+				label: 'Avatar',
+				storage: 'FIRE',
+				disabled: true,
+				buttonLabel: 'Upload'
+			}
+		},
+		{
+			type: 'file-upload',
+			key: 'thumb',
+			templateOptions: {
+				label: 'Thumb',
+				storage: 'FIRE',
+				disabled: true,
+				buttonLabel: 'Upload',
+				description: 'Recommended: 300 px wide x 300 px high'
+			}
+		},
+		{
+			key: 'mapdata',
+			fieldGroup: [
+				{
+					type: 'coords',
+					key: 'annotation',
+					templateOptions: {
+						label: 'Coordinates'
+					}
+				}
+			]
+		},
+		{
+			className: 'col-12',
+			type: 'numeric-input',
+			key: 'price',
+			templateOptions: {
+				label: 'Price',
+				description: 'Please enter the price. Decimals are allowed.',
+				mask: {
+					allowDecimal: true,
+					decimalLimit: 2
+				}
+			}
+		},
+		{
+			wrappers: ['panel'],
+			className: 'row',
+			key: 'contact',
+			templateOptions: {
+				title: 'Contact'
+			},
+			fieldGroup: [
+				{
+					type: 'input',
+					key: 'email'
+				},
+				{
+					type: 'input',
+					key: 'phoneNumber'
+				},
+				{
+					type: 'input',
+					key: 'web'
+				},
+			]
+		}
+	],
+	userprofiles: [
+		{
+			type: 'input',
+			key: 'title',
+			templateOptions: {
+				label: 'Title',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			type: 'file-upload',
+			key: 'avatar',
+			templateOptions: {
+				label: 'Avatar',
+				storage: 'FIRE',
+				disabled: true,
+				buttonLabel: 'Upload'
+			}
+		},
+		{
+			type: 'input',
+			key: 'firstName',
+			templateOptions: {
+				label: 'First name',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			type: 'input',
+			key: 'lastName',
+			templateOptions: {
+				label: 'Last name',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			type: 'input',
+			key: 'email',
+			templateOptions: {
+				label: 'Email',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			type: 'input',
+			key: 'phoneNumber',
+			templateOptions: {
+				label: 'Phone'
+			}
+		},
+		{
+			type: 'input',
+			key: 'linkedIn',
+			templateOptions: {
+				label: 'LinkedIn'
+			}
+		},
+		{
+			type: 'input',
+			key: 'webpage',
+			templateOptions: {
+				label: 'Web page'
+			}
+		},
+		{
+			type: 'input',
+			key: 'address',
+			templateOptions: {
+				label: 'Address'
+			}
+		},
+		{
+			key: 'bio',
+			type: 'textarea',
+			templateOptions: {
+				rows: 5,
+				label: 'Bio'
 			}
 		}
 	],
