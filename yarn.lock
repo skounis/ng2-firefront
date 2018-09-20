@@ -327,15 +327,15 @@
     tree-kill "^1.0.0"
     webpack-sources "^1.1.0"
 
-"@ngx-formly/bootstrap@4.4.6":
-  version "4.4.6"
-  resolved "https://registry.yarnpkg.com/@ngx-formly/bootstrap/-/bootstrap-4.4.6.tgz#30b3a3b8e63c3e95ac26ef87bc0e074b7efa4b7c"
+"@ngx-formly/bootstrap@4.7.2":
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/@ngx-formly/bootstrap/-/bootstrap-4.7.2.tgz#e87237176730d312f5a10c760c419da1bba880c4"
   dependencies:
     tslib "^1.9.0"
 
-"@ngx-formly/core@4.4.6":
-  version "4.4.6"
-  resolved "https://registry.yarnpkg.com/@ngx-formly/core/-/core-4.4.6.tgz#6b2048cd2dcc6656135e477921115871e35c8cbe"
+"@ngx-formly/core@4.7.2":
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/@ngx-formly/core/-/core-4.7.2.tgz#2e7545983e7a34ed22d423c087db7f3a9aa3d134"
   dependencies:
     tslib "^1.7.1"
 
