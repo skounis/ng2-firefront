@@ -13,6 +13,7 @@ import { FormlyModule } from '@ngx-formly/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { environment } from '../environments/environment';
 // App is our top level component
@@ -24,6 +25,8 @@ import { AuthService } from './auth/services/auth.service';
 import { CustomFormlyModule, ngFormlyConfig } from './common/formly/custom-formly.module';
 import { HttpErrorsInterceptor } from './common/pipes/http-errors.interceptor';
 import { DataService } from './common/services/data.service';
+import { RealTimeDatabaseService } from './common/services/realtime-database.service';
+import { CloudFireStoreService } from './common/services/cloud-firestore.service';
 import { FireStorage } from './common/services/fire-storage';
 import { SharedModule } from './common/shared.module';
 import 'hammerjs';
@@ -38,13 +41,16 @@ import { AgmCoreModule } from '@agm/core';
 import { S3Storage } from './common/services/s3-storage';
 import { MenuService } from './common/services/menu.service';
 
+
 // Application wide providers
 const APP_PROVIDERS = [
 	...APP_RESOLVER_PROVIDERS,
 	AuthService,
 	FireStorage,
+	CloudFireStoreService,
 	S3Storage,
 	DataService,
+	RealTimeDatabaseService,
 	MenuService
 ];
 
@@ -75,6 +81,7 @@ const APP_PROVIDERS = [
 
 		AngularFireModule.initializeApp(environment.fire.auth),
 		AngularFireDatabaseModule,
+		AngularFirestoreModule.enablePersistence(),
 		AngularFireAuthModule,
 		SharedModule,
 		AuthModule,
