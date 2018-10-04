@@ -13,8 +13,8 @@ export class RealTimeDatabaseService {
 		if (type === 'system-menus') {
 			return `system/menus`;
 		}
-
-		return `ft${type}`;
+		return type;
+		// return `ft${type}`;
 	}
 
 	loadItems(type: string): Observable<any[]> {

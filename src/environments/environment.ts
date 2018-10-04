@@ -10,7 +10,7 @@ export const environment = {
         subtitle: 'Firebase Admin',
         slogan: 'Your Firebase Admin Panel'
     },
-    databaseType: 'cloud-firestore',
+    databaseType: 'realtime', // cloud-firestore || realtime
     fire: {
         auth: {
             apiKey: 'AIzaSyAY8dIAVW6jZ8sSoYPQLRQOp-sUeYnYfWw',
