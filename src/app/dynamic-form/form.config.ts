@@ -246,7 +246,7 @@ export const itemsFormConfig = () => ({
 			templateOptions: {
 				multiple: false,
 				label: 'Size',
-				labelProp: 'name',
+				labelProp: 'title',
 				valueProp: '$key',
 				collection: 'sizes'
 			}

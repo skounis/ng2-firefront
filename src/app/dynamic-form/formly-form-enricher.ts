@@ -59,10 +59,7 @@ export class FormlyFormEnricher {
 		if (!field.templateOptions.collection) {
 			throw new Error(`'templateOption.collection' should be specified for 'multi-select' field. KEY = '${field.key}'`);
 		}
-		return {
-			dataSource: this.db.list(field.templateOptions.collection).snapshotChanges().pipe(
-				map(actions => actions.map(action => ({ $key: action.key, ...action.payload.val() }))))
-		};
+		return { dataSource: this.dataService.loadItems(field.templateOptions.collection) };
 	}
 
 	private buildFileUploadOptions(field: FormlyFieldConfig) {
