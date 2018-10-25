@@ -29,7 +29,12 @@ export class RealTimeDatabaseService {
 
 	loadItemsByParent(collection: string, parentId: string): Observable<any[]> {
 		let query = ref => ref.orderByChild('parentId').equalTo(parentId);
-		return this.afDB.list(collection, query).valueChanges();
+		return this.afDB.list(collection, query)
+			.snapshotChanges()
+			.pipe(
+				map(actions => actions.map(action => ({ $key: action.key, ...action.payload.val() })))
+			);
+
 	}
 
 	createItem(itemType: string, item: any): Promise<void> {
