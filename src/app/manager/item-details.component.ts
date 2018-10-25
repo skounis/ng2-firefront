@@ -48,16 +48,21 @@ export class ItemDetailsComponent implements AfterViewInit {
 	}
 
 	ngAfterViewInit(): void {
-		if (this.itemId) {
-			this.data.loadItem(this.itemType, this.itemId)
-				.subscribe(item => {
-					if (!this.item) {
-						this.item = ModelProcessor.convertForUI(item, this.fields);
-					}
-				});
-		} else {
-			this.item = {};
-		}
+
+		// TODO: check with skounis
+		setTimeout(() => {
+			if (this.itemId) {
+				this.data.loadItem(this.itemType, this.itemId)
+					.subscribe(item => {
+						if (!this.item) {
+							this.item = this.convertForUI(item);
+						}
+					});
+			} else {
+				this.item = {};
+			}
+
+		}, 0);
 	}
 
 	back() {
@@ -120,6 +125,17 @@ export class ItemDetailsComponent implements AfterViewInit {
 			model.$key = this.itemId || uuid();
 		}
 
+		return model;
+	}
+
+	private convertForUI(model: any) {
+		model = ModelProcessor.convertForUI(model, this.fields);
+		if (this.parentId) {
+			model.parentId = this.parentId;
+		}
+		if (!model.$key) {
+			model.$key = this.itemId;
+		}
 		return model;
 	}
 
