@@ -11,8 +11,10 @@ export class CloudFireStoreService {
 	}
 
 	loadItemsByParent(collection: string, parentId: string): Observable<any[]> {
-		let query = ref => ref.orderByChild('parentId').equalTo(parentId);
-		return this.afCS.collection(collection, query).valueChanges();
+		let query = ref => ref.where('parentId', '==', parentId);
+		return this.afCS.collection(collection, query)
+			.snapshotChanges()
+			.pipe(map(actions => actions.map(action => ({ $key: action.payload.doc.id, ...action.payload.doc.data() }))));
 	}
 
 	loadItems(type: string): Observable<any[]> {
@@ -38,7 +40,15 @@ export class CloudFireStoreService {
 	saveItem(itemType: string, item: any): Promise<void> {
 		let key = item.$key;
 		let update = this.patchEntity(item);
-		return this.afCS.collection(itemType).doc(key).update(update);
+		return this.afCS.collection(itemType).doc(key)
+			.ref.get()
+			.then((documentSnapshot) => {
+				let method = documentSnapshot.exists ? 'update' : 'set';
+				return this.afCS.collection(itemType).doc(key)[method](update);
+			})
+			.catch((error) => {
+			});
+
 	}
 
 	private patchEntity(item: any): any {
