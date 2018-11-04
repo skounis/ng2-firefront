@@ -1,5 +1,8 @@
 import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { Field } from '@ngx-formly/core';
+import { ConfirmDialog } from '../../../dialogs/confirm.dialog';
+import { MatDialog } from '@angular/material';
+
 
 @Component({
 	selector: 'formly-field-file-upload',
@@ -11,6 +14,10 @@ export class FormlyFieldFileUpload extends Field {
 	pictures: any[];
 
 	private downloadableExtensions = ['xls', 'xlsx', 'txt', 'pdf', 'csv'];
+
+	constructor(private dialog: MatDialog) {
+		super();
+	}
 
 	get maxFiles() {
 		return this.to['maxFiles'] || 1;
@@ -28,7 +35,10 @@ export class FormlyFieldFileUpload extends Field {
 			if (!picture.url) {
 				this.uploadFile(file, picture);
 			} else {
-				this.remove(picture, true).then(() => this.uploadFile(file, picture));
+				this.clearInput(picture, true).then(() => {
+					console.log('resolve work');
+					return this.uploadFile(file, picture);
+				});
 			}
 		}
 	}
@@ -38,7 +48,22 @@ export class FormlyFieldFileUpload extends Field {
 	}
 
 	remove(picture, leaveControl): Promise<void> {
-		return this.to['remove'](picture.path).then(() => {
+		let data = {
+			title: 'Delete item',
+			message: 'Do you want to delete the item?'
+		};
+		return new Promise(resolve => {
+			this.dialog.open(ConfirmDialog, { data: data })
+				.afterClosed().subscribe(status => {
+				if (status === 'OK') {
+					resolve(this.clearInput(picture, leaveControl));
+				}
+			});
+		});
+	}
+
+	clearInput(picture, leaveControl) {
+		let emptyField = () => {
 			this.formControl.setValue(null);
 			picture.url = null;
 			picture.path = null;
@@ -52,8 +77,13 @@ export class FormlyFieldFileUpload extends Field {
 				.map(pic => Object.assign({}, pic));
 
 			this.formControl.markAsDirty();
-		});
+		};
+		return this.to['remove'](picture.path).then(
+			() => emptyField(),
+			() => emptyField()
+		);
 	}
+
 
 	getActionLabel(url: string) {
 		return this.isPreviewable(url) ? 'Open / Preview' : 'Download';
