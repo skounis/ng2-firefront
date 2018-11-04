@@ -199,6 +199,7 @@ export const itemsFormConfig = () => ({
 				label: 'Banner',
 				storage: 'FIRE',
 				disabled: true,
+				filetype: 'image/*',
 				buttonLabel: 'Upload'
 			}
 		},
@@ -209,6 +210,7 @@ export const itemsFormConfig = () => ({
 				label: 'Product pictures',
 				storage: 'FIRE',
 				disabled: true,
+				filetype: 'image/*',
 				buttonLabel: 'Upload',
 				maxFiles: 3
 
@@ -299,6 +301,7 @@ export const itemsFormConfig = () => ({
 				label: 'Thumb',
 				storage: 'FIRE',
 				disabled: true,
+				filetype: 'image/*',
 				buttonLabel: 'Upload',
 				description: 'Recommended: 300 px wide x 300 px high'
 			}
@@ -310,6 +313,7 @@ export const itemsFormConfig = () => ({
 				label: 'Pictures',
 				storage: 'FIRE',
 				disabled: true,
+				filetype: 'image/*',
 				buttonLabel: 'Upload',
 				description: 'Recommended: 300 px wide x 300 px high'
 			}
@@ -370,6 +374,7 @@ export const itemsFormConfig = () => ({
 				label: 'Avatar',
 				storage: 'FIRE',
 				disabled: true,
+				filetype: 'image/*',
 				buttonLabel: 'Upload'
 			}
 		},
@@ -380,6 +385,7 @@ export const itemsFormConfig = () => ({
 				label: 'Thumb',
 				storage: 'FIRE',
 				disabled: true,
+				filetype: 'image/*',
 				buttonLabel: 'Upload'
 			}
 		},
@@ -514,6 +520,7 @@ export const itemsFormConfig = () => ({
 				label: 'Thumb',
 				storage: 'FIRE',
 				disabled: true,
+				filetype: 'image/*',
 				buttonLabel: 'Upload',
 				description: 'Recommended: 300 px wide x 300 px high'
 			}
@@ -525,6 +532,7 @@ export const itemsFormConfig = () => ({
 				label: 'Image',
 				storage: 'S3',
 				disabled: true,
+				filetype: 'image/*',
 				buttonLabel: 'Upload',
 				description: 'Recommended: 600 px wide x 600 px high'
 			}
@@ -562,6 +570,7 @@ export const itemsFormConfig = () => ({
 				label: 'Avatar',
 				storage: 'FIRE',
 				disabled: true,
+				filetype: 'image/*',
 				buttonLabel: 'Upload'
 			}
 		}
@@ -668,6 +677,7 @@ export const itemsFormConfig = () => ({
 				label: 'Avatar',
 				storage: 'FIRE',
 				disabled: true,
+				filetype: 'image/*',
 				buttonLabel: 'Upload'
 			}
 		},
@@ -678,6 +688,7 @@ export const itemsFormConfig = () => ({
 				label: 'Thumb',
 				storage: 'FIRE',
 				disabled: true,
+				filetype: 'image/*',
 				buttonLabel: 'Upload',
 				description: 'Recommended: 300 px wide x 300 px high'
 			}
@@ -749,6 +760,7 @@ export const itemsFormConfig = () => ({
 				label: 'Avatar',
 				storage: 'FIRE',
 				disabled: true,
+				filetype: 'image/*',
 				buttonLabel: 'Upload'
 			}
 		},
