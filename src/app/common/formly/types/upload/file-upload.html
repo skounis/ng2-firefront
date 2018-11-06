@@ -13,7 +13,7 @@
 					*ngIf="picture.url && isPreviewable(picture.url)">
 				</div>
 				<i class="material-icons cloud-upload" [hidden]="picture.inProgress"> cloud_upload </i>
-				<mat-spinner [hidden]="!picture.inProgress" class="spinner" [diameter]="20"></mat-spinner>
+				<mat-spinner [hidden]="!picture.inProgress" class="spinner" [diameter]="36"></mat-spinner>
 			</button>
 			<input #fileInput
 				type="file"
