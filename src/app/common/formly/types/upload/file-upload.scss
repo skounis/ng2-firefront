@@ -1,3 +1,12 @@
+$ha-box-width: 150px;
+$ha-box-height: 150px;
+
+$ha-upload-icon-size: 36px;
+$ha-spinner-diameter: $ha-upload-icon-size;
+
+$ha-upload-icon-top: ($ha-box-height - $ha-upload-icon-size) / 2 ;
+$ha-upload-icon-left: ($ha-box-width - $ha-upload-icon-size) / 2 ;
+
 .not-active {
 	pointer-events: none;
 	cursor: default;
@@ -21,15 +30,15 @@
 	background-repeat: no-repeat;
 	img {
 		width: 100%;
-		max-height: 250px;
+		max-height: $ha-box-height;
 		border-radius: 3px;
 	}
 }
 
 .image-preview {
 	img {
-		width: 250px;
-		height: 250px;
+		width: $ha-box-width;
+		height: $ha-box-height;
 		border-radius: 3px;
 	}
 }
@@ -39,8 +48,8 @@
 	justify-content: space-around;
 	align-items: center;
 	position: relative;
-	width: 250px;
-	height: 250px;
+	width: $ha-box-width;
+	height: $ha-box-height;
 	margin: 5px;
 	border: 1px solid whitesmoke;
 	background: white;
@@ -65,8 +74,8 @@ mat-spinner {
 
 .image-upload-area {
 	position: relative;
-	width: 250px;
-	height: 250px;
+	width: $ha-box-width;
+	height: $ha-box-height;
 	border: 1px solid whitesmoke;
 	border-radius: 3px;
 	cursor: pointer;
@@ -87,16 +96,16 @@ mat-spinner {
 		border: 1px solid whitesmoke;
 	}
 	.cloud-upload {
-		font-size: 48px;
+		font-size: $ha-upload-icon-size;
 		position: absolute;
-		top: 100px;
-		left: 100px;
+		top: $ha-upload-icon-top;
+		left: $ha-upload-icon-left;
 		z-index: 10;
 	}
 	.spinner {
 		position: absolute;
-		top: 150px;
-		left: 115px;
+		top: $ha-upload-icon-top;
+		left: $ha-upload-icon-left;
 	}
 }
 
