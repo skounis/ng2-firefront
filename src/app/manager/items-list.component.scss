@@ -13,6 +13,11 @@
 		width: 200px;
 	}
 
+	.mat-card-header .mat-card-title,
+	mat-card-title {
+		font-size: 18px;
+		text-transform: capitalize;
+	}
 	mat-card-actions {
 		bottom: 25px;
 		position: absolute;
