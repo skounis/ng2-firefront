@@ -58,7 +58,8 @@ export const itemsFormConfig = () => ({
 		{
 			type: 'reference',
 			templateOptions: {
-				label: 'News',
+				// label: 'News',
+				panelLabel: 'News',
 				description: 'News posted for this Business',
 				parentCollection: 'businesses',
 				collection: 'news',
