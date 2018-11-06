@@ -5,27 +5,47 @@ import { Observable } from 'rxjs';
 @Component({
 	selector: 'formly-field-reference',
 	template: `
-		<div *ngIf="model.$key">
-			<button class="btn btn-link" (click)="add()">Add</button>
-			<table class="table">
-				<tbody>
-					<tr *ngFor="let item of data | async; let i = index">
-						<td>{{item[to.summaryField]}}</td>
-						<td>
-							<button class="btn btn-link" (click)="edit(item)">Edit</button>
-						</td>
-						<td>
-							<button class="btn btn-link" (click)="remove(item)">X</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+		<div class="card">
+			<div class="card-header">
+				{{to['panelLabel'] || to['title'] || to['label']}}
+				<button class="btn btn-link ha-panel-action" (click)="add()">Add</button>
+			</div>
+
+				<div *ngIf="model.$key">
+					<table class="table table-striped table-borderless m-0">
+						<tbody>
+							<tr *ngFor="let item of data | async; let i = index">
+								<td>{{item[to.summaryField]}}</td>
+								<td class="as-action-column px-0">
+									<button class="mat-icon-button" (click)="edit(item)"><mat-icon>edit</mat-icon></button>
+								</td>
+								<td class="as-action-column px-0">
+									<button class="mat-icon-button" color="warn" (click)="remove(item)"><mat-icon>delete</mat-icon></button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div *ngIf="!model.$key">
+					Save this item before adding children
+				</div>
+
 		</div>
-		<div *ngIf="!model.$key">
-			Save this item before adding children
-		</div>
-	`
+	`,
+	styles: [
+		`
+			.as-action-column {
+				width: 40px;
+			}
+
+			.ha-panel-action {
+				position: absolute;
+				right: 15px;
+				top: 5px;
+			}
+		`
 })
+
 export class FormlyFieldReference extends FieldType {
 	private _data: Observable<any[]>;
 
