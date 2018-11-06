@@ -496,7 +496,7 @@ export const itemsFormConfig = () => ({
 		},
 		{
 			wrappers: ['panel'],
-			className: 'row',
+			// className: 'row',
 			key: 'postDate',
 			templateOptions: {
 				title: 'Post date'
@@ -720,7 +720,7 @@ export const itemsFormConfig = () => ({
 		},
 		{
 			wrappers: ['panel'],
-			className: 'row',
+			// className: 'row',
 			key: 'contact',
 			templateOptions: {
 				title: 'Contact'

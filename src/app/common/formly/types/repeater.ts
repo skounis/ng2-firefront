@@ -5,7 +5,12 @@ import { FieldType, FormlyFormBuilder } from '@ngx-formly/core';
 @Component({
 	selector: 'formly-repeat-section',
 	template: `
-    <div *ngFor="let control of formControl.controls; let i = index;">
+    <div class="jumbotron" style="padding: 2rem 1.5rem;" *ngFor="let control of formControl.controls; let i = index;">
+			<div style="float: right;">
+				<button class="btn btn-danger" (click)="remove(i)">
+					<i style="vertical-align: top;" class="material-icons">delete</i>
+				</button>
+			</div>
       <formly-form
         [model]="model[i]"
         [fields]="fields(i)"
@@ -13,12 +18,9 @@ import { FieldType, FormlyFormBuilder } from '@ngx-formly/core';
         [form]="this.formControl.at(i)"
         [ngClass]="field.fieldArray.className">
       </formly-form>
-      <div>
-        <button class="btn btn-danger" (click)="remove(i)">Remove</button>
-      </div>
     </div>
-    <div style="margin-top: 30px;">
-      <button type="button" class="btn btn-primary" (click)="add()" style="min-width: 80px;">Add</button>
+    <div>
+      <button type="button" class="btn btn-primary  btn-block" (click)="add()" style="min-width: 80px;">Add</button>
     </div>
   `
 })
