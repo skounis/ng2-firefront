@@ -22,27 +22,26 @@
 				[attr.accept]="!!to.filetype ? to.filetype : null">
 			<div class="toolbar">
 				<a *ngIf="picture.url && isPreviewable(picture.url)"
-					mat-mini-fab
+					mat-icon-button
 					color="primary"
-					class="mdc-icon-button material-icons"
+					class="material-icons"
 					[href]="picture.url"
 					target="_blank">
 					<i class="material-icons image">image</i>
 				</a>
 				<a *ngIf="picture.url && !isPreviewable(picture.url)"
-					mat-mini-fab
+					mat-icon-button
 					color="primary"
-					class="mdc-icon-button material-icons"
+					class="material-icons"
 					[href]="picture.url"
 					download>
 					<i class="material-icons cloud-download">cloud_download</i>
 				</a>
-				<button mat-mini-fab class="mdc-icon-button material-icons remove"
-
+				<button mat-icon-button type="button" color="warn"
 					[hidden]="!picture.url"
-					type="button"
-					(click)="remove(picture)"><i
-					class="material-icons">delete</i></button>
+					(click)="remove(picture)">
+					<mat-icon aria-label="remove">delete</mat-icon>
+					</button>
 			</div>
 
 		</div>
