@@ -18,6 +18,7 @@ import { ModelProcessor } from '../dynamic-form/model-processor';
 })
 export class ItemDetailsComponent implements AfterViewInit {
 	item: any;
+	tabs: any;
 	fields: FormlyFieldConfig[];
 	form: FormGroup;
 	options: FormlyFormOptions = {
@@ -110,9 +111,26 @@ export class ItemDetailsComponent implements AfterViewInit {
 
 	private initFormFields() {
 		this.form = this.fb.group({});
-		let fields: FormlyFieldConfig[] = itemsFormConfig()[this.itemType];
+		// let fields: FormlyFieldConfig[] = itemsFormConfig()[this.itemType];
+		this.tabs = itemsFormConfig()[this.itemType].tabs; // We may not have tabs but it's OK;
+		let fields: FormlyFieldConfig[] = this.collectFields(itemsFormConfig()[this.itemType]);
 		this.enricher.enrichFields(fields);
 		this.fields = fields;
+	}
+
+	private collectFields(node) {
+		if (node.tabs) {
+			let fields: FormlyFieldConfig[] = node.tabs.reduce((acc, val) => {
+				if (acc.fields) {
+					acc = acc.fields;
+				}
+				return acc.concat(val.fields);
+			});
+			return fields;
+		} else {
+			let fields: FormlyFieldConfig[] = node;
+			return fields;
+		}
 	}
 
 	private convertForDB(model: any) {
