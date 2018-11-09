@@ -1,4 +1,11 @@
 import { Validators } from '@angular/forms';
+import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
+
+
+export interface TabType {
+	label: string;
+	fields: FormlyFieldConfig[];
+}
 
 export const itemsFormConfig = () => ({
 	activityfeed: [
@@ -888,6 +895,64 @@ export const itemsFormConfig = () => ({
 			}
 		}
 	],
+	events: {
+		tabs: [
+			{
+				type: 'tab',
+				label: 'Intro',
+				fields: [
+					{
+						type: 'input',
+						key: 'title',
+						templateOptions: {
+							label: 'Color',
+							description: 'Enter the color name.',
+							required: true
+						},
+						validators: {
+							validation: Validators.compose([Validators.required])
+						}
+					},
+				]
+			},
+			{
+				type: 'tab',
+				label: 'Details',
+				fields: [
+					{
+						type: 'input',
+						key: 'description',
+						templateOptions: {
+							label: 'Description',
+							description: 'Enter the description.',
+							required: true
+						},
+						validators: {
+							validation: Validators.compose([Validators.required])
+						}
+					}
+				]
+			},
+			{
+				type: 'tab',
+				label: 'Comments',
+				fields: [
+					{
+						type: 'input',
+						key: 'notes',
+						templateOptions: {
+							label: 'Notes',
+							description: 'Enter some notes.',
+							required: true
+						},
+						validators: {
+							validation: Validators.compose([Validators.required])
+						}
+					}
+				]
+			}
+		]
+	},
 	'system-menus': [
 		{
 			type: 'input',
