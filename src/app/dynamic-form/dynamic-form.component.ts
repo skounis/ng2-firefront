@@ -10,6 +10,7 @@ import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 export class DynamicFormComponent {
 	@Input() item: any;
 	@Input() fields: FormlyFieldConfig[];
+	@Input() tabs: FormlyFieldConfig[];
 	@Input() form: FormGroup;
 	@Input() options: FormlyFormOptions;
 }

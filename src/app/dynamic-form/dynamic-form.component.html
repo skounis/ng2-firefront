@@ -1,29 +1,37 @@
 <form role="form" novalidate [formGroup]="form">
 	<ng-content></ng-content>
-
-{{fields}}
-
-<!-- <mat-tab-group *ngIf="tabs; else singleForm"> -->
-<mat-tab-group>
-	<mat-tab *ngFor="let tab of fields;let index = index;"
-		[label]="tab.label"
-		[disabled]="index !== 0 && !form.at(index - 1)?.valid">
-		<formly-form
-			[form]="form.at(index)"
-			[model]="model"
-			[fields]="tab.fields"
-			[options]="options[index]">
-		</formly-form>
-	</mat-tab>
-	<mat-tab label="Submit">
-		<div>
-			<button mat-raised-button class="btn btn-primary" [disabled]="!form.valid" type="submit">Submit</button>
-		</div>
-	</mat-tab>
-</mat-tab-group>
+	<mat-tab-group *ngIf="tabs; else singleForm">
+		<!-- <mat-tab *ngFor="let tab of fields;let index = index;"
+			[label]="tab.label"
+			[disabled]="index !== 0 && !form.at(index - 1)?.valid"> -->
+			<mat-tab *ngFor="let tab of tabs;let index = index;"
+				[label]="tab.label">
+			<!-- <formly-form
+				[model]="item"
+				[form]="form.at(index)"
+				[fields]="tab.fields"
+				[options]="options[index]">
+			</formly-form> -->
+			<formly-form
+				[form]="form"
+				[model]="item"
+				[fields]="tab.fields"
+				[options]="options">
+			</formly-form>
+		</mat-tab>
+		<!-- <mat-tab label="Submit">
+			<div>
+				<button mat-raised-button class="btn btn-primary" [disabled]="!form.valid" type="submit">Submit</button>
+			</div>
+		</mat-tab> -->
+	</mat-tab-group>
 
 <ng-template #singleForm>
-	<formly-form  [model]="item" [fields]="fields" [form]="form" [options]="options"></formly-form>
+	<formly-form
+		[model]="item"
+		[fields]="fields"
+		[form]="form" [options]="options"></formly-form>
 </ng-template>
 
+	<!-- <formly-form  [model]="item" [fields]="fields" [form]="form" [options]="options"></formly-form> -->
 </form>
