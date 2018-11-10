@@ -112,8 +112,8 @@ export class ItemDetailsComponent implements AfterViewInit {
 	private initFormFields() {
 		this.form = this.fb.group({});
 		// let fields: FormlyFieldConfig[] = itemsFormConfig()[this.itemType];
-		this.tabs = itemsFormConfig()[this.itemType].tabs; // We may not have tabs but it's OK;
 		let fields: FormlyFieldConfig[] = this.collectFields(itemsFormConfig()[this.itemType]);
+		this.tabs = itemsFormConfig()[this.itemType].tabs; // We may not have tabs but it's OK;
 		this.enricher.enrichFields(fields);
 		this.fields = fields;
 	}
