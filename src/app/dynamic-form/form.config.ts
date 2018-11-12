@@ -1832,12 +1832,12 @@ export const itemsFormConfig = () => ({
 			},
 			{
 				type: 'tab',
-				label: 'Estimations',
+				label: 'Estimation',
 				fields: [
 					{
 						template: `
 						<div>
-							<h3>Estimations</h3>
+							<h3>Estimation</h3>
 							<p class="mb-3">Estimate the attendance and the cost of the event.</p>
 						</div>
 						`
@@ -1879,6 +1879,19 @@ export const itemsFormConfig = () => ({
 			}
 		]
 	},
+	eventKits: [
+		{
+			type: 'input',
+			key: 'title',
+			templateOptions: {
+				label: 'Title',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+	],
 	'system-menus': [
 		{
 			type: 'input',
