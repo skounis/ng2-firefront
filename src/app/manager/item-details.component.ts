@@ -10,6 +10,7 @@ import { uuid } from '../common/uuid';
 import { itemsFormConfig } from '../dynamic-form/form.config';
 import { FormlyFormEnricher } from '../dynamic-form/formly-form-enricher';
 import { ModelProcessor } from '../dynamic-form/model-processor';
+import { MenuService } from '../common/services/menu.service';
 
 @Component({
 	selector: 'item-details',
@@ -31,13 +32,16 @@ export class ItemDetailsComponent implements AfterViewInit {
 	parentId: string;
 	parentType: string;
 
+	itemsTitle: string;
+
 	constructor(
 		private fb: FormBuilder,
 		private data: DataService,
 		private route: ActivatedRoute,
 		private snackBar: MatSnackBar,
 		private location: Location,
-		private enricher: FormlyFormEnricher
+		private enricher: FormlyFormEnricher,
+		private menuService: MenuService
 	) {
 		this.parentType = route.snapshot.params['parentType'];
 		this.parentId = route.snapshot.params['parentId'];
@@ -52,6 +56,14 @@ export class ItemDetailsComponent implements AfterViewInit {
 		// TODO: check with skounis
 		setTimeout(() => {
 			if (this.itemId) {
+				this.menuService.menus.subscribe(menus => {
+					const currentMenuItem = menus
+						.find(x => x.itemsType === this.itemType);
+					this.itemsTitle = currentMenuItem
+						? currentMenuItem.title
+						: this.itemType;
+				});
+
 				this.data.loadItem(this.itemType, this.itemId)
 					.subscribe(item => {
 						if (!this.item) {

@@ -2,7 +2,7 @@ import { AgmCoreModule } from '@agm/core';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { FormlyModule } from '@ngx-formly/core';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { SharedModule } from '../common/shared.module';
@@ -22,6 +22,7 @@ export const managerRoutes: Routes = [
 
 @NgModule({
 	imports: [
+		RouterModule,
 		CommonModule,
 		SharedModule,
 		FormsModule,

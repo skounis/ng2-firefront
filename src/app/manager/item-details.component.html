@@ -5,7 +5,14 @@
 				<mat-icon class="mat-24">arrow_back</mat-icon>
 			</button>
 
-			<span>{{item?.title}}</span>
+			<span>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a  [routerLink]=" ['../']" routerLinkActive="active">{{itemsTitle}}</a></li>
+						<li class="breadcrumb-item active" aria-current="page">{{item?.title}}</li>
+					</ol>
+				</nav>
+			</span>
 			<span class="spacer"></span>
 
 			<button type="submit" mat-raised-button color="primary" [disabled]="!form.valid || !form.dirty" (click)="save()">Save</button>
@@ -16,4 +23,5 @@
 	<div class="as-form-scroll">
 		<dynamic-form  *ngIf="item" [fields]="fields" [form]="form" [item]="item" [options]="options"></dynamic-form>
 	</div>
+	<router-outlet></router-outlet>
 </div>
