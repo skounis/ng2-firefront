@@ -56,6 +56,10 @@ export class FormlyFormEnricher {
 	}
 
 	private buildMultiSelectOptions(field: FormlyFieldConfig) {
+		if (field.templateOptions.staticValues) {
+			return {};
+		}
+
 		if (!field.templateOptions.collection) {
 			throw new Error(`'templateOption.collection' should be specified for 'multi-select' field. KEY = '${field.key}'`);
 		}
