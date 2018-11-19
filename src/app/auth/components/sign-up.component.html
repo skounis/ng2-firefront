@@ -13,7 +13,7 @@
 			<div fxLayout="column">
 
 				<form [formGroup]="signupForm" #f="ngForm" (ngSubmit)="signUp()" fxLayout="column" fxFlexFill fxLayoutGap="10px">
-
+					<div class="empty-row"></div>
 					<mat-form-field>
 						<input matInput formControlName="email" type="email" placeholder="Email">
 					</mat-form-field>
@@ -31,7 +31,7 @@
 
 				<mat-divider></mat-divider>
 
-				<div fxLayout="column" fxLayoutAlign="center" nxLayoutGap="10px" style="margin-top:8px;">
+				<div fxLayout="column" fxLayoutAlign="center" nxLayoutGap="10px" class="footer">
 					<button mat-button color="primary" (click)="signInWithGoogle()">Sign up with Google</button>
 					<a mat-button [routerLink]="['/sign-in']">Already have an account?</a>
 				</div>
