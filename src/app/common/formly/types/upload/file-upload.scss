@@ -1,11 +1,8 @@
-$ha-box-width: 150px;
-$ha-box-height: 150px;
+$ha-box-width: 1rem;
+$ha-box-height: 1rem;
 
 $ha-upload-icon-size: 36px;
 $ha-spinner-diameter: $ha-upload-icon-size;
-
-$ha-upload-icon-top: ($ha-box-height - $ha-upload-icon-size) / 2 ;
-$ha-upload-icon-left: ($ha-box-width - $ha-upload-icon-size) / 2 ;
 
 .not-active {
 	pointer-events: none;
@@ -56,6 +53,11 @@ $ha-upload-icon-left: ($ha-box-width - $ha-upload-icon-size) / 2 ;
 	border-radius: 3px;
 }
 
+.img-card-content {
+	width: 100%;
+	height: 100%;
+}
+
 .cards-container {
 	display: flex;
 	flex-wrap: wrap;
@@ -66,16 +68,10 @@ $ha-upload-icon-left: ($ha-box-width - $ha-upload-icon-size) / 2 ;
 	background-size: cover;
 }
 
-mat-spinner {
-	display: inline-block;
-	overflow: hidden;
-	margin-right: 5px;
-}
-
 .image-upload-area {
 	position: relative;
-	width: $ha-box-width;
-	height: $ha-box-height;
+	width: 100%;
+	height: 100%;
 	border: 1px solid whitesmoke;
 	border-radius: 3px;
 	cursor: pointer;
@@ -96,16 +92,20 @@ mat-spinner {
 		border: 1px solid whitesmoke;
 	}
 	.cloud-upload {
+
 		font-size: $ha-upload-icon-size;
 		position: absolute;
-		top: $ha-upload-icon-top;
-		left: $ha-upload-icon-left;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 		z-index: 10;
 	}
-	.spinner {
+	.spinner-wrapper {
 		position: absolute;
-		top: $ha-upload-icon-top;
-		left: $ha-upload-icon-left;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		transform-origin: center center;
 	}
 }
 
