@@ -91,6 +91,19 @@ export const itemsFormConfig = () => ({
 			}
 		}
 	],
+	sizes: [
+		{
+			type: 'input',
+			key: 'title',
+			templateOptions: {
+				label: 'Title',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		}
+	],
 	products: [
 		{
 			type: 'input',

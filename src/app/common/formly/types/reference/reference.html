@@ -10,12 +10,12 @@
 				<tr *ngFor="let item of data | async; let i = index">
 					<td>{{item[to.summaryField]}}</td>
 					<td class="as-action-column px-0">
-						<button class="mat-icon-button" (click)="edit(item)">
+						<button mat-icon-button class="mat-icon-button" (click)="edit(item)">
 							<mat-icon>edit</mat-icon>
 						</button>
 					</td>
 					<td class="as-action-column px-0">
-						<button class="mat-icon-button" color="warn" (click)="remove(item)">
+						<button mat-icon-button class="mat-icon-button" color="warn" (click)="remove(item)">
 							<mat-icon>delete</mat-icon>
 						</button>
 					</td>
