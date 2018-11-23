@@ -226,7 +226,9 @@ export const itemsFormConfig = () => ({
 				disabled: true,
 				filetype: 'image/*',
 				buttonLabel: 'Upload',
-				maxFiles: 3
+				maxFiles: 3,
+				width: '250px',
+				height: '250px'
 
 			}
 		},
@@ -317,7 +319,9 @@ export const itemsFormConfig = () => ({
 				disabled: true,
 				filetype: 'image/*',
 				buttonLabel: 'Upload',
-				description: 'Recommended: 300 px wide x 300 px high'
+				description: 'Recommended: 300 px wide x 300 px high',
+				width: '300px',
+				height: '300px'
 			}
 		},
 		{
@@ -329,7 +333,9 @@ export const itemsFormConfig = () => ({
 				disabled: true,
 				filetype: 'image/*',
 				buttonLabel: 'Upload',
-				description: 'Recommended: 300 px wide x 300 px high'
+				description: 'Recommended: 300 px wide x 300 px high',
+				width: '300px',
+				height: '300px'
 			}
 		},
 		{
@@ -389,7 +395,9 @@ export const itemsFormConfig = () => ({
 				storage: 'FIRE',
 				disabled: true,
 				filetype: 'image/*',
-				buttonLabel: 'Upload'
+				buttonLabel: 'Upload',
+				width: '150px',
+				height: '150px'
 			}
 		},
 		{
@@ -400,7 +408,9 @@ export const itemsFormConfig = () => ({
 				storage: 'FIRE',
 				disabled: true,
 				filetype: 'image/*',
-				buttonLabel: 'Upload'
+				buttonLabel: 'Upload',
+				width: '150px',
+				height: '150px'
 			}
 		},
 		{
@@ -536,7 +546,9 @@ export const itemsFormConfig = () => ({
 				disabled: true,
 				filetype: 'image/*',
 				buttonLabel: 'Upload',
-				description: 'Recommended: 300 px wide x 300 px high'
+				description: 'Recommended: 300 px wide x 300 px high',
+				width: '300px',
+				height: '300px'
 			}
 		},
 		{
@@ -548,7 +560,9 @@ export const itemsFormConfig = () => ({
 				disabled: true,
 				filetype: 'image/*',
 				buttonLabel: 'Upload',
-				description: 'Recommended: 600 px wide x 600 px high'
+				description: 'Recommended: 600 px wide x 600 px high',
+				width: '600px',
+				height: '600px'
 			}
 		}
 	],
@@ -585,7 +599,9 @@ export const itemsFormConfig = () => ({
 				storage: 'FIRE',
 				disabled: true,
 				filetype: 'image/*',
-				buttonLabel: 'Upload'
+				buttonLabel: 'Upload',
+				width: '600px',
+				height: '600px'
 			}
 		}
 	],
@@ -692,7 +708,9 @@ export const itemsFormConfig = () => ({
 				storage: 'FIRE',
 				disabled: true,
 				filetype: 'image/*',
-				buttonLabel: 'Upload'
+				buttonLabel: 'Upload',
+				width: '150px',
+				height: '150px'
 			}
 		},
 		{
@@ -704,7 +722,9 @@ export const itemsFormConfig = () => ({
 				disabled: true,
 				filetype: 'image/*',
 				buttonLabel: 'Upload',
-				description: 'Recommended: 300 px wide x 300 px high'
+				description: 'Recommended: 300 px wide x 300 px high',
+				width: '300px',
+				height: '300px'
 			}
 		},
 		{
@@ -775,7 +795,9 @@ export const itemsFormConfig = () => ({
 				storage: 'FIRE',
 				disabled: true,
 				filetype: 'image/*',
-				buttonLabel: 'Upload'
+				buttonLabel: 'Upload',
+				width: '150px',
+				height: '150px'
 			}
 		},
 		{
