@@ -1,5 +1,6 @@
 <div class="cards-container">
-	<div class="img-card" *ngFor="let picture of pictures; let i = index;">
+	<div class="img-card" *ngFor="let picture of pictures; let i = index;"
+	 [ngStyle]="{'width': to.width ? to.width : '150px', 'height': to.height ? to.height : '150px'}">
 		<div class="img-card-content">
 			<button
 				(click)="upload(i)"
@@ -12,8 +13,10 @@
 					[ngStyle]="{'background-image':'url(' + picture.url + ')'}"
 					*ngIf="picture.url && isPreviewable(picture.url)">
 				</div>
-				<i class="material-icons cloud-upload" [hidden]="picture.inProgress"> cloud_upload </i>
-				<mat-spinner [hidden]="!picture.inProgress" class="spinner" [diameter]="36"></mat-spinner>
+				<i class="material-icons cloud-upload" [hidden]="picture.inProgress">cloud_upload </i>
+				<span class="spinner-wrapper">
+					<mat-spinner [hidden]="!picture.inProgress" class="spinner" [diameter]="36"></mat-spinner>
+				</span>
 			</button>
 			<input #fileInput
 				type="file"
