@@ -1,0 +1,29 @@
+:host {
+	display: block;
+	.breadcrumbs-list {
+		display: flex;
+		align-items: center;
+		a {
+			font-size: 1rem;
+			padding: 0;
+			color: #2196f3;
+			border-bottom: 1px solid #2196f3;
+			line-height: 1;
+			text-decoration: none;
+			&:hover {
+				border-bottom: 1px solid transparent;
+				cursor: pointer;
+			}
+		}
+		.breadcrumbs-item {
+			display: inline-flex;
+			align-items: center;
+			&:last-child {
+				mat-icon {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
