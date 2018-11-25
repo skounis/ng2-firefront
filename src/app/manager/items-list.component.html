@@ -1,12 +1,12 @@
 <div class="as-form">
 	<div class="as-form-header">
-		<mat-toolbar>
-			<span>{{itemsTitle}}</span>
-			<span class="spacer"></span>
+
+		<toolbar [title]="itemsTitle">
 			<input class="search form-control" placeholder="Search..." (keyup)="search(input.value)" #input>
 			<span class="spacer"></span>
 			<button mat-raised-button color="primary" (click)="createItem()">New item</button>
-		</mat-toolbar>
+		</toolbar>
+
 	</div>
 
 	<div class="as-form-scroll">
