@@ -49,7 +49,6 @@ export class ItemDetailsComponent implements AfterViewInit {
 
 	ngAfterViewInit(): void {
 
-		// TODO: check with skounis
 		setTimeout(() => {
 			if (this.itemId) {
 				this.data.loadItem(this.itemType, this.itemId)
@@ -61,12 +60,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 			} else {
 				this.item = {};
 			}
-
 		}, 0);
-	}
-
-	back() {
-		this.location.back();
 	}
 
 	save() {
@@ -91,6 +85,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 				}
 			);
 	}
+
 
 	cancel() {
 		if (!this.itemId) {
