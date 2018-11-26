@@ -93,15 +93,22 @@ export const itemsFormConfig = () => ({
 	],
 	sizes: [
 		{
-			type: 'input',
-			key: 'title',
-			templateOptions: {
-				label: 'Title',
-				required: true
-			},
-			validators: {
-				validation: Validators.compose([Validators.required])
-			}
+			key: 'address',
+			wrappers: ['ha-fieldset'],
+			// templateOptions: { label: 'Address' },
+			fieldGroup:[
+				{
+					type: 'input',
+					key: 'title',
+					templateOptions: {
+						label: 'Title',
+						required: true
+					},
+					validators: {
+						validation: Validators.compose([Validators.required])
+					}
+				}
+			]
 		}
 	],
 	products: [
