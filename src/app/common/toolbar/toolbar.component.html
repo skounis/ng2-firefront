@@ -1,16 +1,27 @@
 <mat-toolbar>
-	<mat-toolbar-row *ngIf="_options?.multiRows">
+
+	<!-- <mat-toolbar-row *ngIf="_options?.multiRows" class="as-breadcrumb">
 		<nav class="breadcrumbs-list" *ngIf="_options?.allowBreadCrumbs">
 			<span class="breadcrumbs-item" *ngFor="let breadcrumb of breadcrumbs">
 				<a [routerLink]="breadcrumb.url">{{breadcrumb.title}}</a><mat-icon>chevron_right</mat-icon>
 			</span>
 		</nav>
 		<span class="spacer"></span>
+	</mat-toolbar-row> -->
+
+	<mat-toolbar-row class="as-title">
+		<div>
+			<nav class="breadcrumbs-list" *ngIf="_options?.allowBreadCrumbs">
+				<span class="breadcrumbs-item" *ngFor="let breadcrumb of breadcrumbs">
+					<a [routerLink]="breadcrumb.url">{{breadcrumb.title}}</a><mat-icon>chevron_right</mat-icon>
+				</span>
+			</nav>
+			{{title}}
+		</div>
 	</mat-toolbar-row>
+
 	<mat-toolbar-row>
 		<button type="button" mat-icon-button *ngIf="_options?.backButton" (click)="back()"><mat-icon class="mat-24">arrow_back</mat-icon></button>
-
-		<span>{{title}}</span>
 		<span class="spacer"></span>
 		<ng-content></ng-content>
 	</mat-toolbar-row>

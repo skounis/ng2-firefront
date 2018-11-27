@@ -1,17 +1,26 @@
 :host {
 	display: block;
+
+	.as-breadcrumb {
+		margin-top: 10px;
+		height: 28px;
+	}
+
+	.as-title {
+		// height: 48px;
+		font-size: 26px;
+	}
 	.breadcrumbs-list {
+		margin: 13px 0 5px;
 		display: flex;
 		align-items: center;
 		a {
-			font-size: 1rem;
+			font-size: 14px;
 			padding: 0;
 			color: #2196f3;
-			border-bottom: 1px solid #2196f3;
 			line-height: 1;
 			text-decoration: none;
 			&:hover {
-				border-bottom: 1px solid transparent;
 				cursor: pointer;
 			}
 		}
@@ -26,4 +35,3 @@
 		}
 	}
 }
-
