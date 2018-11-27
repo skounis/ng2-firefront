@@ -1,0 +1,37 @@
+:host {
+	display: block;
+
+	.as-breadcrumb {
+		margin-top: 10px;
+		height: 28px;
+	}
+
+	.as-title {
+		// height: 48px;
+		font-size: 26px;
+	}
+	.breadcrumbs-list {
+		margin: 13px 0 5px;
+		display: flex;
+		align-items: center;
+		a {
+			font-size: 14px;
+			padding: 0;
+			color: #2196f3;
+			line-height: 1;
+			text-decoration: none;
+			&:hover {
+				cursor: pointer;
+			}
+		}
+		.breadcrumbs-item {
+			display: inline-flex;
+			align-items: center;
+			&:last-child {
+				mat-icon {
+					display: none;
+				}
+			}
+		}
+	}
+}
