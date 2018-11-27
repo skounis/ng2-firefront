@@ -23,9 +23,10 @@ import {
 } from '@angular/material';
 import { ConfirmDialog } from './dialogs/confirm.dialog';
 import { OrderBy } from './pipes/order-by.pipe';
+import { ToolbarModule } from './toolbar/toolbar.module';
 
 @NgModule({
-	imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule],
+	imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule, ToolbarModule],
 	exports: [
 		OrderBy,
 		MatProgressSpinnerModule,
@@ -47,7 +48,8 @@ import { OrderBy } from './pipes/order-by.pipe';
 		MatDialogModule,
 		MatInputModule,
 		MatFormFieldModule,
-		MatSidenavModule
+		MatSidenavModule,
+		ToolbarModule
 	],
 	declarations: [ConfirmDialog, OrderBy],
 	entryComponents: [ConfirmDialog],
