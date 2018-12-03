@@ -7,6 +7,7 @@ import { ConfirmDialog } from '../common/dialogs/confirm.dialog';
 import { NewItemDialog } from './new-item.dialog';
 import { MenuService } from '../common/services/menu.service';
 import { MenuItem } from '../common/models/menu-item';
+import { ItemsCollectionViewStore } from './items-collection-view.store';
 
 @Component({
 	selector: 'items-list',
@@ -21,13 +22,16 @@ export class ItemsListComponent implements OnInit {
 
 	itemsType: string;
 	itemsTitle: string;
+	displayedColumns: string[] = ['position', 'title', 'actionControls'];
+	selectedViewMode: string = 'cards';
 
 	constructor(
 		private data: DataService,
 		private dialog: MatDialog,
 		private router: Router,
 		private activatedRoute: ActivatedRoute,
-		private menuService: MenuService
+		private menuService: MenuService,
+		public viewStore: ItemsCollectionViewStore
 	) {
 	}
 
@@ -35,6 +39,7 @@ export class ItemsListComponent implements OnInit {
 		this.activatedRoute.params.subscribe(params => {
 			this.initModule(params['itemsType']);
 		});
+		this.selectedViewMode = this.viewStore.viewMode ? this.viewStore.viewMode : 'cards';
 	}
 
 	editItem(item: any) {
@@ -108,5 +113,14 @@ export class ItemsListComponent implements OnInit {
 
 		this.visibleItems = this.items
 			.filter(x => !filter || x.title.toLowerCase().indexOf(filter) >= 0);
+	}
+
+	onViewModeChange(mode: string) {
+		this.selectedViewMode = mode;
+		this.viewStore.viewMode = mode;
+	}
+
+	isModeSelected(mode: string): boolean {
+		return mode === this.selectedViewMode;
 	}
 }

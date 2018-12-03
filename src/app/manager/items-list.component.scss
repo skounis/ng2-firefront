@@ -1,8 +1,20 @@
 @import "../vars";
 
-// :host {
-// 	display: block;
-// }
+:host {
+	.select-view {
+		padding: 0;
+	}
+
+	::ng-deep {
+		.mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+			height: 36px;
+			line-height: 36px;
+			padding-left: 5px;
+			padding-right: 5px;
+		}
+
+	}
+}
 
 .cards-container {
 	display: flex;
@@ -29,3 +41,21 @@
 	margin-left: 20px;
 	margin-right: 20px;
 }
+
+.table-container {
+	padding: 10px;
+	table {
+		padding: $padding;
+		width: 100%;
+	}
+	.action-controls {
+		width: 110px;
+		td {
+			padding: 0;
+		}		
+	}
+	.position {
+		width: 100px;
+	}
+}
+

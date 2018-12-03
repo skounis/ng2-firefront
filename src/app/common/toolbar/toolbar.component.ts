@@ -44,7 +44,7 @@ export class ToolbarComponent implements OnChanges {
 	}
 
 	loadBreadCrumbs() {
-		const { id, itemsType, parentId, parentType } = this.route.snapshot.params;
+		const { itemsType, parentId, parentType } = this.route.snapshot.params;
 
 		this.breadcrumbs = [];
 		// TODO: how we can get menu information in other way
@@ -54,6 +54,10 @@ export class ToolbarComponent implements OnChanges {
 				const parentMenuItem = menuItems
 					.find(x => x.itemsType === parentType);
 				this.breadcrumbs.push({ title: parentMenuItem.title, url: `/shell/manager/${parentType}/` });
+
+				if (!parentMenuItem) {
+					return;
+				}
 
 				if (parentId) {
 					// TODO: how we can get information without additional call to firebase;
@@ -66,6 +70,11 @@ export class ToolbarComponent implements OnChanges {
 			} else {
 				const currentItem = menuItems
 					.find(x => x.itemsType === itemsType);
+
+				if (!currentItem) {
+					return;
+				}
+
 				this.breadcrumbs.push({ title: currentItem.title, url: `/shell/manager/${itemsType}/` });
 			}
 

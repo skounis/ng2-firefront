@@ -19,7 +19,8 @@ import {
 	MatSelectModule, MatSidenavModule,
 	MatTableModule,
 	MatTabsModule,
-	MatToolbarModule
+	MatToolbarModule,
+	MatButtonToggleModule
 } from '@angular/material';
 import { ConfirmDialog } from './dialogs/confirm.dialog';
 import { OrderBy } from './pipes/order-by.pipe';
@@ -49,7 +50,8 @@ import { ToolbarModule } from './toolbar/toolbar.module';
 		MatInputModule,
 		MatFormFieldModule,
 		MatSidenavModule,
-		ToolbarModule
+		ToolbarModule,
+		MatButtonToggleModule
 	],
 	declarations: [ConfirmDialog, OrderBy],
 	entryComponents: [ConfirmDialog],

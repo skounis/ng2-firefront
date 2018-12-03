@@ -2,6 +2,16 @@
 	<div class="as-form-header">
 
 		<toolbar [title]="itemsTitle">
+			<div class="toolbar-right">
+				<mat-button-toggle-group class="select-view" #viewMode="matButtonToggleGroup" (change)="onViewModeChange(viewMode.value)">
+					<mat-button-toggle mat-flat-button value="cards"  [checked]="isModeSelected('cards')">
+						<mat-icon>view_module</mat-icon>
+					</mat-button-toggle>
+					<mat-button-toggle mat-flat-button value="table" [checked]="isModeSelected('table')">
+						<mat-icon>format_list_numbered</mat-icon>
+					</mat-button-toggle>
+				</mat-button-toggle-group>
+			</div>
 			<input class="search form-control" placeholder="Search..." (keyup)="search(input.value)" #input>
 			<span class="spacer"></span>
 			<button mat-raised-button color="primary" (click)="createItem()">New item</button>
@@ -10,16 +20,53 @@
 	</div>
 
 	<div class="as-form-scroll">
-		<div class="cards-container">
-			<mat-card (click)="editItem(item)" *ngFor="let item of visibleItems">
-				<mat-card-header>
-					<mat-card-title>{{item.title}}</mat-card-title>
-				</mat-card-header>
 
-				<mat-card-actions>
-					<button mat-icon-button *ngIf="canDelete(item)" (click)="deleteItem($event, item);"><mat-icon>delete</mat-icon></button>
-				</mat-card-actions>
-			</mat-card>
-		</div>
+		<ng-template [ngIf]="viewMode.value === 'cards'">
+			<div class="cards-container">
+				<mat-card (click)="editItem(item)" *ngFor="let item of visibleItems">
+					<mat-card-header>
+						<mat-card-title>{{item.title}}</mat-card-title>
+					</mat-card-header>
+
+					<mat-card-actions>
+						<button mat-icon-button *ngIf="canDelete(item)" (click)="deleteItem($event, item);">
+							<mat-icon>delete</mat-icon>
+						</button>
+					</mat-card-actions>
+				</mat-card>
+			</div>
+		</ng-template>
+
+
+		<ng-template [ngIf]="viewMode.value === 'table'">
+			<div class="table-container">
+				<table mat-table [dataSource]="visibleItems" class="mat-elevation-z8">
+					<ng-container matColumnDef="position">
+						<th mat-header-cell *matHeaderCellDef class="position "> No.</th>
+						<td mat-cell *matCellDef="let index = index" class="position "> {{index + 1}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="title">
+						<th mat-header-cell *matHeaderCellDef>Title</th>
+						<td mat-cell *matCellDef="let element;"> {{element.title}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="actionControls">
+						<th mat-header-cell *matHeaderCellDef class="action-controls"></th>
+						<td mat-cell *matCellDef="let element" class="action-controls">
+							<button mat-icon-button (click)="editItem(element);">
+								<mat-icon>edit</mat-icon>
+							</button>
+							<button mat-icon-button *ngIf="canDelete(element)" (click)="deleteItem($event, element);" color="warn">
+								<mat-icon>delete</mat-icon>
+							</button>
+						</td>
+					</ng-container>
+
+					<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+					<tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+				</table>
+			</div>
+		</ng-template>
 	</div>
 </div>
