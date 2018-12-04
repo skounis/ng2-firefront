@@ -20,19 +20,29 @@
 	display: flex;
 	flex-wrap: wrap;
 
+	width: 960px;
+	margin: auto;
+
 	mat-card {
 		height: 200px;
-		width: 200px;
+		width: 296px;
+		margin: 12px;
 	}
+
 
 	.mat-card-header .mat-card-title,
 	mat-card-title {
 		font-size: 18px;
 		text-transform: capitalize;
 	}
+
 	mat-card-actions {
 		bottom: 25px;
 		position: absolute;
+	}
+
+	::ng-deep .mat-card-header-text {
+		margin: 0 !important;
 	}
 }
 
@@ -43,6 +53,10 @@
 }
 
 .table-container {
+
+	width: 960px;
+	margin: auto;
+
 	padding: 10px;
 	table {
 		padding: $padding;
@@ -52,10 +66,29 @@
 		width: 110px;
 		td {
 			padding: 0;
-		}		
+		}
 	}
 	.position {
 		width: 100px;
 	}
 }
 
+@media only screen and (max-width: 983px) and (min-width: 664px) {
+	.cards-container,
+	.table-container {
+		width: 640px;
+	}
+}
+
+
+@media only screen and (max-width: 663px) {
+	.cards-container,
+	.table-container {
+		width: 100%;
+	}
+
+	mat-card {
+		width: 100%;
+	}
+
+}

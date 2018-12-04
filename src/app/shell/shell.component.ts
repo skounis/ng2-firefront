@@ -34,7 +34,7 @@ export class ShellComponent implements OnInit {
 	}
 
 	private fitLayoutToWidth(event) {
-		if (event.target.innerWidth < 960) {
+		if (event.target.innerWidth < (960 + 250)) {
 			this.mode = 'over';
 			this.opened = false;
 		} else {
