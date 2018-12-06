@@ -5,8 +5,10 @@ import { createNumberMask } from 'text-mask-addons/dist/textMaskAddons';
 @Component({
 	selector: 'formly-field-input',
 	template: `
-		<input [textMask]="{mask: mask}" [formControl]="formControl" class="form-control"
+	<mat-form-field style="width:100%">
+		<input matInput [textMask]="{mask: mask}" [formControl]="formControl"
 			[formlyAttributes]="field" [ngClass]="{'form-control-danger': valid}">
+	</mat-form-field>
 	`
 })
 export class FormlyFieldNumericInput extends FieldType {
