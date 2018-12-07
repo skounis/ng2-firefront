@@ -97,7 +97,7 @@ export class ItemsListComponent implements OnInit {
 						? currentMenuItem.title
 						: itemsType;
 
-					if (currentMenuItem.itemsType === 'system-menus') {
+					if (currentMenuItem && currentMenuItem.itemsType === 'system-menus') {
 						items = orderBy(items, ['order']);
 					}
 

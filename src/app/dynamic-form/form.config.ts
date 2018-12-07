@@ -965,6 +965,86 @@ export const itemsFormConfig = () => ({
 			}
 		}
 	],
+	landingpages: [
+		{
+			type: 'input',
+			key: 'title',
+			templateOptions: {
+				label: 'Event Name',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			type: 'input',
+			key: 'companyName',
+			templateOptions: {
+				label: 'Company',
+				required: true
+			}
+		},
+		{
+			type: 'input',
+			key: 'companyLogo',
+			templateOptions: {
+				label: 'Company Logo',
+				required: true
+			}
+		},
+		{
+			type: 'textarea',
+			key: 'location',
+			templateOptions: {
+				label: 'Event Location',
+				rows: 5,
+				description: 'Please enter at least 150 characters',
+			}
+		},
+		{
+			key: 'date',
+			type: 'date-time-picker',
+			templateOptions: {
+				label: 'Start date',
+			}
+		},
+		{
+			key: 'description',
+			type: 'textarea',
+			templateOptions: {
+				rows: 5,
+				label: 'Body',
+				description: 'Please enter at least 150 characters',
+				required: true
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
+			}
+		},
+		{
+			key: 'registerURL',
+			type: 'input',
+			templateOptions: {
+				label: 'Register URL'
+			}
+		},
+		{
+		key: 'template',
+		type: 'select',
+		templateOptions: {
+			label: 'Template',
+			placeholder: 'Placeholder',
+			description: 'Select Template',
+			required: true,
+			options: [
+				{ value: 4441, label: 'Sample / Email'  },
+				{ value: 4442, label: 'Web page'  },
+				{ value: 4449, label: 'Landig Page / Dynamic'  },
+			],
+		},
+	},
+	],
 	'system-menus': [
 		{
 			type: 'input',
