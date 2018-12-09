@@ -7,9 +7,9 @@ import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { Observable } from 'rxjs';
 import { DataService } from '../common/services/data.service';
 import { uuid } from '../common/uuid';
-import { itemsFormConfig } from '../dynamic-form/form.config';
 import { FormlyFormEnricher } from '../dynamic-form/formly-form-enricher';
 import { ModelProcessor } from '../dynamic-form/model-processor';
+import { DynamicFormLoaderService } from '../dynamic-form/dynamic-form-loader.service';
 
 @Component({
 	selector: 'item-details',
@@ -37,6 +37,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 		private route: ActivatedRoute,
 		private snackBar: MatSnackBar,
 		private location: Location,
+		private formlyConfigLoaderService: DynamicFormLoaderService,
 		private enricher: FormlyFormEnricher
 	) {
 		this.parentType = route.snapshot.params['parentType'];
@@ -105,7 +106,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 
 	private initFormFields() {
 		this.form = this.fb.group({});
-		let fields: FormlyFieldConfig[] = itemsFormConfig()[this.itemType];
+		let fields: FormlyFieldConfig[] = this.formlyConfigLoaderService.formlyFieldConfig()[this.itemType];
 		this.enricher.enrichFields(fields);
 		this.fields = fields;
 	}

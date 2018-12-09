@@ -1,4 +1,5 @@
 import { FormlyFieldConfig } from '@ngx-formly/core';
+import { environment } from '../../environments/environment';
 
 export class ModelProcessor {
 	static convertForUI(model: any, fields: FormlyFieldConfig[]): any {
@@ -86,5 +87,34 @@ export class ModelProcessor {
 		});
 
 		return model;
+	}
+
+	static convertFormConfigForUI(model: any): FormlyFieldConfig {
+		let formlyConfig = {};
+		let primaryField = '$key';
+
+		if (environment.databaseType === 'cloud-firestore') {
+
+			model.forEach((item) => {
+				delete item[primaryField];
+				formlyConfig = { ...formlyConfig, ...item };
+			});
+
+			return formlyConfig;
+		}
+
+		model.forEach((item) => {
+			if (!formlyConfig.hasOwnProperty(item[primaryField])) {
+				formlyConfig[item[primaryField]] = [];
+			}
+			for (let k in item) {
+				if (k !== primaryField) {
+					formlyConfig[item[primaryField]].push(item[k]);
+				}
+			}
+
+		});
+
+		return formlyConfig;
 	}
 }
