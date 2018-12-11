@@ -17,3 +17,12 @@ formly-form {
 	box-shadow: none;
 	padding: 0;
 }
+
+::ng-deep .as-radio-vertical .mat-radio-group {
+	display: inline-flex;
+	flex-direction: column;
+
+	.mat-radio-button {
+		margin: 5px 0;
+	}
+}
