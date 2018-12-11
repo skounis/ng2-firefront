@@ -25,7 +25,9 @@ export class ItemDetailsComponent implements AfterViewInit {
 			onFlush: new EventEmitter<void>()
 		}
 	};
-
+	templateOptions: any = {
+		className: ''
+	};
 	itemId: string;
 	itemType: string;
 	parentId: string;
@@ -87,7 +89,6 @@ export class ItemDetailsComponent implements AfterViewInit {
 			);
 	}
 
-
 	cancel() {
 		if (!this.itemId) {
 			this.location.back();
@@ -107,6 +108,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 	private initFormFields() {
 		this.form = this.fb.group({});
 		let fields: FormlyFieldConfig[] = this.formlyConfigLoaderService.formlyFieldConfig()[this.itemType];
+		this.templateOptions.className = this.hasFieldGroup(fields) ? 'as-has-fieldgroup' : '';
 		this.enricher.enrichFields(fields);
 		this.fields = fields;
 	}
@@ -133,6 +135,12 @@ export class ItemDetailsComponent implements AfterViewInit {
 			model.$key = this.itemId;
 		}
 		return model;
+	}
+
+	private hasFieldGroup(items) {
+		return !!items.find(item => {
+			return !!item.wrappers && item.wrappers.includes('ha-fieldset');
+		});
 	}
 
 	@HostListener('window:beforeunload', ['$event'])

@@ -5,17 +5,21 @@ import { FieldWrapper } from '@ngx-formly/core';
 	selector: 'formly-wrapper-fieldset',
 	encapsulation: ViewEncapsulation.None,
 	template: `
-		<h3>Fieldset: {{to['title'] || to['label']}}</h3>
-		<div class="card">
-			<div class="card-block">
+		<h5 *ngIf="to['title'] || to['label']" class="as-fieldset-header">{{to['title'] || to['label']}}</h5>
+		<div class="as-fieldset-wrapper mat-card">
+			<div>
 				<ng-container #fieldComponent></ng-container>
 			</div>
 		</div>
 	`,
 	styles: [
 		`
-			.h3 {
-				color: red;
+			formly-wrapper-fieldset h5 {
+				padding-left: 10px;
+			}
+
+			formly-wrapper-fieldset .as-fieldset-wrapper {
+				margin-bottom: 40px;
 			}
 		`
 	]

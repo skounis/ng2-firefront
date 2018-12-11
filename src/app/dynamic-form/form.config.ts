@@ -93,9 +93,7 @@ export const itemsFormConfig = () => ({
 	],
 	sizes: [
 		{
-			key: 'address',
 			wrappers: ['ha-fieldset'],
-			// templateOptions: { label: 'Address' },
 			fieldGroup:[
 				{
 					type: 'input',
@@ -106,6 +104,43 @@ export const itemsFormConfig = () => ({
 					},
 					validators: {
 						validation: Validators.compose([Validators.required])
+					}
+				},
+				{
+					type: 'input',
+					key: 'abbreviation',
+					templateOptions: {
+						label: 'Abbreviation',
+					},
+					validators: {
+						validation: Validators.compose([Validators.required])
+					}
+				}
+			]
+		},
+		{
+			wrappers: ['ha-fieldset'],
+			templateOptions: { label: 'International' },
+			fieldGroup:[
+				{
+					type: 'input',
+					key: 'sizeUS',
+					templateOptions: {
+						label: 'US Size'
+					}
+				},
+				{
+					type: 'input',
+					key: 'sizeEU',
+					templateOptions: {
+						label: 'EU size'
+					}
+				},
+				{
+					type: 'input',
+					key: 'sizeUK',
+					templateOptions: {
+						label: 'UK Size'
 					}
 				}
 			]
