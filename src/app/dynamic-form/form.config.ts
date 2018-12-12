@@ -1023,7 +1023,7 @@ export const itemsFormConfig = () => ({
 			}
 		},
 		{
-			key: 'registerURL',
+			key: 'registerUrl',
 			type: 'input',
 			templateOptions: {
 				label: 'Register URL'

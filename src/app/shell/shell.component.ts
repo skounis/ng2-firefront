@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, HostListener, OnInit } from '@angular/cor
 import { MenuItem } from '../common/models/menu-item';
 import { orderBy } from 'lodash';
 import { MenuService } from '../common/services/menu.service';
-import { DynamicFormLoaderService } from '../dynamic-form/dynamic-form-loader.service';
+
 
 @Component({
 	selector: 'shell',
@@ -16,10 +16,7 @@ export class ShellComponent implements OnInit {
 
 	menus: MenuItem[];
 
-	constructor(
-		private menuService: MenuService,
-		private formlyConfigLoader: DynamicFormLoaderService
-	) {
+	constructor(private menuService: MenuService) {
 	}
 
 	ngOnInit(): void {
@@ -28,16 +25,11 @@ export class ShellComponent implements OnInit {
 
 			this.menus = orderBy(menus, ['order']);
 		});
-		this.loadFormlyCofiguration();
 	}
 
 	@HostListener('window:resize', ['$event'])
 	onResize(event) {
 		this.fitLayoutToWidth(event);
-	}
-
-	private async loadFormlyCofiguration() {
-		this.formlyConfigLoader.init();
 	}
 
 	private fitLayoutToWidth(event) {

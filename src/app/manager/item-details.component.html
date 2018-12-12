@@ -22,8 +22,8 @@
 			[templateOptions]="templateOptions"></dynamic-form>
 
 		<div class="card">
-			<button mat-button mat-raised-button (click)="editTemplate()">Edit Template</button>
-			<button mat-button mat-raised-button (click)="previewPage()">Preview</button>
+			<button mat-raised-button type="button" (click)="unlayerModal('edit')">Edit Template</button>
+			<button mat-raised-button type="button" (click)="unlayerModal('preview')">Preview</button>
 		</div>
 	</div>
 </div>

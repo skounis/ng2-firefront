@@ -23,7 +23,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/app/common/ngx-unlayer/unlayer.embed.js"
+            ]
           },
           "configurations": {
             "prod": {

@@ -39,4 +39,8 @@ export class DataService {
 		return this[this.databaseService].saveItem(itemType, item);
 	}
 
+	patchEntity(item: any): any {
+		return this[this.databaseService].patchEntity(item);
+	}
+
 }

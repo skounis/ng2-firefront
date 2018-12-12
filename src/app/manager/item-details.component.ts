@@ -11,12 +11,45 @@ import { FormlyFormEnricher } from '../dynamic-form/formly-form-enricher';
 import { ModelProcessor } from '../dynamic-form/model-processor';
 import { DynamicFormLoaderService } from '../dynamic-form/dynamic-form-loader.service';
 
+import { MatDialog } from '@angular/material';
+import { UnlayerDialog } from './unlayer.dialog';
+import { NgxUnlayerRestService } from '../common/ngx-unlayer/ngx-unlayer.service';
+
 @Component({
 	selector: 'item-details',
 	templateUrl: './item-details.component.html',
 	styleUrls: ['./item-details.component.scss']
 })
 export class ItemDetailsComponent implements AfterViewInit {
+
+	unlayerOptions = {
+		projectId: 1556,
+		templateId: 4449,
+		tools: {
+			image: {
+				enabled: false,
+			},
+			'custom#subscribe_button': {
+				enabled: true,
+				priority: 2,
+				data: {
+					url: 'http://via.placeholder.com/350x150',
+				}
+			},
+			'custom#sessions': {
+				enabled: true,
+				priority: 1,
+				data: {
+					sessions: []
+				}
+			}
+		},
+		designTags: {},
+		mergeTags: [
+			{ name: 'XXXXX', value: '{{registerURL}}' },
+		]
+	};
+
 	item: any;
 	fields: FormlyFieldConfig[];
 	form: FormGroup;
@@ -40,7 +73,9 @@ export class ItemDetailsComponent implements AfterViewInit {
 		private snackBar: MatSnackBar,
 		private location: Location,
 		private formlyConfigLoaderService: DynamicFormLoaderService,
-		private enricher: FormlyFormEnricher
+		private enricher: FormlyFormEnricher,
+		private dialog: MatDialog,
+		private unlayerService: NgxUnlayerRestService
 	) {
 		this.parentType = route.snapshot.params['parentType'];
 		this.parentId = route.snapshot.params['parentId'];
@@ -142,6 +177,104 @@ export class ItemDetailsComponent implements AfterViewInit {
 			return !!item.wrappers && item.wrappers.includes('ha-fieldset');
 		});
 	}
+
+	unlayerModal(mode: string = '') {
+		let templateData = this.data.patchEntity(this.item);
+		let dialogRef = this.dialog.open(UnlayerDialog, {
+			width: '90vw%',
+			height: '90vh%',
+			maxWidth: '90vw',
+			maxHeight: '90vh',
+			panelClass: 'unlayer-modal',
+			data: {
+				mode,
+				options: this.mapData(templateData, this.unlayerOptions),
+			}
+		});
+	}
+
+
+	private mapData(emailData, options) {
+		let keys = Object.keys(emailData);
+		let tools: any = { ...options.tools };
+		keys.forEach((key) => {
+				switch (key) {
+					case 'sessions': {
+						if (!tools['custom#sessions']) {
+							tools['custom#sessions'] = { data: null };
+						}
+
+						let data = Object.assign({}, tools['custom#sessions'].data, { title: 'Agenda', sessions: emailData[key] });
+
+						tools['custom#sessions'].data = data;
+						break;
+					}
+					case 'registerURL': {
+						if (!tools['custom#subscribe_button']) {
+							tools['custom#subscribe_button'] = { data: null };
+						}
+
+						let data = Object.assign({}, tools['custom#subscribe_button'].data, { text: 'Register', url: emailData[key] });
+
+						tools['custom#subscribe_button'].data = data;
+						break;
+					}
+					case 'sponsors': {
+						if (!tools['custom#sponsors']) {
+							tools['custom#sponsors'] = { data: null };
+						}
+						let data = Object.assign({}, tools['custom#sponsors'].data, { title: 'Our sponsors', sponsors: emailData[key] });
+
+						tools['custom#sponsors'].data = data;
+						break;
+					}
+					case 'companyLogo': {
+						if (!options.designTags) {
+							options.designTags = null;
+						}
+						options.designTags[key] = `<img src="${emailData[key]}" style="max-width: 100%; heigth: auto;" >`;
+						break;
+					}
+					case 'date':
+						if (!options.designTags) {
+							options.designTags = null;
+						}
+						options.designTags['eventDateShort'] = new Date(emailData[key]);
+						options.designTags['eventDateLong'] = emailData[key];
+						break;
+					case 'description':
+						if (!options.designTags) {
+							options.designTags = null;
+						}
+						options.designTags['eventDescription'] = emailData[key];
+						break;
+					case 'location':
+						if (!options.designTags) {
+							options.designTags = null;
+						}
+						options.designTags['eventLocation'] = emailData[key];
+						break;
+					case 'template':
+						options['templateId'] = emailData[key];
+						break;
+					case 'title':
+						if (!options.designTags) {
+							options.designTags = null;
+						}
+						options.designTags['eventName'] = emailData[key];
+						break;
+					default:
+						if (!options.designTags) {
+							options.designTags = null;
+						}
+						options.designTags[key] = emailData[key];
+						break;
+				}
+			}
+		);
+		return options;
+	}
+
 
 	@HostListener('window:beforeunload', ['$event'])
 	canDeactivate(): Observable<boolean> | boolean {

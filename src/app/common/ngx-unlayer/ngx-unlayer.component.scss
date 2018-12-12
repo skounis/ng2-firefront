@@ -1,0 +1,59 @@
+:host {
+	display: block;
+	height: 90vh;
+	.header {
+		display: flex;
+		padding: 1rem;
+		justify-content: flex-end;
+	}
+	#editor {
+		height: calc(100% - 68px);
+		display: flex;
+	}
+	iframe {
+		flex: 1 0 100%;
+		width: 100%;
+		border: 0;
+		height: 100%;
+	}
+	.toolbar {
+		display: block;
+		flex: 1 0 100%;
+		position: fixed;
+		background-color: #ccc;
+		padding: 0.5rem 0;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		transform: translateY(100%);
+		transition: .3s transform;
+		&:hover {
+			transform: translateY(0);
+		}
+	}
+	.setting-btn {
+		bottom: 100%;
+		position: absolute;
+		border-radius: 0;
+	}
+	.html-preview {
+		width: 100%;
+	}
+	.spinner {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 50px;
+		height: 50px;
+		transform: translate(-25px, -25px);
+	}
+}
+
+::ng-deep {
+	.unlayer-modal {
+		.mat-dialog-container {
+			padding: 0;
+			min-width: 450px;
+		}
+	}
+}

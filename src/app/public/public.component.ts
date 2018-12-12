@@ -38,6 +38,7 @@ export class PublicComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		console.log('public init');
 	}
 
 	submit() {

@@ -13,6 +13,9 @@ import { CanDeactivateManagerGuard } from './manager.can-deactivate';
 import { NewItemDialog } from './new-item.dialog';
 import { ItemsCollectionViewStore } from './items-collection-view.store';
 
+import { NgxUnlayerModule } from '../common/ngx-unlayer/ngx-unlayer.module';
+import { UnlayerDialog} from './unlayer.dialog';
+
 export const managerRoutes: Routes = [
 	{ path: 'manager/:itemsType', component: ItemsListComponent, pathMatch: 'full' },
 	{ path: 'manager/:itemsType/:id', component: ItemDetailsComponent, pathMatch: 'full', canDeactivate: [CanDeactivateManagerGuard] },
@@ -29,15 +32,17 @@ export const managerRoutes: Routes = [
 		FormlyModule,
 		CKEditorModule,
 		AgmCoreModule,
-		DynamicFormModule
+		DynamicFormModule,
+		NgxUnlayerModule
 	],
 	exports: [],
 	declarations: [
 		ItemsListComponent,
 		ItemDetailsComponent,
-		NewItemDialog
+		NewItemDialog,
+		UnlayerDialog
 	],
-	entryComponents: [NewItemDialog],
+	entryComponents: [NewItemDialog, UnlayerDialog],
 	providers: [CanDeactivateManagerGuard, ItemsCollectionViewStore]
 })
 export class ManagerModule {
