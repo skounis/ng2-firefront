@@ -3,11 +3,12 @@
 	height: 90vh;
 	.header {
 		display: flex;
-		padding: 1rem;
+		margin-top: 1rem;
+		padding: 0 1rem;
 		justify-content: flex-end;
 	}
 	#editor {
-		height: calc(100% - 68px);
+		height: calc(100% - 60px);
 		display: flex;
 	}
 	iframe {
@@ -51,6 +52,7 @@
 
 ::ng-deep {
 	.unlayer-modal {
+		margin: 2% !important;
 		.mat-dialog-container {
 			padding: 0;
 			min-width: 450px;

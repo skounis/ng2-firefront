@@ -181,10 +181,10 @@ export class ItemDetailsComponent implements AfterViewInit {
 	unlayerModal(mode: string = '') {
 		let templateData = this.data.patchEntity(this.item);
 		let dialogRef = this.dialog.open(UnlayerDialog, {
-			width: '90vw%',
-			height: '90vh%',
-			maxWidth: '90vw',
-			maxHeight: '90vh',
+			width: '100%',
+			height: '100%',
+			maxWidth: '96%',
+			maxHeight: '96%',
 			panelClass: 'unlayer-modal',
 			data: {
 				mode,
