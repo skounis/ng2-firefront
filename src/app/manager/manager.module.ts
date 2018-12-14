@@ -2,7 +2,7 @@ import { AgmCoreModule } from '@agm/core';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { FormlyModule } from '@ngx-formly/core';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { SharedModule } from '../common/shared.module';
@@ -14,7 +14,7 @@ import { NewItemDialog } from './new-item.dialog';
 import { ItemsCollectionViewStore } from './items-collection-view.store';
 
 import { NgxUnlayerModule } from '../common/ngx-unlayer/ngx-unlayer.module';
-import { UnlayerDialog} from './unlayer.dialog';
+import { UnlayerDialog } from './unlayer.dialog';
 
 export const managerRoutes: Routes = [
 	{ path: 'manager/:itemsType', component: ItemsListComponent, pathMatch: 'full' },
@@ -28,6 +28,7 @@ export const managerRoutes: Routes = [
 		CommonModule,
 		SharedModule,
 		FormsModule,
+		RouterModule,
 		ReactiveFormsModule,
 		FormlyModule,
 		CKEditorModule,

@@ -24,6 +24,7 @@ export class NgxUnlayerComponent implements OnInit {
 	html: string = null;
 
 	constructor(
+		private cdRef: ChangeDetectorRef,
 		private service: NgxUnlayerRestService,
 		public store: NgxUnlayerStore,
 		private sanitizer: DomSanitizer
@@ -38,7 +39,7 @@ export class NgxUnlayerComponent implements OnInit {
 			id: 'editor',
 			displayMode: 'email'
 		});
-		console.log(options);
+
 		unlayer.addEventListener('design:updated', function (data) {
 			this.html = null;
 		});
@@ -56,7 +57,6 @@ export class NgxUnlayerComponent implements OnInit {
 
 	save() {
 		unlayer.saveDesign((design) => {
-			alert('design saved');
 			this.onDesignSave.emit(design);
 		});
 	}
@@ -65,9 +65,9 @@ export class NgxUnlayerComponent implements OnInit {
 		unlayer.exportHtml((data) => {
 			this.onExportHTML.emit(data.html);
 			this.html = data.html;
-			//TODO: workaround, in other case HTML wount render
+			console.log(this.html);
 			window.dispatchEvent(new Event('resize'));
-
+			this.cdRef.detectChanges();
 		});
 	}
 

@@ -22,8 +22,9 @@
 			[templateOptions]="templateOptions"></dynamic-form>
 
 		<div class="card">
-			<button mat-raised-button type="button" (click)="unlayerModal('edit')">Edit Template</button>
-			<button mat-raised-button type="button" (click)="unlayerModal('preview')">Preview</button>
+			<a mat-raised-button (click)="unlayerModal('edit', $event)">Edit Template</a>
+			<a mat-raised-button (click)="unlayerModal('preview', $event)">Preview</a>
+			<a mat-raised-button target="_blank"  [routerLink]="previewUrl">Open</a>
 		</div>
 	</div>
 </div>

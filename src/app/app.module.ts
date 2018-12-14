@@ -33,6 +33,8 @@ import { RealTimeDatabaseService } from './common/services/realtime-database.ser
 import { CloudFireStoreService } from './common/services/cloud-firestore.service';
 import { FireStorage } from './common/services/fire-storage';
 import { SharedModule } from './common/shared.module';
+import { PreviewModule } from './preview/preview.module';
+
 import 'hammerjs';
 
 /*
@@ -71,7 +73,7 @@ const APP_PROVIDERS = [
 		BrowserAnimationsModule,
 		RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
 		MatSnackBarModule,
-
+		PreviewModule,
 		NgbModule.forRoot(),
 		FormlyModule.forRoot(ngFormlyConfig),
 		FormlyBootstrapModule,

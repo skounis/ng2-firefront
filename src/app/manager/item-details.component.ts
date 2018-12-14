@@ -44,10 +44,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 				}
 			}
 		},
-		designTags: {},
-		mergeTags: [
-			{ name: 'XXXXX', value: '{{registerURL}}' },
-		]
+		designTags: {}
 	};
 
 	item: any;
@@ -65,6 +62,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 	itemType: string;
 	parentId: string;
 	parentType: string;
+	previewUrl: string;
 
 	constructor(
 		private fb: FormBuilder,
@@ -81,6 +79,8 @@ export class ItemDetailsComponent implements AfterViewInit {
 		this.parentId = route.snapshot.params['parentId'];
 		this.itemType = route.snapshot.params['itemsType'];
 		this.itemId = route.snapshot.params['id'];
+
+		this.previewUrl = `/preview/${this.itemType}/${this.itemId}`;
 
 		this.initFormFields();
 	}
@@ -178,8 +178,10 @@ export class ItemDetailsComponent implements AfterViewInit {
 		});
 	}
 
-	unlayerModal(mode: string = '') {
+	unlayerModal(mode: string = '', event) {
 		let templateData = this.data.patchEntity(this.item);
+		let options = this.mapData(templateData, this.unlayerOptions);
+		console.log(options);
 		let dialogRef = this.dialog.open(UnlayerDialog, {
 			width: '100%',
 			height: '100%',
@@ -188,9 +190,10 @@ export class ItemDetailsComponent implements AfterViewInit {
 			panelClass: 'unlayer-modal',
 			data: {
 				mode,
-				options: this.mapData(templateData, this.unlayerOptions),
+				options,
 			}
 		});
+		event.preventDefault();
 	}
 
 
