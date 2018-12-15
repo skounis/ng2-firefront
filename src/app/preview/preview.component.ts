@@ -12,6 +12,8 @@ import { DynamicFormLoaderService } from '../dynamic-form/dynamic-form-loader.se
 })
 export class PreviewComponent implements OnInit {
 
+	isReady = false;
+
 	unlayerOptions = {
 		projectId: 1556,
 		templateId: 4449,
@@ -55,6 +57,7 @@ export class PreviewComponent implements OnInit {
 					let fields: FormlyFieldConfig[] = this.formlyConfigLoaderService.formlyFieldConfig()[itemsType];
 					let templateData = this.convertForUI(item, fields);
 					this.options = this.mapData(templateData, this.unlayerOptions);
+					this.isReady = true;
 				}
 			});
 	}
@@ -140,6 +143,10 @@ export class PreviewComponent implements OnInit {
 		);
 		return options;
 	}
+
+	// TODO: Are needed? remove or move them in the right place
+	parentId;
+	itemId;
 
 	private convertForUI(model: any, fields) {
 
