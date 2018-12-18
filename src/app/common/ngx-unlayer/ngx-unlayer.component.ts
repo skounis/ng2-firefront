@@ -1,9 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Options } from './ngx-unlayer.model';
 import { NgxUnlayerRestService } from './ngx-unlayer.service';
 import { NgxUnlayerStore } from './ngx-unlayer.store';
-import { Options } from './ngx-unlayer.model';
-import { DomSanitizer } from '@angular/platform-browser';
-
 import * as unlayer from './unlayer.embed.js';
 
 declare var unlayer: any;
@@ -18,7 +17,7 @@ export class NgxUnlayerComponent implements OnInit {
 	@Input() options: Options = null;
 	@Input() mode: string = 'editor';
 	@Output() onExportHTML = new EventEmitter();
-	@Output() onDesignSave = new EventEmitter();
+	@Output() onDesignSave = new EventEmitter<any>();
 	@Output() onLoadTemplate = new EventEmitter();
 
 	html: string = null;
@@ -30,6 +29,7 @@ export class NgxUnlayerComponent implements OnInit {
 		private sanitizer: DomSanitizer
 	) {
 	}
+
 
 	ngOnInit() {
 		const options: Options = Object.assign({}, this.options);

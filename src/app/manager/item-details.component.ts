@@ -22,6 +22,15 @@ import { NgxUnlayerRestService } from '../common/ngx-unlayer/ngx-unlayer.service
 })
 export class ItemDetailsComponent implements AfterViewInit {
 
+	// The colection of the Designs/Templates created by the user
+	// and saved in Firebase
+	userDesigns = [];
+	// ID of the current/selected design/template (in the future we should use a store for this)
+	userDesignID = null;
+
+	// TODO: we may need to get rid of these
+	isDesignerReady = false;
+
 	unlayerOptions = {
 		projectId: 1556,
 		templateId: 4449,
@@ -94,10 +103,14 @@ export class ItemDetailsComponent implements AfterViewInit {
 						if (!this.item) {
 							this.item = this.convertForUI(item);
 						}
+						this.prepare();
+						this.isDesignerReady = true;
 					});
 			} else {
 				this.item = {};
 			}
+
+			this.loadDesigns();
 		}, 0);
 	}
 
@@ -178,10 +191,18 @@ export class ItemDetailsComponent implements AfterViewInit {
 		});
 	}
 
-	unlayerModal(mode: string = '', event) {
+
+	_options;
+
+	prepare() {
 		let templateData = this.data.patchEntity(this.item);
-		let options = this.mapData(templateData, this.unlayerOptions);
-		console.log(options);
+		this._options = this.mapData(templateData, this.unlayerOptions);
+		// console.log(options);
+	}
+	unlayerModal(mode: string = '', event) {
+		this.prepare();
+		let options = this._options;
+
 		let dialogRef = this.dialog.open(UnlayerDialog, {
 			width: '100%',
 			height: '100%',
@@ -278,6 +299,45 @@ export class ItemDetailsComponent implements AfterViewInit {
 		return options;
 	}
 
+	onDesignSave(design: any) {
+		this.userDesignID = this.userDesignID || Math.random().toString(36).substring(7);
+		let item:any = {
+			name: this.userDesignID,
+			design: design
+		}
+
+		// Turn undefined values into null
+		// Firebase can't serialize `undefined`
+		item = JSON.parse(JSON.stringify(item, function(k, v) {
+			if (v === undefined) { return null; } return v;
+		}));
+
+		this.data.createItem('unlayerDesigns', item)
+			.then(
+				() => {
+
+					this.snackBar.open('The changes has been saved', 'Ok', {
+						duration: 3000
+					});
+
+					if (!this.itemId && item.$key) {
+						this.itemId = item.$key;
+					}
+				},
+				(error) => {
+					console.log(error);
+				}
+			);
+
+		console.log(item);
+	}
+
+	// Load the Desings/Templates of the user
+	loadDesigns() {
+		this.data.loadItems('unlayerDesigns').subscribe(items => {
+			this.userDesigns = items;
+		});
+	}
 
 	@HostListener('window:beforeunload', ['$event'])
 	canDeactivate(): Observable<boolean> | boolean {

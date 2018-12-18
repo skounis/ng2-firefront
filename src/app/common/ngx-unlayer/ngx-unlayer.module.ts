@@ -1,26 +1,31 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgxUnlayerComponent } from './ngx-unlayer.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material';
+import { SharedModule } from '../shared.module';
+import { NgxUnlayerTemplatesComponent } from './ngx-unlayer-templates.component';
+import { NgxUnlayerComponent } from './ngx-unlayer.component';
 import { NgxUnlayerRestService } from './ngx-unlayer.service';
 import { NgxUnlayerStore } from './ngx-unlayer.store';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatIconModule, MatButtonModule, MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
 	imports: [
 		CommonModule,
-		HttpClientModule,
 		FormsModule,
-		MatIconModule,
+		HttpClientModule,
 		MatButtonModule,
-		MatProgressSpinnerModule
+		MatIconModule,
+		MatProgressSpinnerModule,
+		SharedModule
 	],
 	declarations: [
-		NgxUnlayerComponent
+		NgxUnlayerComponent,
+		NgxUnlayerTemplatesComponent
 	],
 	exports: [
-		NgxUnlayerComponent
+		NgxUnlayerComponent,
+		NgxUnlayerTemplatesComponent
 	],
 	providers: [
 		NgxUnlayerStore,
