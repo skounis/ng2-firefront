@@ -12,7 +12,7 @@ import { ModelProcessor } from '../dynamic-form/model-processor';
 import { DynamicFormLoaderService } from '../dynamic-form/dynamic-form-loader.service';
 
 import { MatDialog } from '@angular/material';
-import { UnlayerDialog } from './unlayer.dialog';
+import { NewItemDialog } from './new-item.dialog';
 import { NgxUnlayerRestService } from '../common/ngx-unlayer/ngx-unlayer.service';
 
 @Component({
@@ -28,12 +28,16 @@ export class ItemDetailsComponent implements AfterViewInit {
 	// ID of the current/selected design/template (in the future we should use a store for this)
 	userDesignID = null;
 
+	selectedDesign = null;
+	selectedTabIndex = 0;
+
 	// TODO: we may need to get rid of these
 	isDesignerReady = false;
+	isPreviewReady = false;
 
 	unlayerOptions = {
 		projectId: 1556,
-		templateId: 4449,
+		// templateId: 4449,
 		tools: {
 			image: {
 				enabled: false,
@@ -72,6 +76,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 	parentId: string;
 	parentType: string;
 	previewUrl: string;
+	fullPreviewUrl: string;
 
 	constructor(
 		private fb: FormBuilder,
@@ -90,6 +95,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 		this.itemId = route.snapshot.params['id'];
 
 		this.previewUrl = `/preview/${this.itemType}/${this.itemId}`;
+		this.fullPreviewUrl = window.location.href + this.previewUrl;
 
 		this.initFormFields();
 	}
@@ -105,6 +111,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 						}
 						this.prepare();
 						this.isDesignerReady = true;
+						this.isPreviewReady = true;
 					});
 			} else {
 				this.item = {};
@@ -197,26 +204,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 	prepare() {
 		let templateData = this.data.patchEntity(this.item);
 		this._options = this.mapData(templateData, this.unlayerOptions);
-		// console.log(options);
 	}
-	unlayerModal(mode: string = '', event) {
-		this.prepare();
-		let options = this._options;
-
-		let dialogRef = this.dialog.open(UnlayerDialog, {
-			width: '100%',
-			height: '100%',
-			maxWidth: '96%',
-			maxHeight: '96%',
-			panelClass: 'unlayer-modal',
-			data: {
-				mode,
-				options,
-			}
-		});
-		event.preventDefault();
-	}
-
 
 	private mapData(emailData, options) {
 		let keys = Object.keys(emailData);
@@ -278,9 +266,6 @@ export class ItemDetailsComponent implements AfterViewInit {
 						}
 						options.designTags['eventLocation'] = emailData[key];
 						break;
-					case 'template':
-						options['templateId'] = emailData[key];
-						break;
 					case 'title':
 						if (!options.designTags) {
 							options.designTags = null;
@@ -300,36 +285,73 @@ export class ItemDetailsComponent implements AfterViewInit {
 	}
 
 	onDesignSave(design: any) {
-		this.userDesignID = this.userDesignID || Math.random().toString(36).substring(7);
-		let item:any = {
-			name: this.userDesignID,
-			design: design
-		}
+		if(!!this.selectedDesign) {
+			let item:any = {
+				name: this.userDesignID,
+				design: design,
+				$key: this.selectedDesign.$key
+			}
+	
+			// Turn undefined values into null
+			// Firebase can't serialize `undefined`
+			item = JSON.parse(JSON.stringify(item, function(k, v) {
+				if (v === undefined) { return null; } return v;
+			}));
 
-		// Turn undefined values into null
-		// Firebase can't serialize `undefined`
-		item = JSON.parse(JSON.stringify(item, function(k, v) {
-			if (v === undefined) { return null; } return v;
-		}));
-
-		this.data.createItem('unlayerDesigns', item)
-			.then(
-				() => {
-
-					this.snackBar.open('The changes has been saved', 'Ok', {
-						duration: 3000
-					});
-
-					if (!this.itemId && item.$key) {
-						this.itemId = item.$key;
+			this.data.saveItem('unlayerDesigns', item)
+				.then(
+					() => {
+						this.snackBar.open('The changes has been saved', 'Ok', {
+							duration: 3000
+						});
+	
+						if (!this.itemId && item.$key) {
+							this.itemId = item.$key;
+						}
+						this.selectedDesign = item;
+					},
+					(error) => {
+						console.log(error);
 					}
-				},
-				(error) => {
-					console.log(error);
-				}
-			);
-
-		console.log(item);
+				);
+		} else {
+				let dialogRef = this.dialog.open(NewItemDialog, {
+					width: '300px'
+				});
+				dialogRef.afterClosed().subscribe(itemName => {
+					if (itemName) {
+						this.userDesignID = itemName;
+					}
+						this.userDesignID = this.userDesignID || Math.random().toString(36).substring(7);
+						let item:any = {
+							name: this.userDesignID,
+							design: design
+						}
+				
+						// Turn undefined values into null
+						// Firebase can't serialize `undefined`
+						item = JSON.parse(JSON.stringify(item, function(k, v) {
+							if (v === undefined) { return null; } return v;
+						}));
+			
+					this.data.createItem('unlayerDesigns', item)
+					.then(
+						() => {
+		
+							this.snackBar.open('The changes has been saved', 'Ok', {
+								duration: 3000
+							});
+							this.selectedDesign = item;
+							if (!this.itemId && item.$key) {
+								this.itemId = item.$key;
+							}
+						},
+						(error) => {
+							console.log(error);
+						}
+					);
+				});
+		}
 	}
 
 	// Load the Desings/Templates of the user
@@ -342,5 +364,17 @@ export class ItemDetailsComponent implements AfterViewInit {
 	@HostListener('window:beforeunload', ['$event'])
 	canDeactivate(): Observable<boolean> | boolean {
 		return !this.form.dirty;
+	}
+
+	onTemplateSelected(templateData: any) {
+		if(templateData.type === 'systemTemplate') {
+			this.selectedDesign = null;
+			this.userDesignID = null;
+			this._options['templateId'] = templateData.template.id;
+		} else {
+			this.userDesignID = templateData.template.name;
+			this.selectedDesign = templateData.template;
+		}
+		this.selectedTabIndex = 2;
 	}
 }

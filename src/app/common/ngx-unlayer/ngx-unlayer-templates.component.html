@@ -6,7 +6,7 @@
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>Select</button>
+    <button mat-button (click)="selectTemplate('systemTemplate', template)">Select</button>
     <button mat-button>Clone</button>
   </mat-card-actions>
 </mat-card>
@@ -20,7 +20,7 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>Select</button>
+      <button mat-button (click)="selectTemplate('userDesign', design)">Select</button>
       <button mat-button>Clone</button>
     </mat-card-actions>
   </mat-card>

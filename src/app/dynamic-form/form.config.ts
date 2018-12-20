@@ -1029,21 +1029,6 @@ export const itemsFormConfig = () => ({
 				label: 'Register URL'
 			}
 		},
-		{
-		key: 'template',
-		type: 'select',
-		templateOptions: {
-			label: 'Template',
-			placeholder: 'Placeholder',
-			description: 'Select Template',
-			required: true,
-			options: [
-				{ value: 4441, label: 'Sample / Email'  },
-				{ value: 4442, label: 'Web page'  },
-				{ value: 4449, label: 'Landig Page / Dynamic'  },
-			],
-		},
-	},
 	],
 	'system-menus': [
 		{

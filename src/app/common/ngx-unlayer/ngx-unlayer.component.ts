@@ -16,9 +16,11 @@ declare var unlayer: any;
 export class NgxUnlayerComponent implements OnInit {
 	@Input() options: Options = null;
 	@Input() mode: string = 'editor';
+	@Input() design;
 	@Output() onExportHTML = new EventEmitter();
 	@Output() onDesignSave = new EventEmitter<any>();
 	@Output() onLoadTemplate = new EventEmitter();
+	@Output() onLoadDesign = new EventEmitter();
 
 	html: string = null;
 
@@ -34,6 +36,11 @@ export class NgxUnlayerComponent implements OnInit {
 	ngOnInit() {
 		const options: Options = Object.assign({}, this.options);
 
+		console.log(options);
+		if (this.design) {
+			delete options.projectId;
+			delete options.templateId;
+		}
 		unlayer.init({
 			...options,
 			id: 'editor',
@@ -45,14 +52,21 @@ export class NgxUnlayerComponent implements OnInit {
 		});
 
 		unlayer.addEventListener('design:loaded', (data) => {
-			this.exportHTML();
+			this.exportHTML();	
 		});
 
+		if(this.design) {
+			this.loadDesign();
+		}	
 	}
 
 	loadTemplateById(id) {
 		unlayer.loadTemplate(id);
 		this.onLoadTemplate.emit(id);
+	}
+
+	loadDesign() {
+		unlayer.loadDesign(this.design);
 	}
 
 	save() {
@@ -65,7 +79,6 @@ export class NgxUnlayerComponent implements OnInit {
 		unlayer.exportHtml((data) => {
 			this.onExportHTML.emit(data.html);
 			this.html = data.html;
-			console.log(this.html);
 			window.dispatchEvent(new Event('resize'));
 			this.cdRef.detectChanges();
 		});

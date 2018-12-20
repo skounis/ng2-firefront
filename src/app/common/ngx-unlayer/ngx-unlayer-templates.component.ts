@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChange, SimpleChanges} from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChange, SimpleChanges} from '@angular/core';
 import { NgxUnlayerRestService } from './ngx-unlayer.service';
 
 @Component({
@@ -8,7 +8,8 @@ import { NgxUnlayerRestService } from './ngx-unlayer.service';
 })
 export class NgxUnlayerTemplatesComponent implements OnInit, OnChanges {
 
-  @Input() userDesigns = [];
+	@Input() userDesigns = [];
+	@Output() onTemplateSelected = new EventEmitter();
 
   constructor(public service: NgxUnlayerRestService) { }
   systemTemplates: [];
@@ -28,7 +29,13 @@ export class NgxUnlayerTemplatesComponent implements OnInit, OnChanges {
     console.log('prev value: ', _userDesigns.previousValue);
     console.log('got name: ', _userDesigns.currentValue);
     this.userDesigns = _userDesigns.currentValue;
-  }
-
-
+	}
+	
+	selectTemplate(type: string, template: any) {
+		let templateWithType = {
+			type: type,
+			template: template
+		}
+		this.onTemplateSelected.emit(templateWithType);
+	}
 }
