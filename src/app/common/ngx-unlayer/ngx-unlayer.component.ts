@@ -52,12 +52,12 @@ export class NgxUnlayerComponent implements OnInit {
 		});
 
 		unlayer.addEventListener('design:loaded', (data) => {
-			this.exportHTML();	
+			this.exportHTML();
 		});
 
-		if(this.design) {
+		if (this.design) {
 			this.loadDesign();
-		}	
+		}
 	}
 
 	loadTemplateById(id) {

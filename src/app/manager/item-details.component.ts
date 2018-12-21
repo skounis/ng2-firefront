@@ -37,7 +37,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 
 	unlayerOptions = {
 		projectId: 1556,
-		// templateId: 4449,
+		templateId: 4449,
 		tools: {
 			image: {
 				enabled: false,
@@ -68,6 +68,10 @@ export class ItemDetailsComponent implements AfterViewInit {
 			onFlush: new EventEmitter<void>()
 		}
 	};
+
+
+	_options;
+
 	templateOptions: any = {
 		className: ''
 	};
@@ -95,7 +99,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 		this.itemId = route.snapshot.params['id'];
 
 		this.previewUrl = `/preview/${this.itemType}/${this.itemId}`;
-		this.fullPreviewUrl = window.location.href + this.previewUrl;
+		this.fullPreviewUrl = window.location.origin + '/#' + this.previewUrl;
 
 		this.initFormFields();
 	}
@@ -198,9 +202,6 @@ export class ItemDetailsComponent implements AfterViewInit {
 		});
 	}
 
-
-	_options;
-
 	prepare() {
 		let templateData = this.data.patchEntity(this.item);
 		this._options = this.mapData(templateData, this.unlayerOptions);
@@ -285,17 +286,20 @@ export class ItemDetailsComponent implements AfterViewInit {
 	}
 
 	onDesignSave(design: any) {
-		if(!!this.selectedDesign) {
-			let item:any = {
+		if (!!this.selectedDesign) {
+			let item: any = {
 				name: this.userDesignID,
 				design: design,
 				$key: this.selectedDesign.$key
-			}
-	
+			};
+
 			// Turn undefined values into null
 			// Firebase can't serialize `undefined`
-			item = JSON.parse(JSON.stringify(item, function(k, v) {
-				if (v === undefined) { return null; } return v;
+			item = JSON.parse(JSON.stringify(item, function (k, v) {
+				if (v === undefined) {
+					return null;
+				}
+				return v;
 			}));
 
 			this.data.saveItem('unlayerDesigns', item)
@@ -304,7 +308,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 						this.snackBar.open('The changes has been saved', 'Ok', {
 							duration: 3000
 						});
-	
+
 						if (!this.itemId && item.$key) {
 							this.itemId = item.$key;
 						}
@@ -315,29 +319,32 @@ export class ItemDetailsComponent implements AfterViewInit {
 					}
 				);
 		} else {
-				let dialogRef = this.dialog.open(NewItemDialog, {
-					width: '300px'
-				});
-				dialogRef.afterClosed().subscribe(itemName => {
-					if (itemName) {
-						this.userDesignID = itemName;
+			let dialogRef = this.dialog.open(NewItemDialog, {
+				width: '300px'
+			});
+			dialogRef.afterClosed().subscribe(itemName => {
+				if (itemName) {
+					this.userDesignID = itemName;
+				}
+				this.userDesignID = this.userDesignID || Math.random().toString(36).substring(7);
+				let item: any = {
+					name: this.userDesignID,
+					design: design
+				};
+
+				// Turn undefined values into null
+				// Firebase can't serialize `undefined`
+				item = JSON.parse(JSON.stringify(item, function (k, v) {
+					if (v === undefined) {
+						return null;
 					}
-						this.userDesignID = this.userDesignID || Math.random().toString(36).substring(7);
-						let item:any = {
-							name: this.userDesignID,
-							design: design
-						}
-				
-						// Turn undefined values into null
-						// Firebase can't serialize `undefined`
-						item = JSON.parse(JSON.stringify(item, function(k, v) {
-							if (v === undefined) { return null; } return v;
-						}));
-			
-					this.data.createItem('unlayerDesigns', item)
+					return v;
+				}));
+
+				this.data.createItem('unlayerDesigns', item)
 					.then(
 						() => {
-		
+
 							this.snackBar.open('The changes has been saved', 'Ok', {
 								duration: 3000
 							});
@@ -350,7 +357,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 							console.log(error);
 						}
 					);
-				});
+			});
 		}
 	}
 
@@ -367,7 +374,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 	}
 
 	onTemplateSelected(templateData: any) {
-		if(templateData.type === 'systemTemplate') {
+		if (templateData.type === 'systemTemplate') {
 			this.selectedDesign = null;
 			this.userDesignID = null;
 			this._options['templateId'] = templateData.template.id;
