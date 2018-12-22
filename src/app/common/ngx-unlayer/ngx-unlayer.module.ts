@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material';
 import { SharedModule } from '../shared.module';
 import { NgxUnlayerTemplatesComponent } from './ngx-unlayer-templates.component';
+import { TemplateNameDialog } from './template-name.dialog';
 import { NgxUnlayerComponent } from './ngx-unlayer.component';
 import { NgxUnlayerRestService } from './ngx-unlayer.service';
 import { NgxUnlayerStore } from './ngx-unlayer.store';
@@ -21,7 +22,8 @@ import { NgxUnlayerStore } from './ngx-unlayer.store';
 	],
 	declarations: [
 		NgxUnlayerComponent,
-		NgxUnlayerTemplatesComponent
+		NgxUnlayerTemplatesComponent,
+		TemplateNameDialog
 	],
 	exports: [
 		NgxUnlayerComponent,
@@ -30,7 +32,9 @@ import { NgxUnlayerStore } from './ngx-unlayer.store';
 	providers: [
 		NgxUnlayerStore,
 		NgxUnlayerRestService
-	]
+	],
+	entryComponents: [TemplateNameDialog],
+
 })
 export class NgxUnlayerModule {
 }
