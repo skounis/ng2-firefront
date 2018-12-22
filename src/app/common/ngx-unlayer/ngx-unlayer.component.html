@@ -4,7 +4,7 @@
 	<mat-progress-spinner [diameter]="50" [mode]="'indeterminate'"></mat-progress-spinner>
 </div>
 
-<div class="html-preview" *ngIf="mode === 'preview'" [innerHTML]="sanitazeHtml(html)"></div>
+<!-- <div class="html-preview" *ngIf="mode === 'preview'" [innerHTML]="sanitazeHtml(html)"></div> -->
 
 <div class="header" *ngIf="mode !== 'preview'">
 	<button mat-raised-button color="primary" (click)="save()">Save</button>

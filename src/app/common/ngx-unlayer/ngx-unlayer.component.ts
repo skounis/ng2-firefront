@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Options } from './ngx-unlayer.model';
+import { Options, DesignData, TemplateWithType, TEMPLATE_TYPE_SYSTEM, TEMPLATE_TYPE_USER } from './ngx-unlayer.model';
+import { MatDialog } from '@angular/material';
+import { TemplateNameDialog } from './template-name.dialog'
 import { NgxUnlayerRestService } from './ngx-unlayer.service';
 import { NgxUnlayerStore } from './ngx-unlayer.store';
 import * as unlayer from './unlayer.embed.js';
@@ -16,7 +18,7 @@ declare var unlayer: any;
 export class NgxUnlayerComponent implements OnInit {
 	@Input() options: Options = null;
 	@Input() mode: string = 'editor';
-	@Input() design;
+	@Input() template: TemplateWithType;
 	@Output() onExportHTML = new EventEmitter();
 	@Output() onDesignSave = new EventEmitter<any>();
 	@Output() onLoadTemplate = new EventEmitter();
@@ -28,7 +30,8 @@ export class NgxUnlayerComponent implements OnInit {
 		private cdRef: ChangeDetectorRef,
 		private service: NgxUnlayerRestService,
 		public store: NgxUnlayerStore,
-		private sanitizer: DomSanitizer
+		private sanitizer: DomSanitizer,
+		private dialog: MatDialog,
 	) {
 	}
 
@@ -37,7 +40,7 @@ export class NgxUnlayerComponent implements OnInit {
 		const options: Options = Object.assign({}, this.options);
 
 		console.log(options);
-		if (this.design) {
+		if (this.template.template.design) {
 			delete options.projectId;
 			delete options.templateId;
 		}
@@ -55,7 +58,7 @@ export class NgxUnlayerComponent implements OnInit {
 			this.exportHTML();
 		});
 
-		if (this.design) {
+		if (this.template.template.design) {
 			this.loadDesign();
 		}
 	}
@@ -66,12 +69,46 @@ export class NgxUnlayerComponent implements OnInit {
 	}
 
 	loadDesign() {
-		unlayer.loadDesign(this.design);
+		unlayer.loadDesign(this.template.template.design);
 	}
 
+
 	save() {
+		console.log(this.template);
+		// Prompt for name
+		if(this.template.type === TEMPLATE_TYPE_SYSTEM) {
+			let dialogRef = this.dialog.open(TemplateNameDialog, {
+				width: '300px'
+			});
+			dialogRef.afterClosed().subscribe(name => {
+				this.template.template.name = name;
+				this.template.type = TEMPLATE_TYPE_USER;
+				this.saveDesign()
+			});
+		} else {
+			this.saveDesign();
+		}
+	}
+
+	/**
+	 * Turn undefined values into null
+	 * Firebase can't serialize `undefined`
+	 */
+	private safeNullFor(value){
+		return JSON.parse(JSON.stringify(value, function (k, v) {
+			if (v === undefined) {
+				return null;
+			}
+			return v;
+		}));
+	}
+	
+	private saveDesign(){
 		unlayer.saveDesign((design) => {
-			this.onDesignSave.emit(design);
+			console.log(this.template);
+			this.template.template.design = this.safeNullFor(design);
+			console.log(this.template);
+			this.onDesignSave.emit(this.template);
 		});
 	}
 
