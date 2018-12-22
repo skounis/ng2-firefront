@@ -12,7 +12,6 @@ import { ModelProcessor } from '../dynamic-form/model-processor';
 import { DynamicFormLoaderService } from '../dynamic-form/dynamic-form-loader.service';
 
 import { MatDialog } from '@angular/material';
-import { NewItemDialog } from './new-item.dialog';
 import { NgxUnlayerRestService } from '../common/ngx-unlayer/ngx-unlayer.service';
 
 @Component({
@@ -27,10 +26,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 	// The colection of the Designs/Templates created by the user
 	// and saved in Firebase
 	userTemplates = [];
-	// ID of the current/selected design/template (in the future we should use a store for this)
-	userDesignID = null;
 
-	selectedDesign = null;
 	selectedTabIndex = 0;
 
 	// TODO: we may need to get rid of these
@@ -287,39 +283,38 @@ export class ItemDetailsComponent implements AfterViewInit {
 		return options;
 	}
 
-	onDesignSave(design: any) {
-		if (design.template.$key) {
-			this.data.saveItem('unlayerDesigns', design.template)
+	onDesignSave(template: any) {
+		if (template.$key) {
+			this.data.saveItem('unlayerDesigns', template)
 				.then(
 					() => {
 						this.snackBar.open('The changes has been saved', 'Ok', {
 							duration: 3000
 						});
-						this.selectedTemplate.template = design.template;
-						this.selectedTemplate = Object.assign( {}, this.selectedTemplate);
+						this.selectedTemplate = Object.assign( {}, template);
 					},
 					(error) => {
 						console.log(error);
 					}
 				);
 		} else {
-			design.template.name = design.template.name || Math.random().toString(36).substring(7);
+			template.name = template.name || Math.random().toString(36).substring(7);
 
-			delete design.template.id;
-			delete design.template.displayMode;
+			delete template.id;
+			delete template.displayMode;
+			delete template.folder;
 
-			this.data.createItem('unlayerDesigns', design.template)
+			this.data.createItem('unlayerDesigns', template)
 				.then(
 					(key) => {
 
 						console.log(key);
-						this.selectedTemplate.template.$key = key;
+						template.$key = key;
 
 						this.snackBar.open('The changes has been saved', 'Ok', {
 							duration: 3000
 						});
-						this.selectedTemplate.template = design.template;
-						this.selectedTemplate = Object.assign( {}, this.selectedTemplate);
+						this.selectedTemplate = Object.assign( {}, template);
 					},
 					(error) => {
 						console.log(error);
@@ -340,16 +335,8 @@ export class ItemDetailsComponent implements AfterViewInit {
 		return !this.form.dirty;
 	}
 
-	onTemplateSelected(templateData) {
-		this.selectedTemplate = templateData;
-		// if (templateData.type === 'systemTemplate') {
-		// 	this.selectedDesign = null;
-		// 	this.userDesignID = null;
-		// 	this._options['templateId'] = templateData.template.id;
-		// } else {
-		// 	this.userDesignID = templateData.template.name;
-		// 	this.selectedDesign = templateData.template;
-		// }
+	onTemplateSelected(template) {
+		this.selectedTemplate = template;
 		this.selectedTabIndex = 2;
 	}
 }
