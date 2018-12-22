@@ -21,6 +21,8 @@ import { NgxUnlayerRestService } from '../common/ngx-unlayer/ngx-unlayer.service
 	styleUrls: ['./item-details.component.scss']
 })
 export class ItemDetailsComponent implements AfterViewInit {
+	// Selected Template (TemplateWithType)
+	selectedTemplate = null;
 
 	// The colection of the Designs/Templates created by the user
 	// and saved in Firebase
@@ -286,78 +288,43 @@ export class ItemDetailsComponent implements AfterViewInit {
 	}
 
 	onDesignSave(design: any) {
-		if (!!this.selectedDesign) {
-			let item: any = {
-				name: this.userDesignID,
-				design: design,
-				$key: this.selectedDesign.$key
-			};
-
-			// Turn undefined values into null
-			// Firebase can't serialize `undefined`
-			item = JSON.parse(JSON.stringify(item, function (k, v) {
-				if (v === undefined) {
-					return null;
-				}
-				return v;
-			}));
-
-			this.data.saveItem('unlayerDesigns', item)
+		if (design.template.$key) {
+			this.data.saveItem('unlayerDesigns', design.template)
 				.then(
 					() => {
 						this.snackBar.open('The changes has been saved', 'Ok', {
 							duration: 3000
 						});
-
-						if (!this.itemId && item.$key) {
-							this.itemId = item.$key;
-						}
-						this.selectedDesign = item;
+						this.selectedTemplate.template = design.template;
+						this.selectedTemplate = Object.assign( {}, this.selectedTemplate);
 					},
 					(error) => {
 						console.log(error);
 					}
 				);
 		} else {
-			let dialogRef = this.dialog.open(NewItemDialog, {
-				width: '300px'
-			});
-			dialogRef.afterClosed().subscribe(itemName => {
-				if (itemName) {
-					this.userDesignID = itemName;
-				}
-				this.userDesignID = this.userDesignID || Math.random().toString(36).substring(7);
-				let item: any = {
-					name: this.userDesignID,
-					design: design
-				};
+			design.template.name = design.template.name || Math.random().toString(36).substring(7);
 
-				// Turn undefined values into null
-				// Firebase can't serialize `undefined`
-				item = JSON.parse(JSON.stringify(item, function (k, v) {
-					if (v === undefined) {
-						return null;
+			delete design.template.id;
+			delete design.template.displayMode;
+			
+			this.data.createItem('unlayerDesigns', design.template)
+				.then(
+					(key) => {
+
+						console.log(key);
+						this.selectedTemplate.template.$key = key;
+
+						this.snackBar.open('The changes has been saved', 'Ok', {
+							duration: 3000
+						});
+						this.selectedTemplate.template = design.template;
+						this.selectedTemplate = Object.assign( {}, this.selectedTemplate);
+					},
+					(error) => {
+						console.log(error);
 					}
-					return v;
-				}));
-
-				this.data.createItem('unlayerDesigns', item)
-					.then(
-						() => {
-
-							this.snackBar.open('The changes has been saved', 'Ok', {
-								duration: 3000
-							});
-							this.selectedDesign = item;
-							if (!this.itemId && item.$key) {
-								this.itemId = item.$key;
-							}
-						},
-						(error) => {
-							console.log(error);
-						}
-					);
-			});
+				);
 		}
 	}
 
@@ -373,15 +340,16 @@ export class ItemDetailsComponent implements AfterViewInit {
 		return !this.form.dirty;
 	}
 
-	onTemplateSelected(templateData: any) {
-		if (templateData.type === 'systemTemplate') {
-			this.selectedDesign = null;
-			this.userDesignID = null;
-			this._options['templateId'] = templateData.template.id;
-		} else {
-			this.userDesignID = templateData.template.name;
-			this.selectedDesign = templateData.template;
-		}
+	onTemplateSelected(templateData) {
+		this.selectedTemplate = templateData;
+		// if (templateData.type === 'systemTemplate') {
+		// 	this.selectedDesign = null;
+		// 	this.userDesignID = null;
+		// 	this._options['templateId'] = templateData.template.id;
+		// } else {
+		// 	this.userDesignID = templateData.template.name;
+		// 	this.selectedDesign = templateData.template;
+		// }
 		this.selectedTabIndex = 2;
 	}
 }

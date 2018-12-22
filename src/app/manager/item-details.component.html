@@ -34,18 +34,18 @@
 			<mat-tab label="Design" [ngClass]="{'active': true}">
 				<ng-template matTabContent>
 					<ngx-unlayer *ngIf="isDesignerReady"
-						[design]="selectedDesign?.design ? selectedDesign.design : null"
+						[template]="selectedTemplate"
 						(onDesignSave)="onDesignSave($event)"
 						[mode]="'edit'" [options]="_options"></ngx-unlayer>
 				</ng-template>
 			</mat-tab>
 			<mat-tab label="Preview">
-				<ng-template matTabContent>
+				<!-- <ng-template matTabContent>
 					<ngx-unlayer *ngIf="isPreviewReady"
 						[design]="selectedDesign?.design ? selectedDesign.design : null"
 						[mode]="'preview'"
 						[options]="_options"></ngx-unlayer>
-				</ng-template>
+				</ng-template> -->
 			</mat-tab>
 			<mat-tab label="Publish">
 				<div class="publish-wrapper">
