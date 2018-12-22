@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Options, Template, TEMPLATE_TYPE_SYSTEM, TEMPLATE_TYPE_USER } from './ngx-unlayer.model';
 import { MatDialog } from '@angular/material';
 import { TemplateNameDialog } from './template-name.dialog'
@@ -31,7 +30,6 @@ export class NgxUnlayerComponent implements OnInit {
 		private cdRef: ChangeDetectorRef,
 		private service: NgxUnlayerRestService,
 		public store: NgxUnlayerStore,
-		private sanitizer: DomSanitizer,
 		private dialog: MatDialog,
 	) {
 	}
@@ -126,10 +124,6 @@ export class NgxUnlayerComponent implements OnInit {
 			window.dispatchEvent(new Event('resize'));
 			this.cdRef.detectChanges();
 		});
-	}
-
-	sanitazeHtml(value) {
-		return this.sanitizer.bypassSecurityTrustHtml(value);
 	}
 
 }

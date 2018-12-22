@@ -9,6 +9,7 @@ import { TemplateNameDialog } from './template-name.dialog';
 import { NgxUnlayerComponent } from './ngx-unlayer.component';
 import { NgxUnlayerRestService } from './ngx-unlayer.service';
 import { NgxUnlayerStore } from './ngx-unlayer.store';
+import { NgxUnlayerPreviewComponent } from './ngx-unlayer-preview.component';
 
 @NgModule({
 	imports: [
@@ -23,11 +24,13 @@ import { NgxUnlayerStore } from './ngx-unlayer.store';
 	declarations: [
 		NgxUnlayerComponent,
 		NgxUnlayerTemplatesComponent,
-		TemplateNameDialog
+		TemplateNameDialog,
+		NgxUnlayerPreviewComponent
 	],
 	exports: [
 		NgxUnlayerComponent,
-		NgxUnlayerTemplatesComponent
+		NgxUnlayerTemplatesComponent,
+		NgxUnlayerPreviewComponent
 	],
 	providers: [
 		NgxUnlayerStore,

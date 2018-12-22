@@ -26,8 +26,8 @@ export class NgxUnlayerRestService {
     return this.http.post(`${this.endpoint}/templates/${id}/render`, null, { headers: this.headers });
   }
 
-  render(design) {
-    return this.http.post(`${this.endpoint}/render`, design, { headers: this.headers });
+  render(data) {
+    return this.http.post(`${this.endpoint}/render`, data, { headers: this.headers });
   }
 
 

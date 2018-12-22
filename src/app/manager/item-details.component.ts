@@ -284,12 +284,12 @@ export class ItemDetailsComponent implements AfterViewInit {
 		return options;
 	}
 
-	savedSnack(){
-		this.ngZone.run(()=>{
+	savedSnack() {
+		this.ngZone.run(() => {
 			this.snackBar.open('The changes has been saved', 'Ok', {
 				duration: 3000
 			});
-		})
+		});
 	}
 
 	onDesignSave(template: any) {
@@ -298,7 +298,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 				.then(
 					() => {
 						this.savedSnack();
-						this.selectedTemplate = Object.assign( {}, template);
+						this.selectedTemplate = Object.assign({}, template);
 					},
 					(error) => {
 						console.log(error);
@@ -319,7 +319,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 						template.$key = key;
 
 						this.savedSnack();
-						this.selectedTemplate = Object.assign( {}, template);
+						this.selectedTemplate = Object.assign({}, template);
 					},
 					(error) => {
 						console.log(error);

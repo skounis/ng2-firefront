@@ -40,6 +40,7 @@
 				</ng-template>
 			</mat-tab>
 			<mat-tab label="Preview" [disabled]="!selectedTemplate">
+					<ngx-unlayer-preview *ngIf="selectedTemplate" [design]="selectedTemplate?.design" [options]="_options"></ngx-unlayer-preview>
 				<!-- <ng-template matTabContent>
 					<ngx-unlayer *ngIf="isPreviewReady"
 						[design]="selectedDesign?.design ? selectedDesign.design : null"

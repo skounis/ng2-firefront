@@ -1,0 +1,16 @@
+:host {
+	display: block;
+	height: 100%;
+	min-height: 500px;
+	.html-preview {
+		width: 100%;
+	}
+	.spinner {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 50px;
+		height: 50px;
+		transform: translate(-25px, -25px);
+	}
+}

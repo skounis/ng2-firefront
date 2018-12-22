@@ -37,17 +37,6 @@
 		position: absolute;
 		border-radius: 0;
 	}
-	.html-preview {
-		width: 100%;
-	}
-	.spinner {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		width: 50px;
-		height: 50px;
-		transform: translate(-25px, -25px);
-	}
 }
 
 ::ng-deep {
