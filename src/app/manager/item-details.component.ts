@@ -21,12 +21,12 @@ import { NgxUnlayerRestService } from '../common/ngx-unlayer/ngx-unlayer.service
 	styleUrls: ['./item-details.component.scss']
 })
 export class ItemDetailsComponent implements AfterViewInit {
-	// Selected Template (TemplateWithType)
+	// Selected Template (Template)
 	selectedTemplate = null;
 
 	// The colection of the Designs/Templates created by the user
 	// and saved in Firebase
-	userDesigns = [];
+	userTemplates = [];
 	// ID of the current/selected design/template (in the future we should use a store for this)
 	userDesignID = null;
 
@@ -307,7 +307,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 
 			delete design.template.id;
 			delete design.template.displayMode;
-			
+
 			this.data.createItem('unlayerDesigns', design.template)
 				.then(
 					(key) => {
@@ -331,7 +331,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 	// Load the Desings/Templates of the user
 	loadDesigns() {
 		this.data.loadItems('unlayerDesigns').subscribe(items => {
-			this.userDesigns = items;
+			this.userTemplates = items;
 		});
 	}
 

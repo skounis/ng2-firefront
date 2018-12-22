@@ -11,16 +11,16 @@
   </mat-card-actions>
 </mat-card>
 
-  <h3 style="clear: both">User Designs<h3>
-  <mat-card class="example-card" *ngFor="let design of userDesigns" style="width: 296px; float: left">
-    <img mat-card-image src="https://picsum.photos/500/300?q={{design.$key}}" [alt]="design.name">
-    <mat-card-content>
-      <p>
-        {{design.name}}
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button (click)="selectTemplate(TEMPLATE_TYPE_USER, design)">Select</button>
-      <button mat-button>Clone</button>
-    </mat-card-actions>
-  </mat-card>
+<h3 style="clear: both; margin-top: 20px">User Designs</h3>
+<mat-card class="example-card" *ngFor="let template of userTemplates" style="width: 296px; float: left">
+  <img mat-card-image src="https://picsum.photos/500/300?q={{template.$key}}" [alt]="template.name">
+  <mat-card-content>
+    <p>
+      {{template.name}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="selectTemplate(TEMPLATE_TYPE_USER, template)">Select</button>
+    <button mat-button>Clone</button>
+  </mat-card-actions>
+</mat-card>

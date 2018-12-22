@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Options, DesignData, TemplateWithType, TEMPLATE_TYPE_SYSTEM, TEMPLATE_TYPE_USER } from './ngx-unlayer.model';
+import { Options, Template, TEMPLATE_TYPE_SYSTEM, TEMPLATE_TYPE_USER } from './ngx-unlayer.model';
 import { MatDialog } from '@angular/material';
 import { TemplateNameDialog } from './template-name.dialog'
 import { NgxUnlayerRestService } from './ngx-unlayer.service';
@@ -18,7 +18,7 @@ declare var unlayer: any;
 export class NgxUnlayerComponent implements OnInit {
 	@Input() options: Options = null;
 	@Input() mode: string = 'editor';
-	@Input() template: TemplateWithType;
+	@Input() template: Template;
 	@Output() onExportHTML = new EventEmitter();
 	@Output() onDesignSave = new EventEmitter<any>();
 	@Output() onLoadTemplate = new EventEmitter();
@@ -40,7 +40,7 @@ export class NgxUnlayerComponent implements OnInit {
 		const options: Options = Object.assign({}, this.options);
 
 		console.log(options);
-		if (this.template.template.design) {
+		if (this.template.design) {
 			delete options.projectId;
 			delete options.templateId;
 		}
@@ -58,7 +58,7 @@ export class NgxUnlayerComponent implements OnInit {
 			this.exportHTML();
 		});
 
-		if (this.template.template.design) {
+		if (this.template.design) {
 			this.loadDesign();
 		}
 	}
@@ -69,9 +69,8 @@ export class NgxUnlayerComponent implements OnInit {
 	}
 
 	loadDesign() {
-		unlayer.loadDesign(this.template.template.design);
+		unlayer.loadDesign(this.template.design);
 	}
-
 
 	save() {
 		console.log(this.template);
@@ -81,7 +80,7 @@ export class NgxUnlayerComponent implements OnInit {
 				width: '300px'
 			});
 			dialogRef.afterClosed().subscribe(name => {
-				this.template.template.name = name;
+				this.template.name = name;
 				this.template.type = TEMPLATE_TYPE_USER;
 				this.saveDesign()
 			});
@@ -102,11 +101,11 @@ export class NgxUnlayerComponent implements OnInit {
 			return v;
 		}));
 	}
-	
+
 	private saveDesign(){
 		unlayer.saveDesign((design) => {
 			console.log(this.template);
-			this.template.template.design = this.safeNullFor(design);
+			this.template.design = this.safeNullFor(design);
 			console.log(this.template);
 			this.onDesignSave.emit(this.template);
 		});
