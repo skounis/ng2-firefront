@@ -37,11 +37,13 @@ export class RealTimeDatabaseService {
 
 	}
 
-	createItem(itemType: string, item: any): Promise<void> {
+	createItem(itemType: string, item: any): Promise<string> {
 		const itemPath = this.getItemPath(itemType);
 
 		let key = uuid();
-		return this.afDB.object(`${itemPath}/${key}`).set(item);
+		return this.afDB.object(`${itemPath}/${key}`).set(item).then(()=>{
+			return key;
+		})
 	}
 
 	deleteItem(itemType: string, item: any): Promise<void> {
