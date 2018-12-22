@@ -6,6 +6,7 @@ import { TemplateNameDialog } from './template-name.dialog'
 import { NgxUnlayerRestService } from './ngx-unlayer.service';
 import { NgxUnlayerStore } from './ngx-unlayer.store';
 import * as unlayer from './unlayer.embed.js';
+import { Observable } from 'rxjs';
 
 declare var unlayer: any;
 
@@ -103,10 +104,17 @@ export class NgxUnlayerComponent implements OnInit {
 	}
 
 	private saveDesign(){
+		// const o = Observable.create(observer => {
+		// 	unlayer.saveDesign((design) => {
+		// 		this.template.design = this.safeNullFor(design);
+		// 		observer.next(this.template);
+		// 	});
+		// })
+		//
+		// this.onDesignSave.emit(o);
+
 		unlayer.saveDesign((design) => {
-			console.log(this.template);
 			this.template.design = this.safeNullFor(design);
-			console.log(this.template);
 			this.onDesignSave.emit(this.template);
 		});
 	}

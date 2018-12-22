@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { AfterViewInit, Component, EventEmitter, HostListener } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, HostListener, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
@@ -89,7 +89,8 @@ export class ItemDetailsComponent implements AfterViewInit {
 		private formlyConfigLoaderService: DynamicFormLoaderService,
 		private enricher: FormlyFormEnricher,
 		private dialog: MatDialog,
-		private unlayerService: NgxUnlayerRestService
+		private unlayerService: NgxUnlayerRestService,
+		private ngZone: NgZone,
 	) {
 		this.parentType = route.snapshot.params['parentType'];
 		this.parentId = route.snapshot.params['parentId'];
@@ -283,14 +284,20 @@ export class ItemDetailsComponent implements AfterViewInit {
 		return options;
 	}
 
+	savedSnack(){
+		this.ngZone.run(()=>{
+			this.snackBar.open('The changes has been saved', 'Ok', {
+				duration: 3000
+			});
+		})
+	}
+
 	onDesignSave(template: any) {
 		if (template.$key) {
 			this.data.saveItem('unlayerDesigns', template)
 				.then(
 					() => {
-						this.snackBar.open('The changes has been saved', 'Ok', {
-							duration: 3000
-						});
+						this.savedSnack();
 						this.selectedTemplate = Object.assign( {}, template);
 					},
 					(error) => {
@@ -311,9 +318,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 						console.log(key);
 						template.$key = key;
 
-						this.snackBar.open('The changes has been saved', 'Ok', {
-							duration: 3000
-						});
+						this.savedSnack();
 						this.selectedTemplate = Object.assign( {}, template);
 					},
 					(error) => {
