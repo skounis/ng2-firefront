@@ -343,5 +343,6 @@ export class ItemDetailsComponent implements AfterViewInit {
 	onTemplateSelected(template) {
 		this.selectedTemplate = template;
 		this.selectedTabIndex = 2;
+		console.log(template);
 	}
 }

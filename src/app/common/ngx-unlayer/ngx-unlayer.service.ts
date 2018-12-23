@@ -5,30 +5,29 @@ import { environment } from '../../../environments/environment';
 @Injectable()
 export class NgxUnlayerRestService {
 
-  endpoint = environment.unlayer.endpointUrl;
+	endpoint = environment.unlayer.endpointUrl;
 
-  headers = new HttpHeaders({
-    'Authorization': ` Basic ${btoa(environment.unlayer.token)}`
-  });
+	headers = new HttpHeaders({
+		'Authorization': ` Basic ${btoa(environment.unlayer.token)}`
+	});
 
-  constructor(public http: HttpClient) {
-  }
+	constructor(public http: HttpClient) {
+	}
 
-  getTemplates() {
-    return this.http.get(`${this.endpoint}/templates`, { headers: this.headers });
-  }
+	getTemplates() {
+		return this.http.get(`${this.endpoint}/templates`, { headers: this.headers });
+	}
 
-  getTemplate(id: number) {
-    return this.http.get(`${this.endpoint}/templates/${id}`, { headers: this.headers });
-  }
+	getTemplate(id: number) {
+		return this.http.get(`${this.endpoint}/templates/${id}`, { headers: this.headers });
+	}
 
-  renderTemplate(id: number) {
-    return this.http.post(`${this.endpoint}/templates/${id}/render`, null, { headers: this.headers });
-  }
+	renderTemplate(id: number) {
+		return this.http.post(`${this.endpoint}/templates/${id}/render`, null, { headers: this.headers });
+	}
 
-  render(data) {
-    return this.http.post(`${this.endpoint}/render`, data, { headers: this.headers });
-  }
-
+	render(data) {
+		return this.http.post(`${this.endpoint}/render`, data, { headers: this.headers });
+	}
 
 }
