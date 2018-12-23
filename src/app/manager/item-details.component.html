@@ -14,7 +14,7 @@
 	</div>
 
 	<div class="as-form-scroll">
-		<mat-tab-group [selectedIndex]="selectedTabIndex" (selectedIndexChange)="selectedTabIndex=$event">
+		<mat-tab-group [selectedIndex]="selectedTabIndex" (selectedIndexChange)="selectedTabIndex=$event" (selectedTabChange)="selectedTabChange($event)">
 			<mat-tab label="Event Details">
 				<dynamic-form *ngIf="item"
 					[fields]="fields"
@@ -36,10 +36,11 @@
 					<ngx-unlayer *ngIf="isDesignerReady"
 						[template]="selectedTemplate"
 						(onDesignSave)="onDesignSave($event)"
+						(onEditorDirty)="onEditorDirty($event)"
 						[mode]="'edit'" [options]="_options"></ngx-unlayer>
 				</ng-template>
 			</mat-tab>
-			<mat-tab label="Preview" [disabled]="!selectedTemplate">
+			<mat-tab label="Preview" [disabled]="!selectedTemplate || isEditorDirty">
 					<ngx-unlayer-preview *ngIf="selectedTemplate" [design]="selectedTemplate?.design" [options]="_options"></ngx-unlayer-preview>
 				<!-- <ng-template matTabContent>
 					<ngx-unlayer *ngIf="isPreviewReady"

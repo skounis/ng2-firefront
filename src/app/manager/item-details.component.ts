@@ -10,7 +10,7 @@ import { uuid } from '../common/uuid';
 import { FormlyFormEnricher } from '../dynamic-form/formly-form-enricher';
 import { ModelProcessor } from '../dynamic-form/model-processor';
 import { DynamicFormLoaderService } from '../dynamic-form/dynamic-form-loader.service';
-
+import { MatTabChangeEvent } from '@angular/material/tabs'
 import { MatDialog } from '@angular/material';
 import { NgxUnlayerRestService } from '../common/ngx-unlayer/ngx-unlayer.service';
 
@@ -30,6 +30,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 	selectedTabIndex = 0;
 
 	// TODO: we may need to get rid of these
+	isEditorDirty = false;
 	isDesignerReady = false;
 	isPreviewReady = false;
 
@@ -328,6 +329,10 @@ export class ItemDetailsComponent implements AfterViewInit {
 		}
 	}
 
+	selectedTabChange(event: MatTabChangeEvent){
+		console.log(event);
+	}
+
 	// Load the Desings/Templates of the user
 	loadDesigns() {
 		this.data.loadItems('unlayerDesigns').subscribe(items => {
@@ -338,6 +343,12 @@ export class ItemDetailsComponent implements AfterViewInit {
 	@HostListener('window:beforeunload', ['$event'])
 	canDeactivate(): Observable<boolean> | boolean {
 		return !this.form.dirty;
+	}
+
+	onEditorDirty(event) {
+		this.ngZone.run(() => {
+			this.isEditorDirty = event;
+		});
 	}
 
 	onTemplateSelected(template) {

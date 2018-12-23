@@ -19,6 +19,7 @@ export class NgxUnlayerComponent implements OnInit {
 	@Input() options: Options = null;
 	@Input() mode: string = 'editor';
 	@Input() template: Template;
+	@Output() onEditorDirty = new EventEmitter<boolean>();
 	@Output() onExportHTML = new EventEmitter();
 	@Output() onDesignSave = new EventEmitter<any>();
 	@Output() onLoadTemplate = new EventEmitter();
@@ -36,6 +37,7 @@ export class NgxUnlayerComponent implements OnInit {
 
 
 	ngOnInit() {
+		this.onEditorDirty.emit(false);
 		const options: Options = Object.assign({}, this.options);
 
 		console.log(options);
@@ -48,12 +50,15 @@ export class NgxUnlayerComponent implements OnInit {
 			id: 'editor',
 			displayMode: 'email'
 		});
-
-		unlayer.addEventListener('design:updated', function (data) {
+		
+		unlayer.addEventListener('design:updated', (data) => {
+			console.log('unlayer, design:updated:', data)
+			this.onEditorDirty.emit(true);
 			this.html = null;
 		});
 
 		unlayer.addEventListener('design:loaded', (data) => {
+			console.log('unlayer, design:loaded:', data)
 			this.exportHTML();
 		});
 
@@ -114,6 +119,7 @@ export class NgxUnlayerComponent implements OnInit {
 		unlayer.saveDesign((design) => {
 			this.template.design = this.safeNullFor(design);
 			this.onDesignSave.emit(this.template);
+			this.onEditorDirty.emit(false);
 		});
 	}
 
