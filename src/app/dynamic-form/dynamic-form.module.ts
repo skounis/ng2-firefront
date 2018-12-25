@@ -7,6 +7,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
 import { SharedModule } from '../common/shared.module';
 import { DynamicFormComponent } from './dynamic-form.component';
 import { FormlyFormEnricher } from './formly-form-enricher';
+import { DynamicFormLoaderService } from './dynamic-form-loader.service';
 
 @NgModule({
 	imports: [
@@ -21,7 +22,7 @@ import { FormlyFormEnricher } from './formly-form-enricher';
 	exports: [DynamicFormComponent],
 	declarations: [DynamicFormComponent],
 	entryComponents: [],
-	providers: [FormlyFormEnricher]
+	providers: [FormlyFormEnricher, DynamicFormLoaderService]
 })
 export class DynamicFormModule {
 }

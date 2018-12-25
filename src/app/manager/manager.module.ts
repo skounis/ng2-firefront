@@ -7,11 +7,11 @@ import { FormlyModule } from '@ngx-formly/core';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { SharedModule } from '../common/shared.module';
 import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
-import { FormlyFormEnricher } from '../dynamic-form/formly-form-enricher';
 import { ItemDetailsComponent } from './item-details.component';
 import { ItemsListComponent } from './items-list.component';
 import { CanDeactivateManagerGuard } from './manager.can-deactivate';
 import { NewItemDialog } from './new-item.dialog';
+import { ItemsCollectionViewStore } from './items-collection-view.store';
 
 export const managerRoutes: Routes = [
 	{ path: 'manager/:itemsType', component: ItemsListComponent, pathMatch: 'full' },
@@ -38,7 +38,7 @@ export const managerRoutes: Routes = [
 		NewItemDialog
 	],
 	entryComponents: [NewItemDialog],
-	providers: [CanDeactivateManagerGuard]
+	providers: [CanDeactivateManagerGuard, ItemsCollectionViewStore]
 })
 export class ManagerModule {
 }

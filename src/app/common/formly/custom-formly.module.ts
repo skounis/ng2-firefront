@@ -31,6 +31,7 @@ import { FormlyFieldText } from './types/text';
 import { FormlyFieldTimePicker } from './types/time-picker';
 import { FormlyFieldFileUpload } from './types/upload/file-upload';
 import { FormlyPanelWrapper } from './wrappers/panel';
+import { FormlyFieldsetWrapper } from './wrappers/fieldset';
 import { FormlyWrapperWarning, FormlyWrapperWarningMessage } from './wrappers/warning';
 
 const types: TypeOption[] = [
@@ -119,7 +120,8 @@ const manipulators: ManipulatorOption[] = [
 const wrappers: WrapperOption[] = [
 	{ name: 'warning-wrapper', component: FormlyWrapperWarning },
 	{ name: 'warning-message', component: FormlyWrapperWarningMessage },
-	{ name: 'panel', component: FormlyPanelWrapper }
+	{ name: 'panel', component: FormlyPanelWrapper },
+	{ name: 'ha-fieldset', component: FormlyFieldsetWrapper }
 ];
 
 export const ngFormlyConfig: ConfigOption = {
@@ -162,6 +164,7 @@ export const ngFormlyConfig: ConfigOption = {
 		FormlyFieldOpenHours,
 		EditHoursDialog,
 		FormlyPanelWrapper,
+		FormlyFieldsetWrapper,
 		FormlyFieldReference,
 		FormlyFieldMultiCheckbox,
 		FormlyFieldNumericInput,

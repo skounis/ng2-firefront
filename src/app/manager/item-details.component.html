@@ -1,19 +1,22 @@
 <div class="as-form">
 	<div class="as-form-header">
-		<mat-toolbar>
-			<button type="button" mat-icon-button *ngIf="parentType" (click)="back()">
-				<mat-icon class="mat-24">arrow_back</mat-icon>
-			</button>
-
-			<span>{{item?.title}}</span>
-			<span class="spacer"></span>
-
-			<button type="submit" mat-raised-button color="primary" [disabled]="!form.valid || !form.dirty" (click)="save()">Save</button>
-			<button type="button" mat-button [disabled]="!form.dirty && itemId" (click)="cancel()">Cancel</button>
-		</mat-toolbar>
+		<toolbar [title]="item?.title" [options]="{multiRows:true, allowBreadCrumbs: true, backButton: parentType}">
+			<div class="toolbar-column">
+				<button type="submit"
+					mat-raised-button
+					color="primary"
+					[disabled]="!form.valid || !form.dirty"
+					(click)="save()">Save
+				</button>
+				<button type="button" mat-button [disabled]="!form.dirty && itemId" (click)="cancel()">Cancel</button>
+			</div>
+		</toolbar>
 	</div>
 
 	<div class="as-form-scroll">
-		<dynamic-form  *ngIf="item" [tabs]="tabs" [fields]="fields" [form]="form" [item]="item" [options]="options"></dynamic-form>
+		<!-- <<<<<<< HEAD -->
+		<dynamic-form  *ngIf="item" [tabs]="tabs" [fields]="fields" [form]="form" [item]="item" [options]="options" [templateOptions]="templateOptions"></dynamic-form>
+		<!-- MASTER -->
+		<!-- <dynamic-form *ngIf="item" [fields]="fields" [form]="form" [item]="item" [options]="options" [templateOptions]="templateOptions"></dynamic-form> -->
 	</div>
 </div>

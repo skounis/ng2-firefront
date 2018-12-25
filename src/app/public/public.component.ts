@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { DataService } from '../common/services/data.service';
-import { itemsFormConfig } from '../dynamic-form/form.config';
 import { FormlyFormEnricher } from '../dynamic-form/formly-form-enricher';
 import { ModelProcessor } from '../dynamic-form/model-processor';
+import { DynamicFormLoaderService} from '../dynamic-form/dynamic-form-loader.service';
 
 @Component({
 	selector: 'app-public',
@@ -29,7 +29,8 @@ export class PublicComponent implements OnInit {
 		private fb: FormBuilder,
 		private enricher: FormlyFormEnricher,
 		private data: DataService,
-		private router: Router
+		private router: Router,
+		private formlyConfigLoaderService: DynamicFormLoaderService
 	) {
 		this.itemType = route.snapshot.params['itemsType'];
 
@@ -62,7 +63,7 @@ export class PublicComponent implements OnInit {
 
 	private initFormFields() {
 		this.form = this.fb.group({});
-		let fields: FormlyFieldConfig[] = itemsFormConfig()[this.itemType];
+		let fields: FormlyFieldConfig[] = this.formlyConfigLoaderService.formlyFieldConfig()[this.itemType];
 		this.enricher.enrichFields(fields);
 		this.fields = fields;
 	}

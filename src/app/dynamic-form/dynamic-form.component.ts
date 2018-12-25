@@ -13,4 +13,5 @@ export class DynamicFormComponent {
 	@Input() tabs: FormlyFieldConfig[];
 	@Input() form: FormGroup;
 	@Input() options: FormlyFormOptions;
+	@Input() templateOptions: any;
 }

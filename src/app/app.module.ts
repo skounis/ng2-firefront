@@ -10,6 +10,10 @@ import { PreloadAllModules, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { FormlyModule } from '@ngx-formly/core';
+import { FormlyMaterialModule } from '@ngx-formly/material';
+import { FormlyMatToggleModule } from '@ngx-formly/material/toggle';
+import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -71,6 +75,10 @@ const APP_PROVIDERS = [
 		NgbModule.forRoot(),
 		FormlyModule.forRoot(ngFormlyConfig),
 		FormlyBootstrapModule,
+		FormlyMaterialModule,
+		FormlyMatToggleModule,
+		MatNativeDateModule,
+		FormlyMatDatepickerModule,
 		CustomFormlyModule,
 
 		AgmCoreModule.forRoot({

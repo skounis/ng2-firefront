@@ -7,9 +7,9 @@ import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { Observable } from 'rxjs';
 import { DataService } from '../common/services/data.service';
 import { uuid } from '../common/uuid';
-import { itemsFormConfig } from '../dynamic-form/form.config';
 import { FormlyFormEnricher } from '../dynamic-form/formly-form-enricher';
 import { ModelProcessor } from '../dynamic-form/model-processor';
+import { DynamicFormLoaderService } from '../dynamic-form/dynamic-form-loader.service';
 
 @Component({
 	selector: 'item-details',
@@ -26,7 +26,9 @@ export class ItemDetailsComponent implements AfterViewInit {
 			onFlush: new EventEmitter<void>()
 		}
 	};
-
+	templateOptions: any = {
+		className: ''
+	};
 	itemId: string;
 	itemType: string;
 	parentId: string;
@@ -38,6 +40,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 		private route: ActivatedRoute,
 		private snackBar: MatSnackBar,
 		private location: Location,
+		private formlyConfigLoaderService: DynamicFormLoaderService,
 		private enricher: FormlyFormEnricher
 	) {
 		this.parentType = route.snapshot.params['parentType'];
@@ -50,7 +53,6 @@ export class ItemDetailsComponent implements AfterViewInit {
 
 	ngAfterViewInit(): void {
 
-		// TODO: check with skounis
 		setTimeout(() => {
 			if (this.itemId) {
 				this.data.loadItem(this.itemType, this.itemId)
@@ -62,12 +64,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 			} else {
 				this.item = {};
 			}
-
 		}, 0);
-	}
-
-	back() {
-		this.location.back();
 	}
 
 	save() {
@@ -111,9 +108,17 @@ export class ItemDetailsComponent implements AfterViewInit {
 
 	private initFormFields() {
 		this.form = this.fb.group({});
+		// <<<<<<< HEAD
 		// let fields: FormlyFieldConfig[] = itemsFormConfig()[this.itemType];
-		let fields: FormlyFieldConfig[] = this.collectFields(itemsFormConfig()[this.itemType]);
-		this.tabs = itemsFormConfig()[this.itemType].tabs; // We may not have tabs but it's OK;
+		// let fields: FormlyFieldConfig[] = this.collectFields(itemsFormConfig()[this.itemType]);
+		let fieldsConfig = this.formlyConfigLoaderService.formlyFieldConfig()[this.itemType]
+		let fields: FormlyFieldConfig[] = this.collectFields(fieldsConfig);
+		// this.tabs = itemsFormConfig()[this.itemType].tabs; // We may not have tabs but it's OK;
+		this.tabs = fieldsConfig.tabs; // We may not have tabs but it's OK;
+// =======
+// 		let fields: FormlyFieldConfig[] = this.formlyConfigLoaderService.formlyFieldConfig()[this.itemType];
+// 		this.templateOptions.className = this.hasFieldGroup(fields) ? 'as-has-fieldgroup' : '';
+// >>>>>>> master
 		this.enricher.enrichFields(fields);
 		this.fields = fields;
 	}
@@ -155,6 +160,12 @@ export class ItemDetailsComponent implements AfterViewInit {
 			model.$key = this.itemId;
 		}
 		return model;
+	}
+
+	private hasFieldGroup(items) {
+		return !!items.find(item => {
+			return !!item.wrappers && item.wrappers.includes('ha-fieldset');
+		});
 	}
 
 	@HostListener('window:beforeunload', ['$event'])
