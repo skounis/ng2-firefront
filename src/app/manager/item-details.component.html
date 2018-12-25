@@ -14,7 +14,7 @@
 	</div>
 
 	<div class="as-form-scroll">
-		<mat-tab-group [selectedIndex]="selectedTabIndex" (selectedIndexChange)="selectedTabIndex=$event">
+		<mat-tab-group [selectedIndex]="selectedTabIndex" (selectedIndexChange)="selectedTabIndex=$event" (selectedTabChange)="selectedTabChange($event)">
 			<mat-tab label="Event Details">
 				<dynamic-form *ngIf="item"
 					[fields]="fields"
@@ -36,15 +36,16 @@
 					*ngIf="isDesignerReady && selectedTabIndex == 2"
 					[template]="selectedTemplate"
 					[options]="_options"
-					(onDesignSave)="onDesignSave($event)"></ngx-unlayer>
+					(onDesignSave)="onDesignSave($event)"
+					(onEditorDirty)="onEditorDirty($event)"></ngx-unlayer>
 			</mat-tab>
-			<mat-tab label="Preview" [disabled]="!selectedTemplate">
+			<mat-tab label="Preview" [disabled]="!selectedTemplate || isEditorDirty">
 				<ngx-unlayer-preview *ngIf="selectedTemplate && selectedTabIndex == 3"
 					[template]="selectedTemplate"
 					[options]="_options">
 				</ngx-unlayer-preview>
 			</mat-tab>
-			<mat-tab label="Publish" [disabled]="!selectedTemplate">
+			<mat-tab label="Publish" [disabled]="!selectedTemplate || isEditorDirty">
 				<div class="publish-wrapper">
 					<p>{{ fullPreviewUrl }}</p>
 					<a mat-raised-button color="primary" target="_blank" [routerLink]="previewUrl">Open Landing Page</a>

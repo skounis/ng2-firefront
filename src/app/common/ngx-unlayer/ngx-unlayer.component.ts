@@ -18,6 +18,7 @@ declare var unlayer: any;
 export class NgxUnlayerComponent implements AfterViewInit {
 	@Input() options: Options = null;
 	@Input() template: Template;
+	@Output() onEditorDirty = new EventEmitter<boolean>();
 	@Output() onExportHTML = new EventEmitter();
 	@Output() onDesignSave = new EventEmitter<any>();
 	@Output() onLoadTemplate = new EventEmitter();
@@ -31,8 +32,8 @@ export class NgxUnlayerComponent implements AfterViewInit {
 	) {
 	}
 
-
 	ngAfterViewInit() {
+		this.onEditorDirty.emit(false);
 		const options: Options = Object.assign({}, this.options);
 
 		setTimeout(() => {
@@ -52,8 +53,12 @@ export class NgxUnlayerComponent implements AfterViewInit {
 			if (this.template.design) {
 				this.loadDesign(this.template.design);
 			}
-		}, 0);
 
+			unlayer.addEventListener('design:updated', (data) => {
+				console.log('unlayer, design:updated:', data)
+				this.onEditorDirty.emit(true);
+			});
+		}, 0);
 	}
 
 	loadTemplateById(id) {
@@ -108,6 +113,7 @@ export class NgxUnlayerComponent implements AfterViewInit {
 		unlayer.saveDesign((design) => {
 			this.template.design = this.safeNullFor(design);
 			this.onDesignSave.emit(this.template);
+			this.onEditorDirty.emit(false);
 		});
 	}
 
