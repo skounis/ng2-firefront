@@ -51,7 +51,11 @@ export class ItemDetailsComponent implements AfterViewInit {
 				enabled: true,
 				priority: 1,
 				data: {
-					sessions: []
+					sessions: [
+						{ name: 'Session 1', date: '18-10-2018' },
+						{ name: 'Session 2', date: '18-10-2018' },
+						{ name: 'Session 3', date: '18-10-2018' }
+					]
 				}
 			}
 		},
@@ -343,6 +347,5 @@ export class ItemDetailsComponent implements AfterViewInit {
 	onTemplateSelected(template) {
 		this.selectedTemplate = template;
 		this.selectedTabIndex = 2;
-		console.log(template);
 	}
 }

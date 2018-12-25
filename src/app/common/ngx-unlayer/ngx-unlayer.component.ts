@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, AfterViewInit, Output } from '@angular/core';
 import { Options, Template, TEMPLATE_TYPE_SYSTEM, TEMPLATE_TYPE_USER } from './ngx-unlayer.model';
 import { MatDialog } from '@angular/material';
-import { TemplateNameDialog } from './template-name.dialog'
+import { TemplateNameDialog } from './template-name.dialog';
 import { NgxUnlayerRestService } from './ngx-unlayer.service';
 import { NgxUnlayerStore } from './ngx-unlayer.store';
 import * as unlayer from './unlayer.embed.js';
@@ -15,16 +15,13 @@ declare var unlayer: any;
 	styleUrls: ['./ngx-unlayer.component.scss']
 })
 
-export class NgxUnlayerComponent implements OnInit {
+export class NgxUnlayerComponent implements AfterViewInit {
 	@Input() options: Options = null;
-	@Input() mode: string = 'editor';
 	@Input() template: Template;
 	@Output() onExportHTML = new EventEmitter();
 	@Output() onDesignSave = new EventEmitter<any>();
 	@Output() onLoadTemplate = new EventEmitter();
 	@Output() onLoadDesign = new EventEmitter();
-
-	html: string = null;
 
 	constructor(
 		private cdRef: ChangeDetectorRef,
@@ -35,31 +32,28 @@ export class NgxUnlayerComponent implements OnInit {
 	}
 
 
-	ngOnInit() {
+	ngAfterViewInit() {
 		const options: Options = Object.assign({}, this.options);
 
-		console.log(options);
-		if (this.template.design) {
-			delete options.projectId;
-			delete options.templateId;
-		}
-		unlayer.init({
-			...options,
-			id: 'editor',
-			displayMode: 'email'
-		});
+		setTimeout(() => {
+			// unlayer not able to get access to dom inside this hook
 
-		unlayer.addEventListener('design:updated', function (data) {
-			this.html = null;
-		});
+			if (this.template.design) {
+				delete options.projectId;
+				delete options.templateId;
+			}
 
-		unlayer.addEventListener('design:loaded', (data) => {
-			this.exportHTML();
-		});
+			unlayer.init({
+				...options,
+				className: 'editor',
+				displayMode: 'email'
+			});
 
-		if (this.template.design) {
-			this.loadDesign();
-		}
+			if (this.template.design) {
+				this.loadDesign(this.template.design);
+			}
+		}, 0);
+
 	}
 
 	loadTemplateById(id) {
@@ -67,21 +61,21 @@ export class NgxUnlayerComponent implements OnInit {
 		this.onLoadTemplate.emit(id);
 	}
 
-	loadDesign() {
-		unlayer.loadDesign(this.template.design);
+
+	loadDesign(design) {
+		unlayer.loadDesign(design);
 	}
 
 	save() {
-		console.log(this.template);
 		// Prompt for name
-		if(this.template.type === TEMPLATE_TYPE_SYSTEM) {
+		if (this.template.type === TEMPLATE_TYPE_SYSTEM) {
 			let dialogRef = this.dialog.open(TemplateNameDialog, {
 				width: '300px'
 			});
 			dialogRef.afterClosed().subscribe(name => {
 				this.template.name = name;
 				this.template.type = TEMPLATE_TYPE_USER;
-				this.saveDesign()
+				this.saveDesign();
 			});
 		} else {
 			this.saveDesign();
@@ -92,7 +86,7 @@ export class NgxUnlayerComponent implements OnInit {
 	 * Turn undefined values into null
 	 * Firebase can't serialize `undefined`
 	 */
-	private safeNullFor(value){
+	private safeNullFor(value) {
 		return JSON.parse(JSON.stringify(value, function (k, v) {
 			if (v === undefined) {
 				return null;
@@ -101,7 +95,7 @@ export class NgxUnlayerComponent implements OnInit {
 		}));
 	}
 
-	private saveDesign(){
+	private saveDesign() {
 		// const o = Observable.create(observer => {
 		// 	unlayer.saveDesign((design) => {
 		// 		this.template.design = this.safeNullFor(design);
@@ -117,13 +111,13 @@ export class NgxUnlayerComponent implements OnInit {
 		});
 	}
 
-	exportHTML() {
-		unlayer.exportHtml((data) => {
-			this.onExportHTML.emit(data.html);
-			this.html = data.html;
-			window.dispatchEvent(new Event('resize'));
-			this.cdRef.detectChanges();
-		});
-	}
+	// exportHTML() {
+	// 	unlayer.exportHtml((data) => {
+	// 		this.onExportHTML.emit(data.html);
+	// 		this.html = data.html;
+	// 		window.dispatchEvent(new Event('resize'));
+	// 		this.cdRef.detectChanges();
+	// 	});
+	// }
 
 }

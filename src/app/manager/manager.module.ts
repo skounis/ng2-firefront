@@ -14,7 +14,6 @@ import { NewItemDialog } from './new-item.dialog';
 import { ItemsCollectionViewStore } from './items-collection-view.store';
 
 import { NgxUnlayerModule } from '../common/ngx-unlayer/ngx-unlayer.module';
-import { UnlayerDialog } from './unlayer.dialog';
 
 export const managerRoutes: Routes = [
 	{ path: 'manager/:itemsType', component: ItemsListComponent, pathMatch: 'full' },
@@ -41,9 +40,8 @@ export const managerRoutes: Routes = [
 		ItemsListComponent,
 		ItemDetailsComponent,
 		NewItemDialog,
-		UnlayerDialog
 	],
-	entryComponents: [NewItemDialog, UnlayerDialog],
+	entryComponents: [NewItemDialog],
 	providers: [CanDeactivateManagerGuard, ItemsCollectionViewStore]
 })
 export class ManagerModule {

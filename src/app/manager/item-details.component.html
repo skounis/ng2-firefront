@@ -32,21 +32,17 @@
 				</div>
 			</mat-tab>
 			<mat-tab label="Design" [ngClass]="{'active': true}" [disabled]="!selectedTemplate">
-				<ng-template matTabContent>
-					<ngx-unlayer *ngIf="isDesignerReady"
-						[template]="selectedTemplate"
-						(onDesignSave)="onDesignSave($event)"
-						[mode]="'edit'" [options]="_options"></ngx-unlayer>
-				</ng-template>
+				<ngx-unlayer
+					*ngIf="isDesignerReady && selectedTabIndex == 2"
+					[template]="selectedTemplate"
+					[options]="_options"
+					(onDesignSave)="onDesignSave($event)"></ngx-unlayer>
 			</mat-tab>
 			<mat-tab label="Preview" [disabled]="!selectedTemplate">
-					<ngx-unlayer-preview *ngIf="selectedTemplate" [design]="selectedTemplate?.design" [options]="_options"></ngx-unlayer-preview>
-				<!-- <ng-template matTabContent>
-					<ngx-unlayer *ngIf="isPreviewReady"
-						[design]="selectedDesign?.design ? selectedDesign.design : null"
-						[mode]="'preview'"
-						[options]="_options"></ngx-unlayer>
-				</ng-template> -->
+				<ngx-unlayer-preview *ngIf="selectedTemplate && selectedTabIndex == 3"
+					[template]="selectedTemplate"
+					[options]="_options">
+				</ngx-unlayer-preview>
 			</mat-tab>
 			<mat-tab label="Publish" [disabled]="!selectedTemplate">
 				<div class="publish-wrapper">
