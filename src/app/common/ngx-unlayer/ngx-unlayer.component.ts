@@ -72,6 +72,9 @@ export class NgxUnlayerComponent implements AfterViewInit {
 	}
 
 	save() {
+		// Do not mutate.
+		this.template = Object.assign({}, this.template);
+
 		// Prompt for name
 		if (this.template.type === TEMPLATE_TYPE_SYSTEM) {
 			let dialogRef = this.dialog.open(TemplateNameDialog, {
