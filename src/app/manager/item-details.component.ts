@@ -186,6 +186,9 @@ export class ItemDetailsComponent implements AfterViewInit {
 			model.$key = this.itemId || uuid();
 		}
 
+		// Attache template
+		model.selectedTemplate = this.selectedTemplate;
+
 		return model;
 	}
 
@@ -197,6 +200,10 @@ export class ItemDetailsComponent implements AfterViewInit {
 		if (!model.$key) {
 			model.$key = this.itemId;
 		}
+
+		// Attache template
+		this.selectedTemplate = model.selectedTemplate;
+
 		return model;
 	}
 

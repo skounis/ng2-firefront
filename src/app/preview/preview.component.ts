@@ -12,6 +12,7 @@ import { DynamicFormLoaderService } from '../dynamic-form/dynamic-form-loader.se
 })
 export class PreviewComponent implements OnInit {
 
+	selectedTemplate = null;
 	isReady = false;
 
 	unlayerOptions = {
@@ -56,6 +57,7 @@ export class PreviewComponent implements OnInit {
 				if (item) {
 					let fields: FormlyFieldConfig[] = this.formlyConfigLoaderService.formlyFieldConfig()[itemsType];
 					let templateData = this.convertForUI(item, fields);
+					this.selectedTemplate = templateData.selectedTemplate;
 					this.options = this.mapData(templateData, this.unlayerOptions);
 					this.isReady = true;
 				}
