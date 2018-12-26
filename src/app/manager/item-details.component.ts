@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { AfterViewInit, Component, EventEmitter, HostListener, NgZone } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, HostListener, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
@@ -10,7 +10,6 @@ import { uuid } from '../common/uuid';
 import { FormlyFormEnricher } from '../dynamic-form/formly-form-enricher';
 import { ModelProcessor } from '../dynamic-form/model-processor';
 import { DynamicFormLoaderService } from '../dynamic-form/dynamic-form-loader.service';
-import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material';
 import { NgxUnlayerRestService } from '../common/ngx-unlayer/ngx-unlayer.service';
 
@@ -32,8 +31,6 @@ export class ItemDetailsComponent implements AfterViewInit {
 
 	// TODO: we may need to get rid of these
 	isEditorDirty = false;
-	isDesignerReady = false;
-	isPreviewReady = false;
 
 	unlayerOptions = null;
 
@@ -69,7 +66,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 		private enricher: FormlyFormEnricher,
 		private dialog: MatDialog,
 		private unlayerService: NgxUnlayerRestService,
-		private ngZone: NgZone,
+		private chdr: ChangeDetectorRef
 	) {
 		this.parentType = route.snapshot.params['parentType'];
 		this.parentId = route.snapshot.params['parentId'];
@@ -94,8 +91,6 @@ export class ItemDetailsComponent implements AfterViewInit {
 							this.item = this.convertForUI(item);
 						}
 						this.prepare();
-						this.isDesignerReady = true;
-						this.isPreviewReady = true;
 					});
 			} else {
 				this.item = {};
@@ -103,6 +98,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 
 			this.loadDesigns();
 		}, 0);
+
 	}
 
 	save() {
@@ -113,7 +109,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 			.then(
 				() => {
 					this.form.markAsPristine();
-
+					this.isEditorDirty = false;
 					this.snackBar.open('The changes has been saved', 'Ok', {
 						duration: 3000
 					});
@@ -199,11 +195,10 @@ export class ItemDetailsComponent implements AfterViewInit {
 	}
 
 	savedSnack() {
-		this.ngZone.run(() => {
-			this.snackBar.open('The changes has been saved', 'Ok', {
-				duration: 3000
-			});
+		this.snackBar.open('The changes has been saved', 'Ok', {
+			duration: 3000
 		});
+		this.chdr.detectChanges();
 	}
 
 	onDesignSave(template: any) {
@@ -254,13 +249,12 @@ export class ItemDetailsComponent implements AfterViewInit {
 	}
 
 	onEditorDirty(event) {
-		this.ngZone.run(() => {
-			this.isEditorDirty = event;
-		});
+		this.isEditorDirty = event;
+		this.chdr.detectChanges();
 	}
 
 	onTemplateSelected(template) {
-		let prevTemplateId = this.selectedTemplate ? this.selectedTemplate.id : null
+		let prevTemplateId = this.selectedTemplate ? this.selectedTemplate.id : null;
 		if (template.id !== prevTemplateId) {
 			this.form.markAsDirty();
 			this.isEditorDirty = true;

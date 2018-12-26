@@ -55,13 +55,12 @@ export class NgxUnlayerComponent implements AfterViewInit {
 			}
 
 			unlayer.addEventListener('design:loaded', (data) => {
-				unlayer.exportHtml((data) => {
+				unlayer.exportHtml((data: any) => {
 					this.onExportHTML.emit(data.html);
 				});
 			});
 
 			unlayer.addEventListener('design:updated', (data) => {
-				console.log('unlayer, design:updated:', data)
 				this.onEditorDirty.emit(true);
 			});
 		}, 0);
@@ -110,15 +109,6 @@ export class NgxUnlayerComponent implements AfterViewInit {
 	}
 
 	private saveDesign() {
-		// const o = Observable.create(observer => {
-		// 	unlayer.saveDesign((design) => {
-		// 		this.template.design = this.safeNullFor(design);
-		// 		observer.next(this.template);
-		// 	});
-		// })
-		//
-		// this.onDesignSave.emit(o);
-
 		unlayer.saveDesign((design) => {
 			this.template.design = this.safeNullFor(design);
 			this.onDesignSave.emit(this.template);
@@ -130,13 +120,5 @@ export class NgxUnlayerComponent implements AfterViewInit {
 		});
 	}
 
-	// exportHTML() {
-	// 	unlayer.exportHtml((data) => {
-	// 		this.onExportHTML.emit(data.html);
-	// 		this.html = data.html;
-	// 		window.dispatchEvent(new Event('resize'));
-	// 		this.cdRef.detectChanges();
-	// 	});
-	// }
 
 }

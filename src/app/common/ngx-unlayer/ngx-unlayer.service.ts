@@ -100,7 +100,7 @@ export class NgxUnlayerRestService {
 						if (!options.designTags) {
 							options.designTags = null;
 						}
-						options.designTags[key] = `<img src="${emailData[key]}" style="max-width: 100%; heigth: auto;" >`;
+						options.designTags[key] = `<img src="${emailData[key]}" style="max-width: 200px; heigth: auto;" >`;
 						break;
 					}
 					case 'date':
@@ -115,12 +115,6 @@ export class NgxUnlayerRestService {
 							options.designTags = null;
 						}
 						options.designTags['eventDescription'] = emailData[key];
-						break;
-					case 'location':
-						if (!options.designTags) {
-							options.designTags = null;
-						}
-						options.designTags['eventLocation'] = emailData[key];
 						break;
 					case 'template':
 						options['templateId'] = emailData[key];
