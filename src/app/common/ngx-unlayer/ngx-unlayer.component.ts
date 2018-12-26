@@ -54,6 +54,12 @@ export class NgxUnlayerComponent implements AfterViewInit {
 				this.loadDesign(this.template.design);
 			}
 
+			unlayer.addEventListener('design:loaded', (data) => {
+				unlayer.exportHtml((data) => {
+					this.onExportHTML.emit(data.html);
+				});
+			});
+
 			unlayer.addEventListener('design:updated', (data) => {
 				console.log('unlayer, design:updated:', data)
 				this.onEditorDirty.emit(true);
@@ -117,6 +123,10 @@ export class NgxUnlayerComponent implements AfterViewInit {
 			this.template.design = this.safeNullFor(design);
 			this.onDesignSave.emit(this.template);
 			this.onEditorDirty.emit(false);
+		});
+
+		unlayer.exportHtml((data) => {
+			this.onExportHTML.emit(data.html);
 		});
 	}
 

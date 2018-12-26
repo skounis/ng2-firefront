@@ -37,6 +37,7 @@
 					[template]="selectedTemplate"
 					[options]="_options"
 					(onDesignSave)="onDesignSave($event)"
+					(onExportHTML)="onExportHTML($event)"
 					(onEditorDirty)="onEditorDirty($event)"></ngx-unlayer>
 			</mat-tab>
 			<mat-tab label="Preview" [disabled]="!selectedTemplate || isEditorDirty">

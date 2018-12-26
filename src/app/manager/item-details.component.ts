@@ -22,6 +22,7 @@ import { NgxUnlayerRestService } from '../common/ngx-unlayer/ngx-unlayer.service
 export class ItemDetailsComponent implements AfterViewInit {
 	// Selected Template (Template)
 	selectedTemplate = null;
+	encodedHTML = null;
 
 	// The colection of the Designs/Templates created by the user
 	// and saved in Firebase
@@ -34,34 +35,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 	isDesignerReady = false;
 	isPreviewReady = false;
 
-	unlayerOptions = {
-		projectId: 1556,
-		templateId: 4449,
-		tools: {
-			image: {
-				enabled: false,
-			},
-			'custom#subscribe_button': {
-				enabled: true,
-				priority: 2,
-				data: {
-					url: 'http://via.placeholder.com/350x150',
-				}
-			},
-			'custom#sessions': {
-				enabled: true,
-				priority: 1,
-				data: {
-					sessions: [
-						{ name: 'Session 1', date: '18-10-2018' },
-						{ name: 'Session 2', date: '18-10-2018' },
-						{ name: 'Session 3', date: '18-10-2018' }
-					]
-				}
-			}
-		},
-		designTags: {}
-	};
+	unlayerOptions = null;
 
 	item: any;
 	fields: FormlyFieldConfig[];
@@ -72,12 +46,12 @@ export class ItemDetailsComponent implements AfterViewInit {
 		}
 	};
 
-
 	_options;
 
 	templateOptions: any = {
 		className: ''
 	};
+
 	itemId: string;
 	itemType: string;
 	parentId: string;
@@ -106,6 +80,8 @@ export class ItemDetailsComponent implements AfterViewInit {
 		this.fullPreviewUrl = window.location.origin + '/#' + this.previewUrl;
 
 		this.initFormFields();
+
+		this.unlayerOptions = unlayerService.initialOptions();
 	}
 
 	ngAfterViewInit(): void {
@@ -186,8 +162,11 @@ export class ItemDetailsComponent implements AfterViewInit {
 			model.$key = this.itemId || uuid();
 		}
 
-		// Attache template
-		model.selectedTemplate = this.selectedTemplate;
+		// Attach template
+		model.selectedTemplate = Object.assign({}, this.selectedTemplate);
+		model.selectedTemplate.key = model.selectedTemplate.$key;
+		delete model.selectedTemplate.$key;
+		model.encodedHTML = this.encodedHTML;
 
 		return model;
 	}
@@ -201,8 +180,9 @@ export class ItemDetailsComponent implements AfterViewInit {
 			model.$key = this.itemId;
 		}
 
-		// Attache template
+		// Attach template/html
 		this.selectedTemplate = model.selectedTemplate;
+		this.encodedHTML = model.encodedHTML;
 
 		return model;
 	}
@@ -215,85 +195,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 
 	prepare() {
 		let templateData = this.data.patchEntity(this.item);
-		this._options = this.mapData(templateData, this.unlayerOptions);
-	}
-
-	private mapData(emailData, options) {
-		let keys = Object.keys(emailData);
-		let tools: any = { ...options.tools };
-		keys.forEach((key) => {
-				switch (key) {
-					case 'sessions': {
-						if (!tools['custom#sessions']) {
-							tools['custom#sessions'] = { data: null };
-						}
-
-						let data = Object.assign({}, tools['custom#sessions'].data, { title: 'Agenda', sessions: emailData[key] });
-
-						tools['custom#sessions'].data = data;
-						break;
-					}
-					case 'registerURL': {
-						if (!tools['custom#subscribe_button']) {
-							tools['custom#subscribe_button'] = { data: null };
-						}
-
-						let data = Object.assign({}, tools['custom#subscribe_button'].data, { text: 'Register', url: emailData[key] });
-
-						tools['custom#subscribe_button'].data = data;
-						break;
-					}
-					case 'sponsors': {
-						if (!tools['custom#sponsors']) {
-							tools['custom#sponsors'] = { data: null };
-						}
-						let data = Object.assign({}, tools['custom#sponsors'].data, { title: 'Our sponsors', sponsors: emailData[key] });
-
-						tools['custom#sponsors'].data = data;
-						break;
-					}
-					case 'companyLogo': {
-						if (!options.designTags) {
-							options.designTags = null;
-						}
-						options.designTags[key] = `<img src="${emailData[key]}" style="max-width: 100%; heigth: auto;" >`;
-						break;
-					}
-					case 'date':
-						if (!options.designTags) {
-							options.designTags = null;
-						}
-						options.designTags['eventDateShort'] = new Date(emailData[key]);
-						options.designTags['eventDateLong'] = emailData[key];
-						break;
-					case 'description':
-						if (!options.designTags) {
-							options.designTags = null;
-						}
-						options.designTags['eventDescription'] = emailData[key];
-						break;
-					case 'location':
-						if (!options.designTags) {
-							options.designTags = null;
-						}
-						options.designTags['eventLocation'] = emailData[key];
-						break;
-					case 'title':
-						if (!options.designTags) {
-							options.designTags = null;
-						}
-						options.designTags['eventName'] = emailData[key];
-						break;
-					default:
-						if (!options.designTags) {
-							options.designTags = null;
-						}
-						options.designTags[key] = emailData[key];
-						break;
-				}
-			}
-		);
-		return options;
+		this._options = this.unlayerService.mapData(templateData, this.unlayerOptions);
 	}
 
 	savedSnack() {
@@ -365,5 +267,9 @@ export class ItemDetailsComponent implements AfterViewInit {
 	onTemplateSelected(template) {
 		this.selectedTemplate = template;
 		this.selectedTabIndex = 2;
+	}
+
+	onExportHTML(html) {
+		this.encodedHTML = btoa(html);
 	}
 }

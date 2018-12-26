@@ -1,4 +1,4 @@
-
+<!-- We need the element for initializing the editor -->
 <div class="editor" [hidden]="true"></div>
 
 <div class="spinner" *ngIf="!isHtmlReady">
@@ -6,4 +6,3 @@
 </div>
 
 <div class="html-preview" *ngIf="isHtmlReady" [innerHTML]="sanitazeHtml(html)"></div>
-
