@@ -220,11 +220,10 @@ export class ItemDetailsComponent implements AfterViewInit {
 				);
 		} else {
 			template.name = template.name || Math.random().toString(36).substring(7);
-
+			this.form.markAsDirty();
 			delete template.id;
 			delete template.displayMode;
 			delete template.folder;
-			debugger;
 			this.data.createItem('unlayerDesigns', template)
 				.then(
 					(key) => {

@@ -47,7 +47,7 @@
 					[options]="_options">
 				</ngx-unlayer-preview>
 			</mat-tab>
-			<mat-tab label="Publish" [disabled]="!selectedTemplate || isEditorDirty">
+			<mat-tab label="Publish" [disabled]="!selectedTemplate || isEditorDirty || this.form.dirty">
 				<div class="publish-wrapper">
 					<p>{{ fullPreviewUrl }}</p>
 					<a mat-raised-button color="primary" target="_blank" [routerLink]="previewUrl">Open Landing Page</a>
