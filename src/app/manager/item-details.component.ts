@@ -10,7 +10,7 @@ import { uuid } from '../common/uuid';
 import { FormlyFormEnricher } from '../dynamic-form/formly-form-enricher';
 import { ModelProcessor } from '../dynamic-form/model-processor';
 import { DynamicFormLoaderService } from '../dynamic-form/dynamic-form-loader.service';
-import { MatTabChangeEvent } from '@angular/material/tabs'
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material';
 import { NgxUnlayerRestService } from '../common/ngx-unlayer/ngx-unlayer.service';
 
@@ -164,7 +164,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 
 		// Attach template
 		model.selectedTemplate = Object.assign({}, this.selectedTemplate);
-		model.selectedTemplate.id = model.selectedTemplate.$key;
+		model.selectedTemplate.id = model.selectedTemplate.$key ? model.selectedTemplate.$key : model.selectedTemplate.id;
 		delete model.selectedTemplate.$key;
 		model.encodedHTML = this.encodedHTML;
 
@@ -224,7 +224,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 			delete template.id;
 			delete template.displayMode;
 			delete template.folder;
-
+			debugger;
 			this.data.createItem('unlayerDesigns', template)
 				.then(
 					(key) => {
@@ -240,10 +240,6 @@ export class ItemDetailsComponent implements AfterViewInit {
 					}
 				);
 		}
-	}
-
-	selectedTabChange(event: MatTabChangeEvent){
-		console.log(event);
 	}
 
 	// Load the Desings/Templates of the user
@@ -265,6 +261,11 @@ export class ItemDetailsComponent implements AfterViewInit {
 	}
 
 	onTemplateSelected(template) {
+		let prevTemplateId = this.selectedTemplate ? this.selectedTemplate.id : null
+		if (template.id !== prevTemplateId) {
+			this.form.markAsDirty();
+			this.isEditorDirty = true;
+		}
 		this.selectedTemplate = template;
 		this.selectedTabIndex = 2;
 	}
