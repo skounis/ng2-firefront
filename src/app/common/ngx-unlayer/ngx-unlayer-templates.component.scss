@@ -1,0 +1,22 @@
+:host {
+	.icon-wrapper {
+		position: absolute;
+		right: 1rem;
+		top: 0;
+		color: #27ae60;
+		background: #fff;
+		border-radius: 100%;
+		width: 30px;
+		height: 30px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: 0 0 2px #000;
+	}
+	.template-card {
+		padding-top: 0;
+		width: 296px;
+		float: left;
+		margin-bottom: 1rem;
+	}
+}

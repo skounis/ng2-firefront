@@ -13,6 +13,7 @@ export class NgxUnlayerTemplatesComponent implements OnInit, OnChanges {
   TEMPLATE_TYPE_SYSTEM = TEMPLATE_TYPE_SYSTEM;
   TEMPLATE_TYPE_USER = TEMPLATE_TYPE_USER;
 
+  @Input() selectedTemplate;
   @Input() userTemplates = [];
   @Output() onTemplateSelected = new EventEmitter<Template>();
 
@@ -24,7 +25,7 @@ export class NgxUnlayerTemplatesComponent implements OnInit, OnChanges {
     this.service.getTemplates().subscribe((response: any) => {
       this.systemTemplates = response.data || [];
       console.log('Templates: ', response);
-    })
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -38,6 +39,7 @@ export class NgxUnlayerTemplatesComponent implements OnInit, OnChanges {
 
   selectTemplate(type: string, template: Template) {
     template.type = type;
+    this.selectedTemplate = template;
     this.onTemplateSelected.emit(template);
   }
 }
