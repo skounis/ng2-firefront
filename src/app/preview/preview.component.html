@@ -1,5 +1,5 @@
-<ngx-unlayer-preview
-  *ngIf="selectedTemplate && options"
-  [template]="selectedTemplate?.design"
-  [options]="options">
-</ngx-unlayer-preview>
+<div class="html-preview" *ngIf="html" [innerHTML]="sanitazeHtml(html)"></div>
+
+<div class="spinner" *ngIf="!html">
+	<mat-progress-spinner [diameter]="50" [mode]="'indeterminate'"></mat-progress-spinner>
+</div>
