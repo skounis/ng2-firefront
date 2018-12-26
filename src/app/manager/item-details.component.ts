@@ -164,7 +164,7 @@ export class ItemDetailsComponent implements AfterViewInit {
 
 		// Attach template
 		model.selectedTemplate = Object.assign({}, this.selectedTemplate);
-		model.selectedTemplate.key = model.selectedTemplate.$key;
+		model.selectedTemplate.id = model.selectedTemplate.$key;
 		delete model.selectedTemplate.$key;
 		model.encodedHTML = this.encodedHTML;
 
