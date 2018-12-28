@@ -172,9 +172,13 @@ export const itemsFormConfig = () => ({
 			key: 'priceMasked',
 			templateOptions: {
 				label: 'Price (int)',
+				required: true,
 				mask: {
 					allowDecimal: false
 				}
+			},
+			validators: {
+				validation: Validators.compose([Validators.required])
 			}
 		},
 		{

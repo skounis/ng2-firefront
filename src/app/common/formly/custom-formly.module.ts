@@ -38,7 +38,7 @@ const types: TypeOption[] = [
 	{
 		name: 'numeric-input',
 		component: FormlyFieldNumericInput,
-		wrappers: ['fieldset', 'label']
+		wrappers: ['form-field']
 	},
 	{
 		name: 'date-time-picker',
