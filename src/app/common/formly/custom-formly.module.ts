@@ -14,7 +14,6 @@ import { TemplateWarningWrapper } from './run/warning';
 import { FormlyFieldCheck } from './types/check';
 import { FormlyFieldCoords } from './types/coordinates/coords';
 import { EditCoordsDialog } from './types/coordinates/edit-coords.dialog';
-import { FormlyFieldDatePicker } from './types/date-picker';
 import { FormlyFieldDateTimePicker } from './types/date-time-picker';
 import { FormlyFieldHtml } from './types/html';
 import { FormlyMasterDetails } from './types/master-details/master-details';
@@ -43,11 +42,6 @@ const types: TypeOption[] = [
 	{
 		name: 'date-time-picker',
 		component: FormlyFieldDateTimePicker,
-		wrappers: ['fieldset', 'label']
-	},
-	{
-		name: 'date-picker',
-		component: FormlyFieldDatePicker,
 		wrappers: ['fieldset', 'label']
 	},
 	{
@@ -149,7 +143,6 @@ export const ngFormlyConfig: ConfigOption = {
 	declarations: [
 		FormlyFieldRepeater,
 		FormlyFieldTimePicker,
-		FormlyFieldDatePicker,
 		FormlyFieldDateTimePicker,
 		FormlyFieldFileUpload,
 		FormlyFieldRichText,
