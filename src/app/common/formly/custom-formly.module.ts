@@ -33,6 +33,7 @@ import { FormlyFieldFileUpload } from './types/upload/file-upload';
 import { FormlyPanelWrapper } from './wrappers/panel';
 import { FormlyFieldsetWrapper } from './wrappers/fieldset';
 import { FormlyWrapperWarning, FormlyWrapperWarningMessage } from './wrappers/warning';
+import { ValidationService } from './validation.service';
 
 const types: TypeOption[] = [
 	{
@@ -124,6 +125,21 @@ const wrappers: WrapperOption[] = [
 	{ name: 'ha-fieldset', component: FormlyFieldsetWrapper }
 ];
 
+
+const validators = [
+	{ name: 'invalidEmailAddress', validation: ValidationService.emailValidator },
+	{ name: 'invalidUrl', validation: ValidationService.urlValidator },
+	{ name: 'prefixError', validation: ValidationService.prefixValidator },
+	{ name: 'other', message: (err, field) => err }
+];
+
+const validationMessages = [
+	{ name: 'required', message: ValidationService.getValidatorErrorMessage('required') },
+	{ name: 'invalidEmailAddress', message: ValidationService.getValidatorErrorMessage('invalidEmailAddress') },
+	{ name: 'invalidUrl', message: ValidationService.getValidatorErrorMessage('invalidUrl') },
+	{ name: 'prefixError', message: ValidationService.getValidatorErrorMessage('prefixError') }
+];
+
 export const ngFormlyConfig: ConfigOption = {
 	types: types,
 	manipulators: manipulators,
@@ -132,7 +148,10 @@ export const ngFormlyConfig: ConfigOption = {
 
 @NgModule({
 	imports: [
-		FormlyModule,
+		FormlyModule.forChild({
+			validationMessages: [...validationMessages],
+			validators: [...validators]
+		}),
 		FormsModule,
 		ReactiveFormsModule,
 		CommonModule,
