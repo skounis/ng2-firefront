@@ -1,5 +1,4 @@
 import { Validators } from '@angular/forms';
-import { FormlyFormOptions} from '@ngx-formly/core';
 
 export const itemsFormConfig = () => ({
 	activityfeed: [
