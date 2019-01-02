@@ -94,7 +94,7 @@ export const itemsFormConfig = () => ({
 	sizes: [
 		{
 			wrappers: ['ha-fieldset'],
-			fieldGroup:[
+			fieldGroup: [
 				{
 					type: 'input',
 					key: 'title',
@@ -121,7 +121,7 @@ export const itemsFormConfig = () => ({
 		{
 			wrappers: ['ha-fieldset'],
 			templateOptions: { label: 'International' },
-			fieldGroup:[
+			fieldGroup: [
 				{
 					type: 'input',
 					key: 'sizeUS',

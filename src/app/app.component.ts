@@ -4,7 +4,7 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { DataService } from './common/services/data.service';
 import { MenuService } from './common/services/menu.service';
-import { DynamicFormLoaderService } from './dynamic-form/dynamic-form-loader.service';
+// import { DynamicFormLoaderService } from './dynamic-form/dynamic-form-loader.service';
 
 /*
  * App Component
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
 	constructor(
 		private dataService: DataService,
 		private menuService: MenuService,
-		private formlyConfigLoader: DynamicFormLoaderService
+		// private formlyConfigLoader: DynamicFormLoaderService
 	) {
 	}
 
@@ -35,10 +35,10 @@ export class AppComponent implements OnInit {
 			.subscribe(menus => {
 				this.menuService.menus.next(menus);
 			});
-		this.loadFormlyCofiguration();
+		// this.loadFormlyCofiguration();
 	}
 
-	private async loadFormlyCofiguration() {
-		this.formlyConfigLoader.init();
-	}
+	// private async loadFormlyCofiguration() {
+	// 	this.formlyConfigLoader.init();
+	// }
 }
