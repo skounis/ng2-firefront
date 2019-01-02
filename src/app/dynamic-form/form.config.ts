@@ -1,4 +1,5 @@
 import { Validators } from '@angular/forms';
+import { FormlyFormOptions} from '@ngx-formly/core';
 
 export const itemsFormConfig = () => ({
 	activityfeed: [
@@ -55,6 +56,17 @@ export const itemsFormConfig = () => ({
 			}
 		},
 		{
+			type: 'input',
+			key: 'Email',
+			templateOptions: {
+				label: 'Email test',
+				required: true
+			},
+			validators: {
+				validation: [Validators.required, 'invalidEmailAddress']
+			}
+		},
+		{
 			type: 'reference',
 			templateOptions: {
 				// label: 'News',
@@ -93,7 +105,7 @@ export const itemsFormConfig = () => ({
 	sizes: [
 		{
 			wrappers: ['ha-fieldset'],
-			fieldGroup:[
+			fieldGroup: [
 				{
 					type: 'input',
 					key: 'title',
@@ -120,7 +132,7 @@ export const itemsFormConfig = () => ({
 		{
 			wrappers: ['ha-fieldset'],
 			templateOptions: { label: 'International' },
-			fieldGroup:[
+			fieldGroup: [
 				{
 					type: 'input',
 					key: 'sizeUS',
