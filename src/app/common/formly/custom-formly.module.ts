@@ -46,12 +46,12 @@ const types: TypeOption[] = [
 		wrappers: ['fieldset', 'label']
 	},
 	{
-		name: 'date-picker',
+		name: 'as-datepicker',
 		component: FormlyFieldDatePicker,
 		wrappers: ['fieldset', 'label']
 	},
 	{
-		name: 'time-picker',
+		name: 'as-timepicker',
 		component: FormlyFieldTimePicker,
 		wrappers: ['fieldset', 'label']
 	},

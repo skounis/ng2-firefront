@@ -28,10 +28,9 @@ export const itemsFormConfig = () => ({
 		},
 		{
 			key: 'date',
-			type: 'date-time-picker',
+			type: 'datepicker',
 			templateOptions: {
 				label: 'Date',
-				showTime: false
 			}
 		},
 		{
@@ -574,11 +573,11 @@ export const itemsFormConfig = () => ({
 			fieldGroup: [
 				{
 					className: 'full-width',
-					type: 'date-picker',
+					type: 'as-datepicker',
 					key: 'date'
 				},
 				{
-					type: 'time-picker',
+					type: 'as-timepicker',
 					key: 'time'
 				}
 			]
