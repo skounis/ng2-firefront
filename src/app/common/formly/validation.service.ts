@@ -4,7 +4,7 @@ let validator = require('validator');
 export class ValidationService {
 	static getValidatorErrorMessage(code: string) {
 		let config = {
-			required: 'Required',
+			required: 'This field is required',
 			invalidEmailAddress: 'Invalid email address',
 			invalidUrl: 'Invalid URL',
 			prefixError: 'Fill slag and select year'
