@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ApplicationRef, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ApplicationRef, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
@@ -35,6 +35,9 @@ import { FireStorage } from './common/services/fire-storage';
 import { SharedModule } from './common/shared.module';
 import 'hammerjs';
 
+import { DynamicFormLoaderService } from './dynamic-form/dynamic-form-loader.service';
+
+
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -45,6 +48,10 @@ import { AgmCoreModule } from '@agm/core';
 import { S3Storage } from './common/services/s3-storage';
 import { MenuService } from './common/services/menu.service';
 
+
+export function jokesProviderFactory(provider: DynamicFormLoaderService) {
+  return () => provider.load();
+}
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -99,7 +106,8 @@ const APP_PROVIDERS = [
 	],
 	providers: [ // expose our Services and Providers into Angular's dependency injection
 		APP_PROVIDERS,
-		{ provide: HTTP_INTERCEPTORS, useClass: HttpErrorsInterceptor, multi: true }
+		{ provide: HTTP_INTERCEPTORS, useClass: HttpErrorsInterceptor, multi: true },
+		{ provide: APP_INITIALIZER, useFactory: jokesProviderFactory, deps: [DynamicFormLoaderService], multi: true }
 	]
 })
 export class AppModule {

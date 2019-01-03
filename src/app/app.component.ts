@@ -16,13 +16,14 @@ import { MenuService } from './common/services/menu.service';
 		'../../node_modules/primeng/resources/primeng.min.css',
 		'../../node_modules/primeng/resources/themes/bootstrap/theme.css'
 	],
-	template: `<router-outlet></router-outlet>`,
+	template: `
+		<router-outlet></router-outlet>`,
 	encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
 	constructor(
 		private dataService: DataService,
-		private menuService: MenuService
+		private menuService: MenuService,
 	) {
 	}
 
