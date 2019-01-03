@@ -9,24 +9,13 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 
 export class DynamicFormLoaderService {
 	private configKey: string = 'formConfig';
+
 	// TODO: This is a collection of arrays of FormlyFieldConfig
 	// we may improve this structure or define a type for it.
 	// private formlyConfig: FormlyFieldConfig;
 	private formlyConfig: any;
 
-	constructor(private dataService: DataService) {
-	}
-
-	// async init() {
-	// 	let config = await this.dataService.loadItems(this.configKey)
-	// 		.pipe(take(1))
-	// 		.toPromise();
-	//
-	// 	this.formlyConfig = {
-	// 		...itemsFormConfig(),
-	// 		...ModelProcessor.convertFormConfigForUI(config)
-	// 	};
-	// }
+	constructor(private dataService: DataService) { }
 
 	load() {
 		return this.dataService.loadItems(this.configKey)

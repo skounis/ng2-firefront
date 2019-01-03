@@ -22,6 +22,10 @@ export class PublicComponent implements OnInit {
 		}
 	};
 
+	templateOptions: any = {
+		className: ''
+	};
+
 	private readonly itemType: string;
 
 	constructor(
@@ -63,8 +67,16 @@ export class PublicComponent implements OnInit {
 
 	private initFormFields() {
 		this.form = this.fb.group({});
+		// let fields: FormlyFieldConfig[] = this.formlyConfigLoaderService.formlyFieldConfig()[this.itemType];
+		// this.enricher.enrichFields(fields);
 		let fields: FormlyFieldConfig[] = this.formlyConfigLoaderService.formlyFieldConfig()[this.itemType];
-		this.enricher.enrichFields(fields);
+		this.templateOptions.className = this.hasFieldGroup(fields) ? 'as-has-fieldgroup' : '';
 		this.fields = fields;
+	}
+
+	private hasFieldGroup(items) {
+		return !!items.find(item => {
+			return !!item.wrappers && item.wrappers.includes('ha-fieldset');
+		});
 	}
 }
