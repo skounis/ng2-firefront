@@ -77,7 +77,8 @@ const types: TypeOption[] = [
 	{
 		name: 'multi-select',
 		component: FormlyFieldMultiSelect,
-		wrappers: ['fieldset', 'label']
+		wrappers: ['form-field']
+		// wrappers: ['fieldset', 'label']
 	},
 	{
 		name: 'multi-checkbox',
