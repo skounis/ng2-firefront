@@ -264,6 +264,9 @@ export class ItemDetailsComponent implements AfterViewInit {
 	}
 
 	onExportHTML(html) {
-		this.encodedHTML = btoa(html);
+		for (var i = 0; i < html.length; i++)
+        if (html.charCodeAt(i) > 127)
+            console.log(html[i]);
+		this.encodedHTML = btoa(encodeURIComponent(html));
 	}
 }

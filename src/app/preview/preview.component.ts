@@ -24,7 +24,7 @@ export class PreviewComponent implements OnInit {
 		this.dataService.loadItem(itemsType, id)
 			.subscribe(item => {
 				if (item) {
-					this.html = atob(item.encodedHTML);
+					this.html = decodeURIComponent(atob(item.encodedHTML));
 				}
 			});
 	}
