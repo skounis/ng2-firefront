@@ -971,7 +971,8 @@ export const itemsFormConfig = () => ({
 			key: 'title',
 			templateOptions: {
 				label: 'Event Name',
-				required: true
+				required: true,
+				appearance: 'fill',
 			},
 			validators: {
 				validation: Validators.compose([Validators.required])
@@ -982,7 +983,8 @@ export const itemsFormConfig = () => ({
 			key: 'companyName',
 			templateOptions: {
 				label: 'Company',
-				required: true
+				required: true,
+				appearance: 'fill',
 			}
 		},
 		{
@@ -990,16 +992,27 @@ export const itemsFormConfig = () => ({
 			key: 'companyLogo',
 			templateOptions: {
 				label: 'Company Logo',
-				required: true
+				required: true,
+				appearance: 'fill',
+			}
+		},
+		{
+			type: 'input',
+			key: 'eventLocation',
+			templateOptions: {
+				label: 'Location',
+				required: true,
+				appearance: 'fill',
 			}
 		},
 		{
 			type: 'textarea',
-			key: 'location',
+			key: 'locationDescription',
 			templateOptions: {
-				label: 'Event Location',
+				label: 'Location Description',
 				rows: 5,
 				description: 'Please enter at least 150 characters',
+				appearance: 'fill',
 			}
 		},
 		{
@@ -1007,6 +1020,7 @@ export const itemsFormConfig = () => ({
 			type: 'date-time-picker',
 			templateOptions: {
 				label: 'Start date',
+				appearance: 'fill',
 			}
 		},
 		{
@@ -1016,7 +1030,8 @@ export const itemsFormConfig = () => ({
 				rows: 5,
 				label: 'Body',
 				description: 'Please enter at least 150 characters',
-				required: true
+				required: true,
+				appearance: 'fill',
 			},
 			validators: {
 				validation: Validators.compose([Validators.required])
@@ -1026,7 +1041,8 @@ export const itemsFormConfig = () => ({
 			key: 'registerUrl',
 			type: 'input',
 			templateOptions: {
-				label: 'Register URL'
+				label: 'Register URL',
+				appearance: 'fill',
 			}
 		},
 	],
