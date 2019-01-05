@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { DatePipe } from '@angular/common'
 import { environment } from '../../../environments/environment';
 
 @Injectable()
@@ -11,7 +12,7 @@ export class NgxUnlayerRestService {
 		'Authorization': ` Basic ${btoa(environment.unlayer.token)}`
 	});
 
-	constructor(public http: HttpClient) {
+	constructor(public http: HttpClient,  public datepipe: DatePipe) {
 	}
 
 	getTemplates() {
@@ -107,8 +108,9 @@ export class NgxUnlayerRestService {
 						if (!options.designTags) {
 							options.designTags = null;
 						}
-						options.designTags['eventDateShort'] = new Date(emailData[key]);
-						options.designTags['eventDateLong'] = emailData[key];
+						const date = new Date(emailData[key]);
+						options.designTags['eventDateShort'] = this.datepipe.transform(date, 'MMMM d, yyyy');
+						options.designTags['eventDateLong'] = this.datepipe.transform(date, 'long');
 						break;
 					case 'description':
 						if (!options.designTags) {
