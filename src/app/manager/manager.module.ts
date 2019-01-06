@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { FormlyModule } from '@ngx-formly/core';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { SharedModule } from '../common/shared.module';
@@ -12,6 +13,8 @@ import { ItemsListComponent } from './items-list.component';
 import { CanDeactivateManagerGuard } from './manager.can-deactivate';
 import { NewItemDialog } from './new-item.dialog';
 import { ItemsCollectionViewStore } from './items-collection-view.store';
+
+
 
 import { NgxUnlayerModule } from '../common/ngx-unlayer/ngx-unlayer.module';
 
@@ -33,7 +36,8 @@ export const managerRoutes: Routes = [
 		CKEditorModule,
 		AgmCoreModule,
 		DynamicFormModule,
-		NgxUnlayerModule
+		NgxUnlayerModule,
+		MatExpansionModule
 	],
 	exports: [],
 	declarations: [

@@ -49,8 +49,42 @@
 			</mat-tab>
 			<mat-tab label="Publish" [disabled]="!selectedTemplate || isEditorDirty || form.dirty">
 				<div class="publish-wrapper">
-					<p>{{ fullPreviewUrl }}</p>
-					<a mat-raised-button color="primary" target="_blank" [routerLink]="previewUrl">Open Landing Page</a>
+
+					<mat-accordion>
+						<mat-expansion-panel [expanded]="true">
+							<mat-expansion-panel-header>
+								<mat-panel-title>
+									Online URL
+								</mat-panel-title>
+								<mat-panel-description>
+									<!-- Landing page -->
+								</mat-panel-description>
+							</mat-expansion-panel-header>
+							<p>The landing page is published</p>
+							<ul>
+								<li>{{ fullPreviewUrl }}</li>
+							</ul>
+							<!-- <a mat-raised-button color="primary" target="_blank" [routerLink]="previewUrl">Open Landing Page</a> -->
+							<mat-action-row>
+								<a mat-button color="primary" target="_blank" [routerLink]="previewUrl">Open Landing Page</a>
+								<!-- <button mat-button color="primary" (click)="visit()">Visit Landing page</button> -->
+							</mat-action-row>
+						</mat-expansion-panel>
+						<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+							<mat-expansion-panel-header>
+								<mat-panel-title>
+									Download
+								</mat-panel-title>
+								<mat-panel-description>
+									<!-- ZIP {{panelOpenState ? 'open' : 'closed'}} -->
+								</mat-panel-description>
+							</mat-expansion-panel-header>
+							<p>Download a zip pack containg this page.</p>
+							<mat-action-row>
+								<button mat-button color="primary" (click)="download()">Download</button>
+							</mat-action-row>
+						</mat-expansion-panel>
+					</mat-accordion>
 				</div>
 			</mat-tab>
 
