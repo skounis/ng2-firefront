@@ -110,7 +110,8 @@ export class NgxUnlayerRestService {
 						}
 						const date = new Date(emailData[key]);
 						options.designTags['eventDateShort'] = this.datepipe.transform(date, 'MMMM d, yyyy');
-						options.designTags['eventDateLong'] = this.datepipe.transform(date, 'long');
+						options.designTags['eventDateLong'] = this.datepipe.transform(date, 'longDate');
+						options.designTags['eventTimeLong'] = this.datepipe.transform(date, 'shortTime');
 						break;
 					case 'description':
 						if (!options.designTags) {
