@@ -1,8 +1,8 @@
 :host {
 	.icon-wrapper {
 		position: absolute;
-		right: 1rem;
-		top: 0;
+		right: 0.5rem;
+		top: 0.5rem;
 		color: #27ae60;
 		background: #fff;
 		border-radius: 100%;
@@ -14,9 +14,20 @@
 		box-shadow: 0 0 2px #000;
 	}
 	.template-card {
-		padding-top: 0;
-		width: 296px;
+		width: 200px;
 		float: left;
 		margin-bottom: 1rem;
+
+		.system-template {
+			padding-top: 0;
+
+			.mat-card-content {
+				margin-bottom: 0;
+			}
+		}
+
+		.mat-card-actions{
+			text-align: right;
+		}
 	}
 }

@@ -1,5 +1,6 @@
-<mat-card class="template-card" *ngFor="let template of systemTemplates">
-  <img mat-card-image src="https://picsum.photos/500/300?q={{template.id}}" [alt]="template.name">
+<mat-card class="template-card system-template" *ngFor="let template of systemTemplates">
+  <!-- <img mat-card-image src="https://picsum.photos/500/300?q={{template.id}}" [alt]="template.name"> -->
+  <img mat-card-image src="https://image.thum.io/get/auth/402-unroll/width/300/https://adminapi.unlayer.com/v1/designer/1422/templates/{{template.id}}/preview" [alt]="template.name">
   <div class="icon-wrapper" *ngIf="template?.id === selectedTemplate?.id" >
     <mat-icon>check</mat-icon>
   </div>
@@ -10,13 +11,13 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-button (click)="selectTemplate(TEMPLATE_TYPE_SYSTEM, template)">Select</button>
-    <button mat-button>Clone</button>
+    <!-- <button mat-button>Clone</button> -->
   </mat-card-actions>
 </mat-card>
 
-<h3 style="clear: both; margin-top: 20px">User Designs</h3>
+<h3 style="clear: both; margin-bottom: 16px">User Designs</h3>
 <mat-card class="template-card"  *ngFor="let template of userTemplates">
-  <img mat-card-image src="https://picsum.photos/500/300?q={{template.$key}}" [alt]="template.name">
+  <!-- <img mat-card-image src="https://picsum.photos/500/300?q={{template.$key}}" [alt]="template.name"> -->
   <div class="icon-wrapper" *ngIf="template?.$key === selectedTemplate?.id" >
     <mat-icon>check</mat-icon>
   </div>
@@ -27,6 +28,6 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-button (click)="selectTemplate(TEMPLATE_TYPE_USER, template)">Select</button>
-    <button mat-button>Clone</button>
+    <!-- <button mat-button>Clone</button> -->
   </mat-card-actions>
 </mat-card>
