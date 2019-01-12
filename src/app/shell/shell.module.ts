@@ -9,6 +9,8 @@ import { HomeModule } from '../home/home.module';
 import { managerRoutes } from '../manager/manager.module';
 import { ShellComponent } from './shell.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
+import { FormEditorComponent } from './form-editor/form-editor.component';
+import { FormEditorModule } from './form-editor/form-editor.module';
 
 const routes: Routes = [
 	{
@@ -17,6 +19,7 @@ const routes: Routes = [
 		canActivate: [AuthGuard],
 		children: [
 			...managerRoutes,
+			{ path: 'form-config', component: FormEditorComponent },
 			{ path: '', component: HomeComponent, pathMatch: 'full' },
 		]
 	}
@@ -32,6 +35,7 @@ const routes: Routes = [
 		FormsModule,
 		RouterModule.forChild(routes),
 		SharedModule,
+		FormEditorModule,
 		HomeModule
 	],
 	providers: []

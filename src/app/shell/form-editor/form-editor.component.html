@@ -1,0 +1,12 @@
+<div class="as-form">
+	<div class="as-form-header">
+		<toolbar [title]="'Form editor'">
+			<button mat-raised-button color="primary" [disabled]="!isEditorDirty" (click)="save()">Save</button>
+		</toolbar>
+	</div>
+	<div class="as-form-scroll">
+		<div class="app-content">
+			<json-editor [options]="editorOptions" [data]="data"></json-editor>
+		</div>
+	</div>
+</div>

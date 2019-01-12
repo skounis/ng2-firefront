@@ -58,9 +58,12 @@ export class RealTimeDatabaseService {
 
 	saveItem(itemType: string, item: any): Promise<void> {
 		const itemPath = this.getItemPath(itemType);
-
 		let key = item.$key;
 		let update = this.patchEntity(item);
+		if (itemPath === 'formConfig') {
+			return this.afDB.object(`${itemPath}`).update(update);
+		}
+
 		return this.afDB.object(`${itemPath}/${key}`).update(update);
 	}
 
