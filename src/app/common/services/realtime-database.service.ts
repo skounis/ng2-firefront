@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs';
 import { uuid } from '../uuid';
+import { Validators } from '@angular/forms';
 
 @Injectable()
 export class RealTimeDatabaseService {
@@ -39,8 +40,20 @@ export class RealTimeDatabaseService {
 
 	createItem(itemType: string, item: any): Promise<void> {
 		const itemPath = this.getItemPath(itemType);
-
 		let key = uuid();
+		if (itemPath === 'formConfig') {
+			key = item.title;
+			item = [
+				{
+					type: 'input',
+					key: 'title',
+					templateOptions: {
+						label: 'Title',
+						required: true
+					}
+				}
+			];
+		}
 		return this.afDB.object(`${itemPath}/${key}`).set(item);
 	}
 
@@ -60,7 +73,7 @@ export class RealTimeDatabaseService {
 		const itemPath = this.getItemPath(itemType);
 		let key = item.$key;
 		let update = this.patchEntity(item);
-		if (itemPath === 'formConfig') {
+		if (itemPath === 'formConfig' && !key) {
 			return this.afDB.object(`${itemPath}`).update(update);
 		}
 

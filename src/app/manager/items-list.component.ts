@@ -8,6 +8,7 @@ import { NewItemDialog } from './new-item.dialog';
 import { MenuService } from '../common/services/menu.service';
 import { MenuItem } from '../common/models/menu-item';
 import { ItemsCollectionViewStore } from './items-collection-view.store';
+import { Validators } from '@angular/forms';
 
 @Component({
 	selector: 'items-list',
@@ -43,7 +44,8 @@ export class ItemsListComponent implements OnInit {
 	}
 
 	editItem(item: any) {
-		this.router.navigate(['./shell/manager', this.itemsType, item.$key]);
+		this.isFormConfigItem(this.itemsType) ? this.router.navigate(['./shell/form-config', item.$key])
+			: this.router.navigate(['./shell/manager', this.itemsType, item.$key]);
 	}
 
 	createItem() {
@@ -52,7 +54,7 @@ export class ItemsListComponent implements OnInit {
 		});
 		dialogRef.afterClosed().subscribe(itemName => {
 			if (itemName) {
-				let item = {
+				let item: any = {
 					title: itemName
 				};
 				this.data.createItem(this.itemsType, item);
@@ -84,28 +86,43 @@ export class ItemsListComponent implements OnInit {
 	}
 
 	private initModule(itemsType: string) {
-		this.itemsType = itemsType;
 
-		this.data
-			.loadItems(itemsType)
-			.subscribe(items => {
-				this.menuService.menus.subscribe(menus => {
-					const currentMenuItem = menus
-						.find(x => x.itemsType === itemsType);
+		this.itemsType = this.isFormConfigItem(itemsType) ? 'formConfig' : itemsType;
 
-					this.itemsTitle = currentMenuItem
-						? currentMenuItem.title
-						: itemsType;
-
-					if (currentMenuItem.itemsType === 'system-menus') {
-						items = orderBy(items, ['order']);
-					}
-
-					this.currentMenuItem = currentMenuItem;
+		if (this.isFormConfigItem(itemsType)) {
+			this.data.loadItems('formConfig')
+				.subscribe((_items) => {
+					this.itemsTitle = 'Form configuration';
+					let items = _items.map((item) => {
+						item.title = item.$key;
+						return item;
+					});
 					this.items = items;
 					this.visibleItems = items;
 				});
-			});
+		}
+		else {
+			this.data
+				.loadItems(itemsType)
+				.subscribe(items => {
+					this.menuService.menus.subscribe(menus => {
+						const currentMenuItem = menus
+							.find(x => x.itemsType === itemsType);
+
+						this.itemsTitle = currentMenuItem
+							? currentMenuItem.title
+							: itemsType;
+
+						if (currentMenuItem.itemsType === 'system-menus') {
+							items = orderBy(items, ['order']);
+						}
+
+						this.currentMenuItem = currentMenuItem;
+						this.items = items;
+						this.visibleItems = items;
+					});
+				});
+		}
 	}
 
 	search(filter: string) {
@@ -122,5 +139,9 @@ export class ItemsListComponent implements OnInit {
 
 	isModeSelected(mode: string): boolean {
 		return mode === this.selectedViewMode;
+	}
+
+	private isFormConfigItem(itemType: string): boolean {
+		return itemType === 'form-config' || itemType === 'formConfig';
 	}
 }

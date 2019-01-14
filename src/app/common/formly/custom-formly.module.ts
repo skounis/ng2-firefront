@@ -151,7 +151,7 @@ export const ngFormlyConfig: ConfigOption = {
 	imports: [
 		FormlyModule.forChild({
 			validationMessages: [...validationMessages],
-			validators: [...validators]
+			// validators: [...validators]
 		}),
 		FormsModule,
 		ReactiveFormsModule,
