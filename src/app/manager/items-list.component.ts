@@ -8,7 +8,6 @@ import { NewItemDialog } from './new-item.dialog';
 import { MenuService } from '../common/services/menu.service';
 import { MenuItem } from '../common/models/menu-item';
 import { ItemsCollectionViewStore } from './items-collection-view.store';
-import { Validators } from '@angular/forms';
 
 @Component({
 	selector: 'items-list',
@@ -142,6 +141,6 @@ export class ItemsListComponent implements OnInit {
 	}
 
 	private isFormConfigItem(itemType: string): boolean {
-		return itemType === 'form-config' || itemType === 'formConfig';
+		return itemType === 'form-config';
 	}
 }
