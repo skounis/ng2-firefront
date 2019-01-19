@@ -25,7 +25,21 @@ export class CloudFireStoreService {
 
 	createItem(itemType: string, item: any): Promise<void> {
 		let key = uuid();
-		return this.afCS.collection(itemType).doc(key).set(item);
+		if (itemType === 'formConfig') {
+			key = item.title;
+			item[item.title] = [
+				{
+					type: 'input',
+					key: 'title',
+					templateOptions: {
+						label: 'Title',
+						required: true
+					}
+				}
+			];
+			delete item.title;
+		}
+		return this.afCS.collection(itemType).doc(key).set((item));
 	}
 
 	deleteItem(itemType: string, item: any): Promise<void> {
@@ -44,6 +58,9 @@ export class CloudFireStoreService {
 			.ref.get()
 			.then((documentSnapshot) => {
 				let method = documentSnapshot.exists ? 'update' : 'set';
+				if (itemType === 'formConfig' && !key) {
+					return this.afCS.collection(itemType)[method](update);
+				}
 				return this.afCS.collection(itemType).doc(key)[method](update);
 			})
 			.catch((error) => {

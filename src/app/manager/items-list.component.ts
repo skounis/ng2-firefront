@@ -141,6 +141,6 @@ export class ItemsListComponent implements OnInit {
 	}
 
 	private isFormConfigItem(itemType: string): boolean {
-		return itemType === 'form-config';
+		return itemType === 'form-config' || itemType === 'formConfig';
 	}
 }
