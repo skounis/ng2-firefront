@@ -13,11 +13,14 @@ import { CanDeactivateManagerGuard } from './manager.can-deactivate';
 import { NewItemDialog } from './new-item.dialog';
 import { ItemsCollectionViewStore } from './items-collection-view.store';
 
+import { FormConfigDetailModule } from './form-config-detail/form-config-detail.module';
+import { FormConfigDetailComponent } from './form-config-detail/form-config-detail.component';
 export const managerRoutes: Routes = [
 	{ path: 'manager/:itemsType', component: ItemsListComponent, pathMatch: 'full' },
 	{ path: 'manager/:itemsType/:id', component: ItemDetailsComponent, pathMatch: 'full', canDeactivate: [CanDeactivateManagerGuard] },
 	{ path: 'manager/:parentType/:parentId/:itemsType', component: ItemDetailsComponent, pathMatch: 'full' },
-	{ path: 'manager/:parentType/:parentId/:itemsType/:id', component: ItemDetailsComponent, pathMatch: 'full', canDeactivate: [CanDeactivateManagerGuard] }
+	{ path: 'manager/:parentType/:parentId/:itemsType/:id', component: ItemDetailsComponent, pathMatch: 'full', canDeactivate: [CanDeactivateManagerGuard] },
+	{ path: 'form-config/:id', component: FormConfigDetailComponent, pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -29,6 +32,7 @@ export const managerRoutes: Routes = [
 		FormlyModule,
 		CKEditorModule,
 		AgmCoreModule,
+		FormConfigDetailModule,
 		DynamicFormModule
 	],
 	exports: [],

@@ -3,24 +3,27 @@
 	<mat-sidenav #sidenav [mode]="mode" [opened]="opened" class="app-sidenav">
 		<mat-nav-list>
 
-			<a mat-list-item [routerLink]=" ['./'] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+			<a mat-list-item [routerLink]="['./']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
 				<mat-icon mat-list-icon>home</mat-icon>
 				<span mat-line>Home</span>
 			</a>
 
 			<ng-template ngFor let-menu [ngForOf]="menus">
-				<a mat-list-item [routerLink]=" ['./manager/' + menu.itemsType]" routerLinkActive="active">
+				<a mat-list-item [routerLink]="['./manager/' + menu.itemsType]" routerLinkActive="active">
 					<mat-icon mat-list-icon>{{menu.icon}}</mat-icon>
 					<span mat-line>{{menu.title}}</span>
 				</a>
 			</ng-template>
 
 
-			<a mat-list-item [routerLink]=" ['./manager/system-menus']" routerLinkActive="active">
+			<a mat-list-item [routerLink]="['./manager/system-menus']" routerLinkActive="active">
 				<mat-icon mat-list-icon>list</mat-icon>
 				<span mat-line>Menus</span>
 			</a>
-
+			<a mat-list-item [routerLink]="['./manager/form-config']" routerLinkActive="active">
+				<mat-icon mat-list-icon>settings_applications</mat-icon>
+				<span mat-line>Form editor</span>
+			</a>
 		</mat-nav-list>
 
 	</mat-sidenav>
