@@ -9,13 +9,16 @@ import { MenuService } from '../common/services/menu.service';
 import { MenuItem } from '../common/models/menu-item';
 import { ItemsCollectionViewStore } from './items-collection-view.store';
 
+import * as FileSaver from 'file-saver';
+import { TEMPORARY_NAME } from '@angular/compiler/src/render3/view/util';
+
 @Component({
 	selector: 'items-list',
 	styleUrls: ['./items-list.component.scss'],
 	templateUrl: './items-list.component.html'
 })
 export class ItemsListComponent implements OnInit {
-	items: any[];
+	items: any[] | Array<any>;
 	visibleItems: any[];
 
 	currentMenuItem: MenuItem;
@@ -129,6 +132,38 @@ export class ItemsListComponent implements OnInit {
 
 		this.visibleItems = this.items
 			.filter(x => !filter || x.title.toLowerCase().indexOf(filter) >= 0);
+	}
+
+	exportToCSV() {
+	//REMOVING >1 LEVEL ITEMS
+		this.visibleItems.map((item) => {
+			let keys = Object.keys(item);
+			keys.forEach((key) => {
+				if(typeof item[key] === 'object') {
+					delete item[key];
+				}
+			});
+		});
+
+		let keyLength = this.visibleItems.map((item) => {
+			return Object.keys(item).length;
+		});
+		let keyMaxLengthIndex = keyLength.indexOf(Math.max(...keyLength));
+		
+		let replacer = (key, value) => (value === null || typeof value === 'undefined') ? '' : value;
+		let header = Object.keys(this.visibleItems[keyMaxLengthIndex]);
+		let csv = this.visibleItems.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','));
+		csv.unshift(header.join(','));
+		let csvArray = csv.join('\r\n');
+
+		let blob = new Blob([csvArray], { type: 'text/csv' });
+		FileSaver.saveAs(blob, `${this.itemsType}.csv`);
+	}
+
+	exportToJSON() {
+		let json = JSON.stringify(this.visibleItems);
+		let blob = new Blob([json], { type: 'text/json'});
+		FileSaver.saveAs(blob, `${this.itemsType}.json`);
 	}
 
 	onViewModeChange(mode: string) {

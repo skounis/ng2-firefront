@@ -5,11 +5,11 @@ import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { Observable } from 'rxjs';
-import { DataService } from '../common/services/data.service';
-import { uuid } from '../common/uuid';
-import { FormlyFormEnricher } from '../dynamic-form/formly-form-enricher';
-import { ModelProcessor } from '../dynamic-form/model-processor';
-import { DynamicFormLoaderService } from '../dynamic-form/dynamic-form-loader.service';
+import { DataService } from '../../common/services/data.service';
+import { uuid } from '../../common/uuid';
+import { FormlyFormEnricher } from '../../dynamic-form/formly-form-enricher';
+import { ModelProcessor } from '../../dynamic-form/model-processor';
+import { DynamicFormLoaderService } from '../../dynamic-form/dynamic-form-loader.service';
 
 @Component({
 	selector: 'item-details',
