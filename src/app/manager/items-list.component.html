@@ -61,10 +61,17 @@
 								<mat-icon>delete</mat-icon>
 							</button>
 						</td>
+						<td mat-footer-cell *matFooterCellDef colspan="3">
+							<div class="export-buttons">
+									<button mat-button (click)="exportToJSON()">Export in JSON</button>
+									<button mat-button (click)="exportToCSV()">Export in CSV</button>
+							</div>
+						</td>
 					</ng-container>
 
 					<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 					<tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+					<tr mat-footer-row *matFooterRowDef="['actionControls']; sticky: true"></tr>
 				</table>
 			</div>
 		</ng-template>

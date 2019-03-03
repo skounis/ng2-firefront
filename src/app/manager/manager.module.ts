@@ -7,7 +7,7 @@ import { FormlyModule } from '@ngx-formly/core';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { SharedModule } from '../common/shared.module';
 import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
-import { ItemDetailsComponent } from './item-details.component';
+import { ItemDetailsComponent } from './item-detail/item-details.component';
 import { ItemsListComponent } from './items-list.component';
 import { CanDeactivateManagerGuard } from './manager.can-deactivate';
 import { NewItemDialog } from './new-item.dialog';

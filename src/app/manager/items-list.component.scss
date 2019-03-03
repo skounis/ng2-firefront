@@ -71,6 +71,13 @@
 	.position {
 		width: 100px;
 	}
+	.export-buttons {
+		display: flex;
+		justify-content: flex-end;
+		button, button:focus {
+			outline: none;
+		}
+	}
 }
 
 @media only screen and (max-width: 983px) and (min-width: 664px) {

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot } from '@angular/router';
 import { ConfirmDialog } from '../common/dialogs/confirm.dialog';
-import { ItemDetailsComponent } from './item-details.component';
+import { ItemDetailsComponent } from './item-detail/item-details.component';
 
 @Injectable()
 export class CanDeactivateManagerGuard implements CanDeactivate<ItemDetailsComponent> {
