@@ -1,5 +1,11 @@
-@media only screen and (max-width: 983px) and (min-width: 664px) {
-	.json-editor {
-		height: 420px !important;
+.json-editor {
+	height: 420px !important;
+	display: flex;
+	justify-content: stretch;
+	align-items: stretch;
+	width: 100%;
+	min-height: 100%;
+	::ng-deep > div {
+		width: 100%;
 	}
 }
