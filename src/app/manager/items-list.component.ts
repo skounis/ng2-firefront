@@ -99,8 +99,7 @@ export class ItemsListComponent implements OnInit {
 					this.items = items;
 					this.visibleItems = items;
 				});
-		}
-		else {
+		} else {
 			this.data
 				.loadItems(itemsType)
 				.subscribe(items => {
